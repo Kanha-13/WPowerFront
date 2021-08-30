@@ -1,7 +1,8 @@
 import React, { useRef, useState } from 'react';
-import TabButton from './TabButtonTamplate';
+import TabButton from './Utility/TabButtonTamplate';
 import Header from './Header';
-
+import Body from './Body';
+import Footer from './Footer';
 import {
   SafeAreaView,
   StyleSheet,
@@ -16,7 +17,7 @@ import home from '../assets/home.png'
 import notification from '../assets/home.png'
 import search from '../assets/home.png'
 import setting from '../assets/home.png'
-import logout from '../assets/home.png'
+
 //Menu option
 import menu from '../assets/home.png'
 import close from '../assets/home.png'
@@ -38,19 +39,9 @@ const Drawer = (props) => {
     <SafeAreaView style={styles.container} >
       <View style={{ justifyContent: "flex-start", padding: 15 }}>
         <Header />
-        <View style={{ flexGrow: 1, marginTop: 50 }} >
-          {
-            //tab bar butrtons....
-          }
-          {TabButton(currentTab, setCurrentTab, "Home", home)}
-          {TabButton(currentTab, setCurrentTab, "Search", search)}
-          {TabButton(currentTab, setCurrentTab, "Notification", notification)}
-          {TabButton(currentTab, setCurrentTab, "Settings", setting)}
-        </View>
+        <Body current={currentTab} setCurrentTab={setCurrentTab} />
 
-        <View>
-          {TabButton(currentTab, setCurrentTab, "Logout", logout)}
-        </View>
+        <Footer current={currentTab} setCurrentTab={setCurrentTab} />
       </View>
       {
         //over lay view
@@ -76,7 +67,9 @@ const Drawer = (props) => {
           //Menu Button..
         }
         <Animated.View style={{
-          transform: [{ translateY: closeButtonOffset }]
+          transform: [{ translateY: closeButtonOffset }],
+          // backgroundColor: "blue",
+          // height: "100%"
         }}>
           <TouchableOpacity onPress={() => {
             //Do actions here
