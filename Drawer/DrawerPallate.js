@@ -3,6 +3,8 @@ import TabButton from './Utility/TabButtonTamplate';
 import Header from './Header';
 import Body from './Body';
 import Footer from './Footer';
+
+import MainScreenHeader from './DefaultScreenHeader';
 import {
   SafeAreaView,
   StyleSheet,
@@ -12,15 +14,6 @@ import {
   TouchableOpacity,
   Animated,
 } from 'react-native';
-//Tab icons
-import home from '../assets/home.png'
-import notification from '../assets/home.png'
-import search from '../assets/home.png'
-import setting from '../assets/home.png'
-
-//Menu option
-import menu from '../assets/home.png'
-import close from '../assets/home.png'
 
 const Drawer = (props) => {
   const [currentTab, setCurrentTab] = useState('Home')
@@ -63,42 +56,13 @@ const Drawer = (props) => {
 
 
       }}>
-        {
-          //Menu Button..
-        }
+
         <Animated.View style={{
           transform: [{ translateY: closeButtonOffset }],
           // backgroundColor: "blue",
           // height: "100%"
         }}>
-          <TouchableOpacity onPress={() => {
-            //Do actions here
-            //scaling the view
-            Animated.timing(scaleValue, {
-              toValue: showMenu ? 1 : 0.88,
-              duration: 300,
-              useNativeDriver: true,
-            }).start()
-            Animated.timing(offsetValue, {
-              toValue: showMenu ? 0 : 300,
-              duration: 300,
-              useNativeDriver: true,
-            }).start()
-            Animated.timing(closeButtonOffset, {
-              toValue: !showMenu ? -30 : 0,
-              duration: 300,
-              useNativeDriver: true,
-            }).start()
-            setShowMenu(!showMenu)
-          }}>
-            <Image source={showMenu ? close : menu} style={{
-              width: 20,
-              height: 20,
-              tintColor: "black",
-              marginTop: 40,
-            }} ></Image>
-
-          </TouchableOpacity>
+          <MainScreenHeader currentTab={currentTab} offsetValue={offsetValue} scaleValue={scaleValue} closeButtonOffset={closeButtonOffset} showMenu={showMenu} setShowMenu={setShowMenu} />
           {props.children}
         </Animated.View>
       </Animated.View>

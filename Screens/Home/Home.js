@@ -1,16 +1,10 @@
 import React from "react"
 import profile from '../../assets/kanha.jpg'
 import { Text, Image } from "react-native";
-const Home = ({ currentTab }) => {
+const Home = () => {
   return (
     <>
-      <Text style={{
-        fontSize: 30,
-        fontWeight: "bold",
-        color: "black",
-        paddingTop: 20,
-        // }}>{currentTab}</Text>
-      }}>Header</Text>
+
       <Image source={profile} style={{
         width: "100%",
         height: 300,
