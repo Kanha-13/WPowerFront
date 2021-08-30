@@ -1,4 +1,7 @@
 import React, { useRef, useState } from 'react';
+import TabButton from './TabButtonTamplate';
+import Header from './Header';
+
 import {
   SafeAreaView,
   StyleSheet,
@@ -8,7 +11,6 @@ import {
   TouchableOpacity,
   Animated,
 } from 'react-native';
-import profile from '../assets/kanha.jpg'
 //Tab icons
 import home from '../assets/home.png'
 import notification from '../assets/home.png'
@@ -35,11 +37,7 @@ const Drawer = (props) => {
   return (
     <SafeAreaView style={styles.container} >
       <View style={{ justifyContent: "flex-start", padding: 15 }}>
-        <Image source={profile} style={{ width: 60, height: 60, borderRadius: 10, marginTop: 10 }} ></Image>
-        <Text style={{ fontSize: 20, fontWeight: 'bold', color: "white", marginTop: 20 }}>Kanha Agrawal</Text>
-        <TouchableOpacity>
-          <Text style={{ marginTop: 6, color: "white" }}>View Profile</Text>
-        </TouchableOpacity>
+        <Header />
         <View style={{ flexGrow: 1, marginTop: 50 }} >
           {
             //tab bar butrtons....
@@ -114,43 +112,6 @@ const Drawer = (props) => {
     </SafeAreaView>
   );
 };
-//for multiple buttons
-const TabButton = (currentTab, setCurrentTab, title, image) => {
-  return (
-    <TouchableOpacity onPress={() => {
-      if (title == "Logout") {
-        //logout event
-      }
-      else {
-        setCurrentTab(title)
-      }
-    }}>
-      <View style={{
-        flexDirection: "row",
-        alignItems: "center",
-        paddingVertical: 8,
-        backgroundColor: currentTab == title ? "white" : "transparent",
-        borderRadius: 8,
-        paddingLeft: 13,
-        paddingRight: 35,
-        marginTop: 10
-      }}>
-        <Image source={image} style={{
-          height: 20,
-          width: 25,
-          tintColor: currentTab == title ? '#5359D1' : 'white',
-        }}></Image>
-        <Text style={{
-          fontSize: 15,
-          fontWeight: "bold",
-          paddingLeft: 15,
-          color: currentTab == title ? '#5359D1' : 'white',
-        }}>{title}</Text>
-      </View>
-
-    </TouchableOpacity>
-  )
-}
 
 const styles = StyleSheet.create({
   container: {
