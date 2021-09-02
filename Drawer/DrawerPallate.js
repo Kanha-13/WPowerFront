@@ -62,7 +62,13 @@ const Drawer = (props) => {
           // backgroundColor: "blue",
           // height: "100%"
         }}>
-          <MainScreenHeader currentTab={currentTab} offsetValue={offsetValue} scaleValue={scaleValue} closeButtonOffset={closeButtonOffset} showMenu={showMenu} setShowMenu={setShowMenu} />
+          <MainScreenHeader
+            currentTab={currentTab}
+            offsetValue={offsetValue}
+            scaleValue={scaleValue}
+            closeButtonOffset={closeButtonOffset}
+            showMenu={showMenu} setShowMenu={setShowMenu}
+          />
           {props.children}
         </Animated.View>
       </Animated.View>
