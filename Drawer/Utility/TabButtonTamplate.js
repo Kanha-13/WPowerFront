@@ -10,27 +10,28 @@ const TabButton = (currentTab, setCurrentTab, title, image) => {
       else {
         setCurrentTab(title)
       }
-    }}>
+    }}
+    >
       <View style={{
         flexDirection: "row",
         alignItems: "center",
         paddingVertical: 8,
-        backgroundColor: currentTab == title ? "white" : "transparent",
+        backgroundColor: currentTab === title ? "white" : "transparent",
         borderRadius: 8,
         paddingLeft: 13,
-        paddingRight: 35,
-        marginTop: 10
+        paddingRight: 25,
+        marginTop: 10,
       }}>
         <Image source={image} style={{
           height: 20,
           width: 25,
-          tintColor: currentTab == title ? '#5359D1' : 'white',
+          tintColor: currentTab === title ? 'black' : '#FAF3F3',
         }}></Image>
         <Text style={{
           fontSize: 15,
           fontWeight: "bold",
           paddingLeft: 15,
-          color: currentTab == title ? '#5359D1' : 'white',
+          color: currentTab === title ? 'black' : '#FAF3F3',
         }}>{title}</Text>
       </View>
 

@@ -1,6 +1,7 @@
 import React from 'react'
+import VerticalSlider from 'rn-vertical-slider';
 import Drawer from './Drawer/DrawerPallate';
-import Home from './Screens/Home/Home';
+import Home from './src/Screens/Home/Home';
 const App = () => {
   return (
     <Drawer>

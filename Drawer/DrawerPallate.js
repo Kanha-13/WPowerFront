@@ -32,9 +32,8 @@ const Drawer = (props) => {
     <SafeAreaView style={styles.container} >
       <View style={{ justifyContent: "flex-start", padding: 15 }}>
         <Header />
-        <Body current={currentTab} setCurrentTab={setCurrentTab} />
-
-        <Footer current={currentTab} setCurrentTab={setCurrentTab} />
+        <Body currentTab={currentTab} setCurrentTab={setCurrentTab} />
+        <Footer currentTab={currentTab} setCurrentTab={setCurrentTab} />
       </View>
       {
         //over lay view
@@ -47,8 +46,8 @@ const Drawer = (props) => {
         bottom: 0,
         right: 0,
         left: 0,
-        paddingHorizontal: 15,
-        paddingVertical: 10,
+        // paddingHorizontal: 5,
+        // paddingVertical: 2,
         borderRadius: showMenu ? 15 : 0,
         transform: [
           { scale: scaleValue }, { translateX: offsetValue },
@@ -59,7 +58,7 @@ const Drawer = (props) => {
 
         <Animated.View style={{
           transform: [{ translateY: closeButtonOffset }],
-          // backgroundColor: "blue",
+          // backgroundColor: "white",
           // height: "100%"
         }}>
           <MainScreenHeader
@@ -79,7 +78,7 @@ const Drawer = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#5359D1',
+    backgroundColor: '#A7BBC7',
     alignItems: "flex-start",
     justifyContent: "flex-start",
   }
