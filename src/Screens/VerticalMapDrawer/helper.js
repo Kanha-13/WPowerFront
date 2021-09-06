@@ -29,7 +29,6 @@ export const getNextState = (currentState, val, margin) => {
   //   default:
   //     return currentState;
   // }
-  console.log(val)
   switch (currentState) {
     case DrawerState.Peek:
       return val <= DrawerState.Peek - margin ? DrawerState.Closed : DrawerState.Peek;

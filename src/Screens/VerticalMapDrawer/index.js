@@ -49,9 +49,11 @@ const VMD = (props) => {
         {
           zIndex: 100,
           width: '100%',
-          height: height - 107,
+          height: height - 25,
           borderRadius: 20,
-          backgroundColor: '#DA7F8F',
+          // backgroundColor: '#DA7F8F',
+          backgroundColor: "#E1E5EA",
+
           transform: [{ translateY: y }],
           marginTop: 745,
         },
@@ -65,7 +67,6 @@ const VMD = (props) => {
         borderRadius: 5,
         marginVertical: 20,
       }}></View>
-      <Text>Helloo</Text>
       {props.children}
     </Animated.View>
   );

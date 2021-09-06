@@ -17,10 +17,13 @@ const Map = ({ myCords, helpCords, res, help }) => {
       }}
       initialRegion={myCords}
       ref={mapRef}
+      showsUserLocation={true}
+      showsMyLocationButton={true}
+    // initialCamera={myCords}
     >
-      <Marker
+      {/* <Marker
         coordinate={myCords}
-      />
+      /> */}
       {
         help &&
         <>

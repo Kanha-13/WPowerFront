@@ -1,7 +1,6 @@
 import { PermissionsAndroid, Platform } from "react-native";
 import Geolocation from 'react-native-geolocation-service'
 
-
 export const getCurrentLocation = () => new Promise((resolve, reject) => {
   Geolocation.getCurrentPosition(
     position => {

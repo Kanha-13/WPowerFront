@@ -8,7 +8,9 @@ const MainScreenHeader = ({ currentTab, closeButtonOffset, scaleValue, offsetVal
   return (
     <>
       <View style={{
-        backgroundColor: "#E1E5EA",
+        // backgroundColor: "#E1E5EA",
+        backgroundColor: '#DA7F8F',
+
         borderRadius: 10,
         top: 30,
         display: "flex",
