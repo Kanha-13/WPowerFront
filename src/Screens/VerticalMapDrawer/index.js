@@ -1,18 +1,13 @@
 import React, { useRef } from "react";
 import { Animated } from "react-native";
 import { Dimensions, PixelRatio } from 'react-native';
-import { HorizontalLine } from "./HorizontalLine";
 import { getNextState, animateMove } from "./helper";
 import { PanResponder } from "react-native";
-import { Text } from 'react-native';
+import { Text, View } from 'react-native';
+import { DrawerState } from "./Constants";
 //vertical Map Drawer
 const VMD = (props) => {
   const { height } = Dimensions.get('window');
-  const DrawerState = {
-    Open: height - 230,
-    Peek: 30,
-    Closed: 0,
-  }
   const y = useRef(new Animated.Value(DrawerState.Closed)).current;
   const state = useRef(new Animated.Value(DrawerState.Closed)).current;
   const margin = 0.05 * height;
@@ -54,21 +49,23 @@ const VMD = (props) => {
         {
           zIndex: 100,
           width: '100%',
-          height: height - 90,
+          height: height - 107,
           borderRadius: 20,
           backgroundColor: '#DA7F8F',
-
-          // position: 'absolute',
-          // bottom: -height,
           transform: [{ translateY: y }],
-          marginTop: 645,
+          marginTop: 745,
         },
       ]}
       {...panResponder.panHandlers}>
-      <HorizontalLine />
+      <View style={{
+        width: 35,
+        height: 7,
+        backgroundColor: "#D3D3D3",
+        alignSelf: "center",
+        borderRadius: 5,
+        marginVertical: 20,
+      }}></View>
       <Text>Helloo</Text>
-      {/* <HorizontalLine />
-      <HorizontalLine /> */}
       {props.children}
     </Animated.View>
   );

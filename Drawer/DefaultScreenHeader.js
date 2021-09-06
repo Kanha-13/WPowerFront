@@ -46,7 +46,7 @@ const MainScreenHeader = ({ currentTab, closeButtonOffset, scaleValue, offsetVal
         </TouchableOpacity>
 
         <Text style={{
-          fontSize: 30,
+          fontSize: 25,
           fontWeight: "bold",
           color: "black",
           marginLeft: 20

@@ -46,8 +46,6 @@ const Drawer = (props) => {
         bottom: 0,
         right: 0,
         left: 0,
-        // paddingHorizontal: 5,
-        // paddingVertical: 2,
         borderRadius: showMenu ? 15 : 0,
         transform: [
           { scale: scaleValue }, { translateX: offsetValue },

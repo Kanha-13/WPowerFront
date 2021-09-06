@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react"
 import { locationPermission, getCurrentLocation } from "../../../Utility/CurrentLocation";
-import MapVerticalSlide from "./MapVerticalSlide";
+import Map from "./Map";
 import MyDetails from "./MyDetails&Help";
 import MapView, { Marker } from "react-native-maps";
 import MapViewDirections from 'react-native-maps-directions';
@@ -58,7 +58,7 @@ const Home = () => {
       res &&
       <>
         <MyDetails myCords={myCords} />
-        <MapVerticalSlide myCords={myCords} helpCords={helpCords} res={res} help={help} />
+        <Map myCords={myCords} helpCords={helpCords} res={res} help={help} />
       </>
     }
     </>

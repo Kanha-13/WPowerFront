@@ -1,9 +1,8 @@
 import React, { useRef, useState } from 'react'
 import MapView, { Marker } from "react-native-maps";
 import MapViewDirections from 'react-native-maps-directions';
-import VMD from '../VerticalMapDrawer';
 import { Text, View } from 'react-native';
-export default MapSlider = ({ myCords, helpCords, res, help }) => {
+const Map = ({ myCords, helpCords, res, help }) => {
   const mapRef = useRef()
   return (
 
@@ -51,3 +50,4 @@ export default MapSlider = ({ myCords, helpCords, res, help }) => {
     </MapView>
   );
 }
+export default Map;
