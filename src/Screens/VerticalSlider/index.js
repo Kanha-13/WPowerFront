@@ -6,8 +6,8 @@ import { PanResponder } from "react-native";
 import { Text, View } from 'react-native';
 import { DrawerState } from "./Constants";
 //vertical Map Drawer
-const VMD = (props) => {
-  const { height } = Dimensions.get('window');
+const VerticalSlider = (props) => {
+  const { height, width } = Dimensions.get('window');
   const y = useRef(new Animated.Value(DrawerState.Closed)).current;
   const state = useRef(new Animated.Value(DrawerState.Closed)).current;
   const margin = 0.05 * height;
@@ -48,7 +48,7 @@ const VMD = (props) => {
       style={[
         {
           zIndex: 100,
-          width: '100%',
+          width: width,
           height: height - 25,
           borderRadius: 20,
           // backgroundColor: '#DA7F8F',
@@ -72,4 +72,4 @@ const VMD = (props) => {
   );
 }
 
-export default VMD;
+export default VerticalSlider;

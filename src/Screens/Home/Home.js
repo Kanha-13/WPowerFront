@@ -2,10 +2,6 @@ import React, { useEffect, useState, useRef } from "react"
 import { locationPermission, getCurrentLocation } from "../../../Utility/CurrentLocation";
 import Map from "./Map";
 import MyDetails from "./MyDetails&Help";
-import MapView, { Marker } from "react-native-maps";
-import MapViewDirections from 'react-native-maps-directions';
-import { View } from 'react-native'
-import VMD from "../VerticalMapDrawer";
 const Home = () => {
   const [help, setHelp] = useState(false)
   const [res, setRes] = useState({
@@ -27,10 +23,10 @@ const Home = () => {
   })
 
   useEffect(() => {
-    // const interval = setInterval(() => {
+    //   const interval = setInterval(() => {
     callCurrentLocation()
-    // }, 4000);
-    // return () => clearInterval(interval)
+    //   }, 4000);
+    //   return () => clearInterval(interval)
   }, [])
   //fetch current location==================================================
   const callCurrentLocation = async () => {
@@ -40,10 +36,10 @@ const Home = () => {
     }
   }
   useEffect(() => {
-    setmyCords({
+    if (res.lat) setmyCords({
       ...myCords,
-      latitude: res.lat,
-      longitude: res.lng,
+      latitude: (res.lat === 0) ? myCords : res.lat,
+      longitude: (res.lng === 0) ? myCords : res.lng,
       latitudeDelta: (res.lat !== 0) ? 0.0922 : 0,
       longitudeDelta: (res.lng !== 0) ? 0.0421 : 30.0,
     })

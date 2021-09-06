@@ -27,7 +27,6 @@ const Drawer = (props) => {
   //Initally scale value should be 1
   const scaleValue = useRef(new Animated.Value(1)).current;
   const closeButtonOffset = useRef(new Animated.Value(0)).current;
-
   return (
     <SafeAreaView style={styles.container} >
       <View style={{ justifyContent: "flex-start", padding: 15 }}>
@@ -38,24 +37,29 @@ const Drawer = (props) => {
       {
         //over lay view
       }
+      {
+        //home screen ka container
+      }
       <Animated.View style={{
         flexGrow: 1,
-        backgroundColor: "white",
+        backgroundColor: "purple",
         position: "absolute",
         top: 0,
         bottom: 0,
         right: 0,
         left: 0,
         borderRadius: showMenu ? 15 : 0,
+        overflow: "hidden",
         transform: [
-          { scale: scaleValue }, { translateX: offsetValue },
+          // { scale: scaleValue }, { translateX: offsetValue },
+          { translateX: offsetValue }, { translateY: closeButtonOffset },
         ],
 
 
       }}>
 
         <Animated.View style={{
-          transform: [{ translateY: closeButtonOffset }],
+          // transform: [{ translateY: closeButtonOffset }],
           // backgroundColor: "white",
           // height: "100%"
         }}>

@@ -3,27 +3,27 @@ import React from 'react'
 import menu from '../assets/home.png'
 import close from '../assets/home.png'
 import { View, TouchableOpacity, Image, Text, Animated } from 'react-native';
-import { HorizontalLine } from '../src/Screens/VerticalMapDrawer/HorizontalLine';
+import { HorizontalLine } from '../src/Screens/VerticalSlider/HorizontalLine';
 const MainScreenHeader = ({ currentTab, closeButtonOffset, scaleValue, offsetValue, showMenu, setShowMenu }) => {
   return (
     <>
       <View style={{
         // backgroundColor: "#E1E5EA",
         backgroundColor: '#DA7F8F',
-
         borderRadius: 10,
         top: 30,
         display: "flex",
         alignItems: "center",
         paddingHorizontal: 10,
         height: 50,
+        width: "80%",
         flexDirection: "row"
       }}>
         <TouchableOpacity style={{ height: 30, width: 30, marginLeft: 10 }} onPress={() => {
           //Do actions here
           //scaling the view
           Animated.timing(scaleValue, {
-            toValue: showMenu ? 1 : 0.90,
+            toValue: showMenu ? 1 : 0.12,
             duration: 300,
             useNativeDriver: true,
           }).start()
@@ -33,7 +33,7 @@ const MainScreenHeader = ({ currentTab, closeButtonOffset, scaleValue, offsetVal
             useNativeDriver: true,
           }).start()
           Animated.timing(closeButtonOffset, {
-            toValue: !showMenu ? -30 : 0,
+            toValue: !showMenu ? 30 : 0,
             duration: 300,
             useNativeDriver: true,
           }).start()

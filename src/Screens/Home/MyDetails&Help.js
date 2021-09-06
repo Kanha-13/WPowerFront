@@ -1,15 +1,21 @@
 import React from 'react'
 import { View, Text, Button, TouchableOpacity } from 'react-native'
-import VMD from '../VerticalMapDrawer';
+import VerticalSlider from '../VerticalSlider';
+import CallHelp from '../../../Utility/callHelp';
 const DetailAndHelp = ({ myCords }) => {
+  const MyDetails = {
+    Cords: myCords,
+    batteryLvl: 0,
+
+  }
   return (
-    <VMD>
+    <VerticalSlider>
       <View style={{
         display: "flex",
         flexGrow: 1,
         paddingHorizontal: 15,
       }}>
-        <Text>Helloooo</Text>
+        <Text>My Details</Text>
         <Text>{myCords.latitude} {myCords.longitude}</Text>
 
         <View style={{
@@ -18,7 +24,7 @@ const DetailAndHelp = ({ myCords }) => {
           alignSelf: "center",
           width: "65%",
           justifyContent: "center",
-          height: 250,
+          height: 255,
           marginVertical: 30,
         }}>
 
@@ -32,30 +38,31 @@ const DetailAndHelp = ({ myCords }) => {
               justifyContent: "center"
             }}
             onPress={() => {
-
+              console.log("touched")
+              CallHelp(myCords);
             }}
           >
-            <View style={{
+            {/* <View style={{
               alignSelf: "center",
               alignItems: "center",
               justifyContent: "center"
-            }}>
+            }}> */}
 
-              <Text style={{
-                fontSize: 60,
-                fontWeight: "bold",
-                paddingLeft: 15,
-                color: 'white',
-                textAlign: "center",
-                alignSelf: "center"
+            <Text style={{
+              fontSize: 60,
+              fontWeight: "bold",
+              paddingLeft: 15,
+              color: 'white',
+              textAlign: "center",
+              alignSelf: "center"
 
-              }}>Help</Text>
-            </View>
+            }}>Help</Text>
+            {/* </View> */}
 
           </TouchableOpacity>
         </View>
       </View>
-    </VMD>
+    </VerticalSlider>
   );
 }
 export default DetailAndHelp;

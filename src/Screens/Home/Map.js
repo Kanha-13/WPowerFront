@@ -1,27 +1,31 @@
 import React, { useRef, useState } from 'react'
 import MapView, { Marker } from "react-native-maps";
 import MapViewDirections from 'react-native-maps-directions';
+import { Dimensions, PixelRatio } from 'react-native';
 import { Text, View } from 'react-native';
 const Map = ({ myCords, helpCords, res, help }) => {
   const mapRef = useRef()
+  const { height, width } = Dimensions.get('window');
   return (
-
     <MapView
       style={{
-        width: "100%",
-        height: "100%",
+        width: width,
+        height: height,
         top: 0,
         flexGrow: 1,
         position: "absolute",
         zIndex: -1,
       }}
+      center={myCords}
       initialRegion={myCords}
       ref={mapRef}
       showsUserLocation={true}
       showsMyLocationButton={true}
     // initialCamera={myCords}
     >
-      {/* <Marker
+      {/* <Marker style={{
+        zIndex: 10000,
+      }}
         coordinate={myCords}
       /> */}
       {
