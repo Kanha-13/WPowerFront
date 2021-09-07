@@ -1,13 +1,27 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { View, Text, Button, TouchableOpacity } from 'react-native'
 import VerticalSlider from '../VerticalSlider';
-import CallHelp from '../../../Utility/callHelp';
+import fetchMyDeviceStatus from '../../../Utility/fetchMyDeviceStatus';
 const DetailAndHelp = ({ myCords }) => {
-  const MyDetails = {
-    Cords: myCords,
-    batteryLvl: 0,
-
+  const [DeviceState, setDeviceState] = useState({
+    phoneNumber: "",
+    brand: "",
+    powerState: { batteryLevel: "", batteryState: "", lowPowerMode: true },
+    fingerPrint: "",
+    mnf: "",
+    ipAdd: "",
+    uniqueId: "",
+    carrier: "",
+  })
+  const getDeviceState = async () => {
+    const details = await fetchMyDeviceStatus()
+    setDeviceState(details)
   }
+  useEffect(() => {
+    getDeviceState()
+  }, [])
+  const { phoneNumber, brand, powerState, fingerPrint, model, deviceType, mnf, ipAdd, uniqueId, carrier } = DeviceState
+  // console.log(powerState)
   return (
     <VerticalSlider>
       <View style={{
@@ -15,9 +29,6 @@ const DetailAndHelp = ({ myCords }) => {
         flexGrow: 1,
         paddingHorizontal: 15,
       }}>
-        <Text>My Details</Text>
-        <Text>{myCords.latitude} {myCords.longitude}</Text>
-
         <View style={{
           backgroundColor: "white",
           borderRadius: 30,
@@ -39,14 +50,14 @@ const DetailAndHelp = ({ myCords }) => {
             }}
             onPress={() => {
               console.log("touched")
-              CallHelp(myCords);
+              // CallHelp(myCords);
             }}
           >
             {/* <View style={{
-              alignSelf: "center",
-              alignItems: "center",
-              justifyContent: "center"
-            }}> */}
+            alignSelf: "center",
+            alignItems: "center",
+            justifyContent: "center"
+          }}> */}
 
             <Text style={{
               fontSize: 60,
@@ -61,6 +72,20 @@ const DetailAndHelp = ({ myCords }) => {
 
           </TouchableOpacity>
         </View>
+        <Text style={{ fontSize: 30, fontWeight: "bold" }}>My Details</Text>
+        <Text>Location: {myCords.latitude} {myCords.longitude}</Text>
+        <Text>Phone Number: {phoneNumber}</Text>
+        <Text>Mobile Brand: {brand}</Text>
+        <Text>Model: {model}</Text>
+        <Text>Device Type: {deviceType}</Text>
+        <Text>Battery Level: {Math.floor(powerState.batteryLevel * 100)}%</Text>
+        <Text>Charging State: {powerState.batteryState}</Text>
+        <Text>On powerSaving: {powerState.lowPowerMode}</Text>
+        {/* <Text> {fingerPrint}</Text> */}
+        <Text>Manufacturer: {mnf}</Text>
+        <Text>IP Address: {ipAdd}</Text>
+        <Text>Unique Id: {uniqueId}</Text>
+        <Text>Network Carrier: {carrier}</Text>
       </View>
     </VerticalSlider>
   );

@@ -2,11 +2,15 @@ import React from 'react'
 import VerticalSlider from 'rn-vertical-slider';
 import Drawer from './Drawer/DrawerPallate';
 import Home from './src/Screens/Home/Home';
+import { StatusBar } from 'react-native';
 const App = () => {
   return (
-    <Drawer>
-      <Home currentTab={Drawer.currentTab} />
-    </Drawer>
+    <>
+      <StatusBar backgroundColor="transparent" translucent={true} barStyle="dark-content" type="dark" />
+      <Drawer>
+        <Home currentTab={Drawer.currentTab} />
+      </Drawer>
+    </>
   );
 }
 export default App;

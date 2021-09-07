@@ -29,7 +29,7 @@ const Drawer = (props) => {
   const closeButtonOffset = useRef(new Animated.Value(0)).current;
   return (
     <SafeAreaView style={styles.container} >
-      <View style={{ justifyContent: "flex-start", padding: 15 }}>
+      <View style={{ justifyContent: "flex-start", padding: 0 }}>
         <Header />
         <Body currentTab={currentTab} setCurrentTab={setCurrentTab} />
         <Footer currentTab={currentTab} setCurrentTab={setCurrentTab} />
@@ -83,6 +83,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#A7BBC7',
     alignItems: "flex-start",
     justifyContent: "flex-start",
+    paddingTop: 0,
   }
 });
 

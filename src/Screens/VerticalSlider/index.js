@@ -47,7 +47,7 @@ const VerticalSlider = (props) => {
     <Animated.View
       style={[
         {
-          zIndex: 100,
+          zIndex: 1000,
           width: width,
           height: height - 25,
           borderRadius: 20,

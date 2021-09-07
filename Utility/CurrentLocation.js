@@ -5,8 +5,10 @@ export const getCurrentLocation = () => new Promise((resolve, reject) => {
   Geolocation.getCurrentPosition(
     position => {
       const cords = {
-        lat: position.coords.latitude,
-        lng: position.coords.longitude,
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude,
+        latitudeDelta: 0.0922,
+        longitudeDelta: 0.0421,
       }
       resolve(cords)
     },
