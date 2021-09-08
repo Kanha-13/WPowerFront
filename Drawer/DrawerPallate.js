@@ -42,7 +42,7 @@ const Drawer = (props) => {
       }
       <Animated.View style={{
         flexGrow: 1,
-        backgroundColor: "purple",
+        backgroundColor: "white",
         position: "absolute",
         top: 0,
         bottom: 0,

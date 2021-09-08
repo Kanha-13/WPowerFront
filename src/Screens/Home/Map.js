@@ -16,8 +16,9 @@ const Map = ({ myCords, helpCords, help }) => {
         style={{
           ...StyleSheet.absoluteFillObject,
           zIndex: -1000,
-          // width: width,
-          // height: height,
+          width: width,
+          height: height + 30,
+          // top: 20,
         }}
         initialRegion={myCords}
       >
