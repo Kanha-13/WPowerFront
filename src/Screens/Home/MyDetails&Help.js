@@ -21,7 +21,7 @@ const DetailAndHelp = ({ myCords }) => {
     getDeviceState()
   }, [])
   const { phoneNumber, brand, powerState, fingerPrint, model, deviceType, mnf, ipAdd, uniqueId, carrier } = DeviceState
-  // console.log(powerState)
+  console.log(powerState)
   return (
     <VerticalSlider>
       <View style={{

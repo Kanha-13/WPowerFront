@@ -1,18 +1,27 @@
+import ReactNative, { PermissionsAndroid } from 'react-native'
 import {
   getUniqueId,
   getManufacturer,
   getBrand,
   getFingerprint,
   getIpAddress,
-  getPhoneNumber,
   getPowerState,
   getCarrier,
   getModel,
   getDeviceType,
 } from 'react-native-device-info';
+import { NativeModules } from 'react-native';
+const { DeviceNumber } = NativeModules;
+const IMEI = require('react-native-imei');
+
 export default DeviceState = async () => {
+  const mobileNumber = await DeviceNumber.get();
+  console.log(mobileNumber)
+  IMEI.getImei().then(imeiList => {
+    console.log(imeiList)
+  });
   const details = {
-    phoneNumber: await getPhoneNumber(),
+    // phoneNumber: mobileNumber,
     fingerPrint: await getFingerprint(),
     powerState: await getPowerState(),
     brand: getBrand(),
@@ -25,4 +34,3 @@ export default DeviceState = async () => {
   }
   return details
 }
-
