@@ -1,4 +1,3 @@
-import SyncStorage from 'sync-storage';
 import {
   getUniqueId,
   getManufacturer,
@@ -11,23 +10,12 @@ import {
   getDeviceType,
 } from 'react-native-device-info';
 import { NativeModules } from 'react-native';
-import syncStorage from 'sync-storage';
 const { DeviceNumber } = NativeModules;
-// const IMEI = require('react-native-imei');
 
 export default DeviceState = async () => {
-  let phoneNumber = SyncStorage.get('mobileNumber')
-  if (phoneNumber) {
-
-  } else {
-    const { mobileNumber } = await DeviceNumber.get();
-    phoneNumber = mobileNumber;
-    syncStorage.set('mobileNumber', mobileNumber)
-  }
+  const { mobileNumber } = await DeviceNumber.get();
+  let phoneNumber = mobileNumber;
   console.log(phoneNumber)
-  // IMEI.getImei().then(imeiList => {
-  //   console.log(imeiList)
-  // });
   const details = {
     phoneNumber: phoneNumber,
     fingerPrint: await getFingerprint(),

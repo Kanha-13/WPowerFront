@@ -21,7 +21,6 @@ const DetailAndHelp = ({ myCords }) => {
     getDeviceState()
   }, [])
   const { phoneNumber, brand, powerState, fingerPrint, model, deviceType, mnf, ipAdd, uniqueId, carrier } = DeviceState
-  console.log(powerState)
   return (
     <VerticalSlider>
       <View style={{
@@ -73,15 +72,14 @@ const DetailAndHelp = ({ myCords }) => {
           </TouchableOpacity>
         </View>
         <Text style={{ fontSize: 30, fontWeight: "bold" }}>My Details</Text>
-        <Text>Location: {myCords.latitude} {myCords.longitude}</Text>
+        <Text>Location: {myCords.latitude} , {myCords.longitude}</Text>
         <Text>Phone Number: {phoneNumber}</Text>
         <Text>Mobile Brand: {brand}</Text>
         <Text>Model: {model}</Text>
         <Text>Device Type: {deviceType}</Text>
-        <Text>Battery Level: {Math.floor(powerState.batteryLevel * 100)}%</Text>
+        <Text>Battery Level: {Math.round(powerState.batteryLevel * 100)}%</Text>
         <Text>Charging State: {powerState.batteryState}</Text>
-        <Text>On powerSaving: {powerState.lowPowerMode}</Text>
-        {/* <Text> {fingerPrint}</Text> */}
+        <Text>On powerSaving: {(powerState.lowPowerMode).toString()}</Text>
         <Text>Manufacturer: {mnf}</Text>
         <Text>IP Address: {ipAdd}</Text>
         <Text>Unique Id: {uniqueId}</Text>
