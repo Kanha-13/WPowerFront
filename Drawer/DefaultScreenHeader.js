@@ -1,9 +1,7 @@
 import React from 'react'
 //Menu option
-import menu from '../assets/home.png'
-import close from '../assets/home.png'
+import menu from '../assets/menu.png'
 import { View, TouchableOpacity, Image, Text, Animated } from 'react-native';
-import { HorizontalLine } from '../src/Screens/VerticalSlider/HorizontalLine';
 const MainScreenHeader = ({ currentTab, closeButtonOffset, scaleValue, offsetValue, showMenu, setShowMenu }) => {
   return (
     <>
@@ -12,14 +10,15 @@ const MainScreenHeader = ({ currentTab, closeButtonOffset, scaleValue, offsetVal
         backgroundColor: '#DA7F8F',
         borderRadius: 10,
         top: 30,
+        zIndex: 1000,
         display: "flex",
         alignItems: "center",
         paddingHorizontal: 10,
         height: 50,
-        width: "80%",
+        width: "100%",
         flexDirection: "row"
       }}>
-        <TouchableOpacity style={{ height: 30, width: 30, marginLeft: 10 }} onPress={() => {
+        <TouchableOpacity style={{ height: 40, width: 50, marginLeft: 10, alignItems: "center" }} onPress={() => {
           //Do actions here
           //scaling the view
           Animated.timing(scaleValue, {
@@ -39,10 +38,15 @@ const MainScreenHeader = ({ currentTab, closeButtonOffset, scaleValue, offsetVal
           }).start()
           setShowMenu(!showMenu)
         }}>
-          <Image source={showMenu ? close : menu} style={{
+          <Image source={menu} style={{
             width: 30,
-            height: 30,
+            height: 40,
             alignSelf: "center",
+            transform: showMenu ? [
+              {
+                rotate: '180deg'
+              }
+            ] : [],
             tintColor: "black",
           }} ></Image>
         </TouchableOpacity>

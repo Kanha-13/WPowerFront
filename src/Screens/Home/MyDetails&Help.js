@@ -52,12 +52,6 @@ const DetailAndHelp = ({ myCords }) => {
               // CallHelp(myCords);
             }}
           >
-            {/* <View style={{
-            alignSelf: "center",
-            alignItems: "center",
-            justifyContent: "center"
-          }}> */}
-
             <Text style={{
               fontSize: 60,
               fontWeight: "bold",

@@ -8,10 +8,7 @@ import MainScreenHeader from './DefaultScreenHeader';
 import {
   SafeAreaView,
   StyleSheet,
-  Text,
   View,
-  Image,
-  TouchableOpacity,
   Animated,
 } from 'react-native';
 
@@ -83,7 +80,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#A7BBC7',
     alignItems: "flex-start",
     justifyContent: "flex-start",
-    paddingTop: 0,
+    paddingTop: 15,
+    paddingLeft: 20,
   }
 });
 

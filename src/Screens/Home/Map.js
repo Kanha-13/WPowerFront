@@ -5,7 +5,6 @@ import { StyleSheet } from 'react-native';
 import { Text, View } from 'react-native';
 const Map = ({ myCords, helpCords, help }) => {
   const { latitude, longitude } = myCords;
-  const mapRef = useRef()
   const { height, width } = Dimensions.get('window');
   return (
     <>
@@ -17,7 +16,7 @@ const Map = ({ myCords, helpCords, help }) => {
           ...StyleSheet.absoluteFillObject,
           zIndex: -1000,
           width: width,
-          height: height + 30,
+          height: height,
           // top: 20,
         }}
         initialRegion={myCords}
@@ -32,25 +31,3 @@ const Map = ({ myCords, helpCords, help }) => {
   );
 }
 export default Map;
-
-
-
-
-{/* <MapViewDirections
-  origin={myCords}
-  destination={helpCords}
-  apikey="AIzaSyAsZbs9xy83SCO8-0MViS37BTyKqoP8GK0"
-  strokeWidth={3}
-  strokeColor="hotpink"
-  optimizeWaypoints={true}
-  onReady={res => {
-    mapRef.current.fitToCoordinates(res.coordinates, {
-      edgePadding: {
-        right: 30,
-        bottom: 300,
-        left: 30,
-        top: 100,
-      }
-    })
-  }}
-/> */}

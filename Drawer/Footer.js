@@ -6,7 +6,7 @@ const Footer = ({ currentTab, setCurrentTab }) => {
   return (
     <>
       <View>
-        {TabButton(currentTab, setCurrentTab, "Logout", logout)}
+        {TabButton(currentTab, setCurrentTab, "logout", logout)}
       </View>
     </>
   );

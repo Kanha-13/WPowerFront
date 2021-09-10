@@ -24,7 +24,7 @@ const Home = () => {
     // return () => clearInterval(interval)
   }, [])
 
-  const mapRef = useRef();
+  // const mapRef = useRef();
   return (
     <>{
       myCords &&

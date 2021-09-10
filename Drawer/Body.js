@@ -14,9 +14,9 @@ const Body = ({ currentTab, setCurrentTab }) => {
           //tab bar butrtons....
         }
         {TabButton(currentTab, setCurrentTab, "Home", home)}
-        {TabButton(currentTab, setCurrentTab, "Search", search)}
-        {TabButton(currentTab, setCurrentTab, "Notification", notification)}
-        {TabButton(currentTab, setCurrentTab, "Settings", setting)}
+        {TabButton(currentTab, setCurrentTab, "Profile", search)}
+        {/* {TabButton(currentTab, setCurrentTab, "Notification", notification)}
+        {TabButton(currentTab, setCurrentTab, "Settings", setting)} */}
       </View>
     </>
   );
