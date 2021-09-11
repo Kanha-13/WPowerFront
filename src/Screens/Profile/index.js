@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react"
 import { View, SafeAreaView, StyleSheet, Text, Flex, TextInput } from "react-native";
 import { Dimensions, PixelRatio } from 'react-native';
+import InputField from "./Utility/inputFields";
 const Profile = () => {
   const { height, width } = Dimensions.get('window');
   const [myDetails, setMyDetails] = useState({
@@ -8,6 +9,8 @@ const Profile = () => {
     lastName: "",
     mobileNumber: "",
   })
+  const { firstName, lastName, mobileNumber } = myDetails
+  console.log(myDetails)
   return (
     <>
       <View style={{
@@ -27,28 +30,13 @@ const Profile = () => {
           alignSelf: "center"
         }}
         >
-
           <Text style={{
             fontSize: 20,
             alignSelf: "center",
-
-            // color: "white"
           }}>My Details</Text>
-          <View style={{
-            backgroundColor: "#CECECB",
-            width: "95%",
-            alignSelf: "center",
-            padding: 20,
-            borderRadius: 10,
-
-
-          }}>
-            <Text>First Name</Text>
-            <TextInput style={{
-              color: "black",
-              borderBottomWidth: 0.5,
-            }} />
-          </View>
+          <InputField title="First Name" name="firstName" setMyDetails={setMyDetails} myDetails={myDetails} />
+          <InputField title="Last Name" name="lastName" setMyDetails={setMyDetails} myDetails={myDetails} />
+          <InputField title="Mobile Number" name="mobileNumber" setMyDetails={setMyDetails} myDetails={myDetails} />
         </View>
 
       </View>

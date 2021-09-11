@@ -4,16 +4,20 @@ import { Link } from "react-router-native";
 //for multiple buttons
 const TabButton = (currentTab, setCurrentTab, title, image) => {
   return (
-    <TouchableOpacity onPress={() => {
-      if (title == "Logout") {
-        //logout event
-      }
-      else {
-        setCurrentTab(title)
-      }
-    }}
-    >
-      <Link to={`/${title}`} >
+    <TouchableOpacity>
+      <Link to={`/${title}`} style={{
+      }}
+        underlayColor="none"
+        onPress={() => {
+          if (title == "Logout") {
+            //logout event
+          }
+          else {
+            setCurrentTab(title)
+          }
+
+        }}
+      >
         <View style={{
           flexDirection: "row",
           alignItems: "center",
@@ -37,8 +41,7 @@ const TabButton = (currentTab, setCurrentTab, title, image) => {
           }}>{title}</Text>
         </View>
       </Link>
-
-    </TouchableOpacity>
+    </TouchableOpacity >
   )
 }
 export default TabButton;
