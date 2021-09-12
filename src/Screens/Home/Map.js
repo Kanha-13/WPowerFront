@@ -19,6 +19,12 @@ const Map = ({ myCords, helpCords, help }) => {
           height: height,
           // top: 20,
         }}
+        streetViewControl={true}
+        mapTypeControl={true}
+        mapTypeControlOptions={{
+          style: "horizontalBar",
+          position: "topCenter",
+        }}
         initialRegion={myCords}
       >
         <Marker

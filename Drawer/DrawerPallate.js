@@ -13,8 +13,7 @@ import {
 } from 'react-native';
 
 const Drawer = (props) => {
-  const [currentTab, setCurrentTab] = useState('Home')
-
+  const { currentTab, setCurrentTab } = props
   //To get the current status of menu...
   const [showMenu, setShowMenu] = useState(false);
 
@@ -27,7 +26,7 @@ const Drawer = (props) => {
   return (
     <SafeAreaView style={styles.container} >
       <View style={{ justifyContent: "flex-start", padding: 0 }}>
-        <Header />
+        <Header setShowMenu={setShowMenu} setCurrentTab={setCurrentTab} />
         <Body currentTab={currentTab} setCurrentTab={setCurrentTab} />
         <Footer currentTab={currentTab} setCurrentTab={setCurrentTab} />
       </View>
@@ -39,7 +38,8 @@ const Drawer = (props) => {
       }
       <Animated.View style={{
         flexGrow: 1,
-        backgroundColor: "white",
+        // backgroundColor: "white",
+        backgroundColor: '#A7BBC7',
         position: "absolute",
         top: 0,
         bottom: 0,
@@ -77,7 +77,8 @@ const Drawer = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#A7BBC7',
+    backgroundColor: '#000000',
+    // backgroundColor: '#A7BBC7',
     alignItems: "flex-start",
     justifyContent: "flex-start",
     paddingTop: 15,

@@ -7,56 +7,63 @@ const MainScreenHeader = ({ currentTab, closeButtonOffset, scaleValue, offsetVal
     <>
       <View style={{
         // backgroundColor: "#E1E5EA",
-        backgroundColor: '#DA7F8F',
+        // backgroundColor: '#DA7F8F',
+        backgroundColor: "#000000",
         borderRadius: 10,
-        top: 30,
+        borderTopStartRadius: 0,
+        top: 33,
+        marginLeft: 2,
         zIndex: 1000,
         display: "flex",
         alignItems: "center",
-        paddingHorizontal: 10,
-        height: 50,
-        width: "100%",
-        flexDirection: "row"
+        height: 40,
+        width: 50,
+        flexDirection: "row",
+        justifyContent: "center"
       }}>
-        <TouchableOpacity style={{ height: 40, width: 50, marginLeft: 10, alignItems: "center" }} onPress={() => {
-          //Do actions here
-          //scaling the view
-          Animated.timing(scaleValue, {
-            toValue: showMenu ? 1 : 0.12,
-            duration: 300,
-            useNativeDriver: true,
-          }).start()
-          Animated.timing(offsetValue, {
-            toValue: showMenu ? 0 : 250,
-            duration: 300,
-            useNativeDriver: true,
-          }).start()
-          Animated.timing(closeButtonOffset, {
-            toValue: !showMenu ? 30 : 0,
-            duration: 300,
-            useNativeDriver: true,
-          }).start()
-          setShowMenu(!showMenu)
-        }}>
+        <TouchableOpacity
+          style={{
+            height: 50,
+            width: 60,
+          }}
+          onPress={() => {
+            Animated.timing(scaleValue, {
+              toValue: showMenu ? 1 : 0.12,
+              duration: 300,
+              useNativeDriver: true,
+            }).start()
+            Animated.timing(offsetValue, {
+              toValue: showMenu ? 0 : 250,
+              duration: 300,
+              useNativeDriver: true,
+            }).start()
+            Animated.timing(closeButtonOffset, {
+              toValue: !showMenu ? 30 : 0,
+              duration: 300,
+              useNativeDriver: true,
+            }).start()
+            setShowMenu(!showMenu)
+          }}>
           <Image source={menu} style={{
+            marginTop: 10,
             width: 30,
-            height: 40,
+            height: 30,
             alignSelf: "center",
-            transform: showMenu ? [
+            transform: !showMenu ? [
               {
                 rotate: '180deg'
               }
             ] : [],
-            tintColor: "black",
+            // tintColor: "black",
           }} ></Image>
         </TouchableOpacity>
 
-        <Text style={{
+        {/* <Text style={{
           fontSize: 25,
           fontWeight: "bold",
-          color: "black",
+          color: "white",
           marginLeft: 20
-        }}>{currentTab}</Text>
+        }}>{currentTab}</Text> */}
       </View>
     </>
   );

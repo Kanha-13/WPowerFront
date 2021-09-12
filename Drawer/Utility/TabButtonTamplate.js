@@ -5,8 +5,7 @@ import { Link } from "react-router-native";
 const TabButton = (currentTab, setCurrentTab, title, image) => {
   return (
     <TouchableOpacity>
-      <Link to={`/${title}`} style={{
-      }}
+      <Link to={`/${title}`}
         underlayColor="none"
         onPress={() => {
           if (title == "Logout") {
@@ -22,22 +21,22 @@ const TabButton = (currentTab, setCurrentTab, title, image) => {
           flexDirection: "row",
           alignItems: "center",
           paddingVertical: 8,
-          backgroundColor: currentTab === title ? "white" : "transparent",
+          backgroundColor: currentTab === title ? "#ffffff" : "transparent",
           borderRadius: 8,
           paddingLeft: 13,
           paddingRight: 25,
           marginTop: 10,
         }}>
           <Image source={image} style={{
-            height: 20,
+            height: 30,
             width: 25,
-            tintColor: currentTab === title ? 'black' : '#FAF3F3',
+            tintColor: currentTab === title ? '#A7BBC7' : '#FAF3F3',
           }}></Image>
           <Text style={{
+            color: currentTab === title ? '#000000' : '#ffffff',
             fontSize: 15,
             fontWeight: "bold",
             paddingLeft: 15,
-            color: currentTab === title ? 'black' : '#FAF3F3',
           }}>{title}</Text>
         </View>
       </Link>
