@@ -1,7 +1,7 @@
 import { PermissionsAndroid, Platform } from "react-native";
 import Geolocation from 'react-native-geolocation-service'
 
-export const getCurrentLocation = () => new Promise((resolve, reject) => {
+const getCurrentCords = () => new Promise((resolve, reject) => {
   Geolocation.getCurrentPosition(
     position => {
       const cords = {
@@ -21,7 +21,7 @@ export const getCurrentLocation = () => new Promise((resolve, reject) => {
 })
 
 
-export const locationPermission = () => new Promise(async (resolve, reject) => {
+const locationPermission = () => new Promise(async (resolve, reject) => {
   if (Platform === "ios") {
     try {
       const permissionStatus = await Geolocation.requestAuthorization('whenInUse');
@@ -46,4 +46,10 @@ export const locationPermission = () => new Promise(async (resolve, reject) => {
     return reject(error)
   })
 })
+export const getCurrentLocation = async () => {
+  const permission = await locationPermission();
+  if (permission) {
+    return await getCurrentCords()
+  }
+}
 

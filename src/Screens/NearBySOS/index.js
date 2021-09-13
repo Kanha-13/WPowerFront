@@ -1,23 +1,21 @@
 import React, { useEffect, useState, useRef } from "react"
 import { View } from "react-native";
-import { locationPermission, getCurrentLocation } from "../../../Utility/CurrentLocation";
+import { getCurrentLocation } from "../../../Utility/CurrentLocation";
 import Map from "./Map";
-import MyDetails from "./MyDetails&Help";
-const Home = () => {
+import DetailAndHelp from "../../Utility/MyDetailsAndHelp/MyDetails&Help";
+const NearBySOS = () => {
   const [help, setHelp] = useState(false)
   const [myCords, setMyCords] = useState();
   const helpCords = {}
   const callCurrentLocation = async () => {
-    const permission = await locationPermission();
-    if (permission) {
-      const cords = await getCurrentLocation()
-      console.log(cords)
-      setMyCords(
-        cords
-      )
-    }
+    const cords = await getCurrentLocation()
+    console.log(cords)
+    setMyCords(
+      cords
+    )
   }
   useEffect(() => {
+
     // const interval = setInterval(() => {
     callCurrentLocation()
     // }, 4000);
@@ -29,11 +27,11 @@ const Home = () => {
     <>{
       myCords &&
       <>
-        <MyDetails myCords={myCords} />
+        <DetailAndHelp myCords={myCords} />
         <Map myCords={myCords} helpCords={helpCords} help={help} />
       </>
     }
     </>
   );
 }
-export default Home
+export default NearBySOS
