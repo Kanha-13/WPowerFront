@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react"
 import { View } from "react-native";
 import { getCurrentLocation } from "../../../Utility/CurrentLocation";
 import Map from "./Map";
-import DetailAndHelp from "../../Utility/MyDetailsAndHelp/MyDetails&Help";
+import DetailAndHelp from "../../../Utility/MyDetailsAndHelp/MyDetails&Help";
 const NearBySOS = () => {
   const [help, setHelp] = useState(false)
   const [myCords, setMyCords] = useState();

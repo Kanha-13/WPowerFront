@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react"
 import { Link } from "react-router-native";
 import { Text, TouchableOpacity, View } from 'react-native'
-import AccountNavigation from "../../Utility/AccountNavigation";
+import AccountNavigation from "../../../Utility/AccountNavigation";
 const MyAccount = ({ currentTab, setCurrentTab }) => {
   return (
     <View style={{

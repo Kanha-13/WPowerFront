@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text } from "react-native";
-import DetailAndHelp from "../../Utility/MyDetailsAndHelp/MyDetails&Help";
+import DetailAndHelp from "../../../Utility/MyDetailsAndHelp/MyDetails&Help";
 const Home = () => {
   return (
     <View>

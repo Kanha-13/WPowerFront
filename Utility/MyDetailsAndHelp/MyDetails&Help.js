@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { View, Text, Button, TouchableOpacity } from 'react-native'
-import VerticalSlider from '../../Utility/VerticalSlidder';
-import fetchMyDeviceStatus from '../../../Utility/fetchMyDeviceStatus';
+import VerticalSlider from '../VerticalSlidder';
+import fetchMyDeviceStatus from '../fetchMyDeviceStatus'
 const DetailAndHelp = ({ myCords }) => {
   const [DeviceState, setDeviceState] = useState({
     phoneNumber: "",

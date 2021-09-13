@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react"
 import { View, SafeAreaView, StyleSheet, Text, Flex, TextInput, TouchableOpacity, Image, Keyboard } from "react-native";
 import { Dimensions, PixelRatio } from 'react-native';
-import InputField from "../../Utility/inputFields";
+import InputField from "../../../Utility/inputFields";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import save from '../../../assets/save.png'
 import cancle from '../../../assets/cancle.png'
