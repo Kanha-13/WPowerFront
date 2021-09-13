@@ -55,7 +55,7 @@ const VerticalSlider = (props) => {
           backgroundColor: "#E1E5EA",
 
           transform: [{ translateY: y }],
-          marginTop: 745,
+          marginTop: 700,
         },
       ]}
       {...panResponder.panHandlers}>

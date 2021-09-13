@@ -11,6 +11,7 @@ import {
   View,
   Animated,
 } from 'react-native';
+import BottomNavigation from './BottomNavigation';
 
 const Drawer = (props) => {
   const { currentTab, setCurrentTab } = props
@@ -67,6 +68,7 @@ const Drawer = (props) => {
             closeButtonOffset={closeButtonOffset}
             showMenu={showMenu} setShowMenu={setShowMenu}
           />
+          <BottomNavigation currentTab={currentTab} setCurrentTab={setCurrentTab} />
           {props.children}
         </Animated.View>
       </Animated.View>
