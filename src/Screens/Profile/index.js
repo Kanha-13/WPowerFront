@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useRef } from "react"
-import { View, SafeAreaView, StyleSheet, Text, Flex, TextInput, TouchableOpacity, Image, Keyboard } from "react-native";
+import React, { useEffect, useState } from "react"
+import { View, Text, TouchableOpacity, Image } from "react-native";
 import InputField from "../../../Utility/inputFields";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import save from '../../../assets/save.png'

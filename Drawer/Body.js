@@ -17,8 +17,8 @@ const Body = ({ currentTab, setCurrentTab }) => {
         {TabButton(currentTab, setCurrentTab, "Home", home)}
         {TabButton(currentTab, setCurrentTab, "Profile", profile)}
         {TabButton(currentTab, setCurrentTab, "MyAccount", account)}
-        {TabButton(currentTab, setCurrentTab, "Settings", settings)}
         {TabButton(currentTab, setCurrentTab, "NearBySOS", nearBySos)}
+        {TabButton(currentTab, setCurrentTab, "Settings", settings)}
         {/* {TabButton(currentTab, setCurrentTab, "Notification", notification)}
         {TabButton(currentTab, setCurrentTab, "Settings", setting)} */}
       </View>
