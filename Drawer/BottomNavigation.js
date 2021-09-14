@@ -9,7 +9,7 @@ const BottomNavigation = ({ setCurrentTab, setCurrentNavigation, currentNavigati
   const { height, width } = Dimensions.get('window');
   console.log(height)
   return (
-    <View style={{ top: height - (height * 15 / 100), width: width, height: height - 820, display: "flex", justifyContent: "space-around", flexDirection: "row", backgroundColor: "#ffffff", zIndex: 1000000 }}>
+    <View style={{ top: height - 67, width: width, height: height - 820, display: "flex", justifyContent: "space-around", flexDirection: "row", backgroundColor: "#ffffff", zIndex: 1000000 }}>
       <View style={{
         display: "flex",
         flexDirection: "column",

@@ -60,9 +60,9 @@ const VerticalSlider = (props) => {
       ]}
       {...panResponder.panHandlers}>
       <View style={{
-        width: 35,
+        width: 40,
         height: 7,
-        backgroundColor: "#D3D3D3",
+        backgroundColor: "#A4A4A4",
         alignSelf: "center",
         borderRadius: 5,
         marginVertical: 20,
