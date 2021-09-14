@@ -1,19 +1,26 @@
 import React from "react";
-import { StyleSheet, View, Text } from "react-native";
-import DetailAndHelp from "../../../Utility/MyDetailsAndHelp/MyDetails&Help";
-const Home = () => {
+import { View, Text } from "react-native";
+import { Dimensions } from "react-native";
+const Home = ({ myCords }) => {
+  const { height, width } = Dimensions.get('window');
   return (
     <View style={{
-      height: "96%",
-    }} >
+      paddingTop: 90,
+    }}>
       <View style={{
-        backgroundColor: "#ffffff",
-        marginTop: "30%",
-        borderRadius: 15,
-      }} >
-        <Text>Welcome to Home Screen</Text>
-        {/* <DetailAndHelp /> */}
-
+        backgroundColor: "white",
+        padding: 10,
+        width: "100%",
+        borderRadius: 20,
+        alignSelf: "center",
+        height: "97%",
+      }}
+      >
+        {myCords && <Text>
+          {myCords.latitude}
+        </Text>}
+        <Text>{height} height</Text>
+        <Text>{width} height</Text>
       </View>
     </View>
   );

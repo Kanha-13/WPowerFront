@@ -57,13 +57,6 @@ const MainScreenHeader = ({ currentTab, closeButtonOffset, scaleValue, offsetVal
             // tintColor: "black",
           }} ></Image>
         </TouchableOpacity>
-
-        {/* <Text style={{
-          fontSize: 25,
-          fontWeight: "bold",
-          color: "white",
-          marginLeft: 20
-        }}>{currentTab}</Text> */}
       </View>
     </>
   );

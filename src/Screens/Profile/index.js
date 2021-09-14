@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { View, Text, TouchableOpacity, Image } from "react-native";
+import { View, Text, TouchableOpacity, Image, ScrollView, StyleSheet } from "react-native";
 import InputField from "../../../Utility/inputFields";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import save from '../../../assets/save.png'
@@ -22,11 +22,11 @@ const Profile = () => {
     }}>
       <View style={{
         backgroundColor: "white",
-        padding: 10,
+        padding: 20,
         width: "100%",
         borderRadius: 20,
         alignSelf: "center",
-        height: "97%",
+        height: "90%",
       }}
       >
         <Text style={{
@@ -56,15 +56,21 @@ const Profile = () => {
             }}
           ></Image>
         </TouchableOpacity>
-
-        <InputField editMode={editMode} title="First Name" name="firstName" setMyDetails={setMyDetails} myDetails={myDetails} />
-        <InputField editMode={editMode} title="Last Name" name="lastName" setMyDetails={setMyDetails} myDetails={myDetails} />
-        <InputField editMode={editMode} title="Mobile Number" name="mobileNumber" setMyDetails={setMyDetails} myDetails={myDetails} />
-        <InputField editMode={editMode} title="Email Address" name="emailAddress" setMyDetails={setMyDetails} myDetails={myDetails} />
+        <ScrollView
+          style={{ marginBottom: 40 }}
+          showsHorizontalScrollIndicator={false}
+          showsVerticalScrollIndicator={false}
+        >
+          <View>
+            <InputField editMode={editMode} title="First Name" name="firstName" setMyDetails={setMyDetails} myDetails={myDetails} />
+            <InputField editMode={editMode} title="Last Name" name="lastName" setMyDetails={setMyDetails} myDetails={myDetails} />
+            <InputField editMode={editMode} title="Mobile Number" name="mobileNumber" setMyDetails={setMyDetails} myDetails={myDetails} />
+            <InputField editMode={editMode} title="Email Address" name="emailAddress" setMyDetails={setMyDetails} myDetails={myDetails} />
+          </View>
+        </ScrollView>
       </View>
-    </View>
+    </View >
   );
 
 }
-
 export default Profile

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { View, Text } from "react-native";
+import { View, Text, ScrollView, StyleSheet } from "react-native";
 const Settings = () => {
   return (
     <View style={{
@@ -18,8 +18,86 @@ const Settings = () => {
           fontSize: 20,
           alignSelf: "center",
         }}>Settings</Text>
+        <ScrollView
+          // horizontal={true}
+          style={styles.contentContainer}
+          showsHorizontalScrollIndicator={false}
+          showsVerticalScrollIndicator={false}
+        >
+          <View>
+            <Text>Hello</Text>
+            <Text>Hello</Text>
+            <Text>Hello</Text>
+            <Text>Hello</Text>
+            <Text>Hello</Text>
+            <Text>Hello</Text>
+            <Text>Hello</Text>
+            <Text>Hello</Text>
+            <Text>Hello</Text>
+            <Text>Hello</Text>
+            <Text>Hello</Text>
+            <Text>Hello</Text>
+            <Text>Hello</Text>
+            <Text>Hello</Text>
+            <Text>Hello</Text>
+            <Text>Hello</Text>
+            <Text>Hello</Text>
+            <Text>Hello</Text>
+            <Text>Hello</Text>
+            <Text>Hello</Text>
+            <Text>Hello</Text>
+            <Text>Hello</Text>
+            <Text>Hello</Text>
+            <Text>Hello</Text>
+            <Text>Hello</Text>
+            <Text>Hello</Text>
+            <Text>Hello</Text>
+            <Text>Hello</Text>
+            <Text>Hello</Text>
+            <Text>Hello</Text>
+            <Text>Hello</Text>
+            <Text>Hello</Text>
+            <Text>Hello</Text>
+            <Text>Hello</Text>
+            <Text>Hello</Text>
+            <Text>Hello</Text>
+            <Text>Hello</Text>
+            <Text>Hello</Text>
+            <Text>Hello</Text>
+            <Text>Hello</Text>
+            <Text>Hello</Text>
+            <Text>Hello</Text>
+            <Text>Hello</Text>
+            <Text>Hello</Text>
+            <Text>Hello</Text>
+            <Text>Hello</Text>
+            <Text>Hello</Text>
+            <Text>Hello</Text>
+            <Text>Hello</Text>
+            <Text>Hello</Text>
+            <Text>Hello</Text>
+            <Text>Hello</Text>
+            <Text>Hello</Text>
+          </View>
+        </ScrollView>
       </View>
     </View>
   );
 }
+const styles = StyleSheet.create({
+  contentContainer: {
+    marginTop: 50,
+    paddingVertical: 20,
+    backgroundColor: '#F5FCFF',
+  },
+  welcome: {
+    flex: 1,
+    margin: 20,
+    backgroundColor: 'pink',
+    margin: 10,
+    textAlign: 'center',
+    fontSize: 20,
+    paddingTop: 70,
+  }
+});
 export default Settings;

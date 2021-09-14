@@ -3,7 +3,6 @@ import { Link } from "react-router-native";
 import { Text, TouchableOpacity, View } from 'react-native'
 import AccountNavigation from "../../../Utility/AccountNavigation";
 const MyAccount = ({ currentTab, setCurrentTab }) => {
-  console.log(currentTab, setCurrentTab)
   return (
     <View style={{
       paddingTop: 90,

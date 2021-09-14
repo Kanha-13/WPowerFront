@@ -1,5 +1,4 @@
 import React, { useRef, useState } from 'react';
-import TabButton from './Utility/TabButtonTamplate';
 import Header from './Header';
 import Body from './Body';
 import Footer from './Footer';
@@ -57,9 +56,6 @@ const Drawer = (props) => {
       }}>
 
         <Animated.View style={{
-          // transform: [{ translateY: closeButtonOffset }],
-          // backgroundColor: "white",
-          // height: "100%"
         }}>
           <MainScreenHeader
             currentTab={currentTab}
@@ -68,7 +64,7 @@ const Drawer = (props) => {
             closeButtonOffset={closeButtonOffset}
             showMenu={showMenu} setShowMenu={setShowMenu}
           />
-          <BottomNavigation currentTab={currentTab} setCurrentTab={setCurrentTab} />
+          <BottomNavigation currentTab={currentTab} setCurrentTab={setCurrentTab} setCurrentNavigation={props.setCurrentNavigation} currentNavigation={props.currentNavigation} />
           {props.children}
         </Animated.View>
       </Animated.View>

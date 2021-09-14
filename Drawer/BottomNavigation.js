@@ -5,24 +5,26 @@ import home from '../assets/home.png'
 import nearBySos from '../assets/nearBySos.png'
 import account from '../assets/account.png'
 import { Link } from "react-router-native";
-const BottomNavigation = ({ setCurrentTab }) => {
+const BottomNavigation = ({ setCurrentTab, setCurrentNavigation, currentNavigation }) => {
   const { height, width } = Dimensions.get('window');
+  console.log(height)
   return (
-    <View style={{ top: height - 67, width: width, height: height - 820, display: "flex", justifyContent: "space-around", flexDirection: "row", backgroundColor: "#ffffff", zIndex: 1000000 }}>
+    <View style={{ top: height - (height * 15 / 100), width: width, height: height - 820, display: "flex", justifyContent: "space-around", flexDirection: "row", backgroundColor: "#ffffff", zIndex: 1000000 }}>
       <View style={{
         display: "flex",
         flexDirection: "column",
-        // backgroundColor: "pink",
         height: "100%",
         width: "20%",
         alignItems: "center",
         paddingTop: 5,
-
       }}>
         <TouchableOpacity>
-          <Link to="/Home" underlayColor="none" onPress={() => { setCurrentTab("Home") }}>
+          <Link to="/Home" underlayColor="none" onPress={() => {
+            setCurrentTab("Home")
+            setCurrentNavigation("Home")
+          }}>
             <View style={{ alignItems: "center" }}>
-              <Image height={1} width={1} style={{ height: 30, width: 30 }} source={home} />
+              <Image height={1} width={1} style={{ height: 30, width: 30, tintColor: currentNavigation === 'Home' ? "#A7BBC7" : "#000000", }} source={home} />
               <Text style={{ fontWeight: "600" }} >Home</Text>
             </View>
           </Link>
@@ -31,7 +33,6 @@ const BottomNavigation = ({ setCurrentTab }) => {
       <View style={{
         display: "flex",
         flexDirection: "column",
-        // backgroundColor: "pink",
         height: "100%",
         width: "20%",
         alignItems: "center",
@@ -39,9 +40,12 @@ const BottomNavigation = ({ setCurrentTab }) => {
 
       }}>
         <TouchableOpacity>
-          <Link to="/NearBySOS" underlayColor="none" onPress={() => { setCurrentTab("NearBySOS") }}>
+          <Link to="/NearBySOS" underlayColor="none" onPress={() => {
+            setCurrentTab("NearBySOS")
+            setCurrentNavigation("NearBySOS")
+          }}>
             <View style={{ alignItems: "center" }}>
-              <Image height={1} width={1} style={{ height: 30, width: 30, tintColor: "#000000" }} source={nearBySos} />
+              <Image height={1} width={1} style={{ height: 30, width: 30, tintColor: currentNavigation === 'NearBySOS' ? "#A7BBC7" : "#000000", }} source={nearBySos} />
               <Text style={{ fontWeight: "600" }} >NearSOS</Text>
             </View>
           </Link>
@@ -50,7 +54,6 @@ const BottomNavigation = ({ setCurrentTab }) => {
       <View style={{
         display: "flex",
         flexDirection: "column",
-        // backgroundColor: "pink",
         height: "100%",
         width: "20%",
         alignItems: "center",
@@ -58,9 +61,12 @@ const BottomNavigation = ({ setCurrentTab }) => {
 
       }}>
         <TouchableOpacity>
-          <Link to="/MyAccount" underlayColor="none" onPress={() => { setCurrentTab("MyAccount") }}>
+          <Link to="/MyAccount" underlayColor="none" onPress={() => {
+            setCurrentTab("MyAccount")
+            setCurrentNavigation("MyAccount")
+          }}>
             <View style={{ alignItems: "center" }}>
-              <Image height={1} width={1} style={{ height: 30, width: 30 }} source={account} />
+              <Image height={1} width={1} style={{ height: 30, width: 30, tintColor: currentNavigation === 'MyAccount' ? "#A7BBC7" : "#000000", }} source={account} />
               <Text style={{ fontWeight: "600" }} >Account</Text>
             </View>
           </Link>
