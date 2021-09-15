@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react'
+import makeConnection from './socketConfig';
 import getMyDetails from './Utility/fetchProfileDetails';
 import { StatusBar } from 'react-native';
 import { NativeRouter, Route } from "react-router-native";
 import { getCurrentLocation } from "./Utility/CurrentLocation"
+import { io } from "socket.io-client/build/index"
+// import socket from './socketConfig';
 //screens
 import Drawer from './Drawer/DrawerPallate';
 import Home from './src/Screens/Home';
@@ -12,6 +15,7 @@ import MyAccount from './src/Screens/MyAccount';
 import MyGuardian from './src/Screens/MyGuardian';
 import Settings from './src/Screens/Settings';
 const App = () => {
+
   const [myCords, setMyCords] = useState();
   const callCurrentLocation = async () => {
     setMyCords(
@@ -19,6 +23,8 @@ const App = () => {
     )
   }
   useEffect(() => {
+    makeConnection()
+    io("ws://localhost:1312/")
     // const interval = setInterval(() => {
     callCurrentLocation()
     // }, 4000);

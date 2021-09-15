@@ -62,8 +62,7 @@ const Profile = () => {
           showsVerticalScrollIndicator={false}
         >
           <View>
-            <InputField editMode={editMode} title="First Name" name="firstName" setMyDetails={setMyDetails} myDetails={myDetails} />
-            <InputField editMode={editMode} title="Last Name" name="lastName" setMyDetails={setMyDetails} myDetails={myDetails} />
+            <InputField editMode={editMode} title="Name" name="name" setMyDetails={setMyDetails} myDetails={myDetails} />
             <InputField editMode={editMode} title="Mobile Number" name="mobileNumber" setMyDetails={setMyDetails} myDetails={myDetails} />
             <InputField editMode={editMode} title="Email Address" name="emailAddress" setMyDetails={setMyDetails} myDetails={myDetails} />
           </View>
