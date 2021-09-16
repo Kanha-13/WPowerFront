@@ -3,7 +3,7 @@ import MapView, { Marker } from "react-native-maps";
 import { Dimensions, PixelRatio } from 'react-native';
 import { StyleSheet } from 'react-native';
 import { Text, View } from 'react-native';
-const Map = ({ myCords, helpCords, help }) => {
+const Map = ({ myCords, helpCords, help, familyLocation }) => {
   const { latitude, longitude } = myCords;
   const { height, width } = Dimensions.get('window');
   return (
@@ -32,6 +32,11 @@ const Map = ({ myCords, helpCords, help }) => {
           title='Your Location'
           description={`${[latitude, longitude]}`}
         ></Marker >
+        {familyLocation ? <Marker
+          coordinate={familyLocation}
+          title='Your Location'
+        // description={`${familyLocation.latitude, familyLocation.longitude}`}
+        ></Marker > : null}
       </MapView>
     </>
   );
