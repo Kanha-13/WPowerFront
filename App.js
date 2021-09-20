@@ -30,13 +30,21 @@ const App = () => {
     })
   }
   useEffect(() => {
+    let componentMounted = true;
     setSocket(makeConnection())
+    return () => {
+      componentMounted = false;
+    }
   }, [])
   useEffect(() => {
-    const interval = setInterval(() => {
-      callCurrentLocation()
-    }, 10000);
-    return () => clearInterval(interval)
+    // const interval = setInterval(() => {
+    let componentMounted = true;
+    callCurrentLocation()
+    return () => {
+      componentMounted = false;
+    }
+    // }, 10000);
+    // return () => clearInterval(interval)
   }, [socket])
   const [currentNavigation, setCurrentNavigation] = useState('Home')
   const { mydetails } = async () => await getMyDetails()

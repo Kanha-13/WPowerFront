@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import MapView, { Marker } from "react-native-maps";
 import { Dimensions, PixelRatio } from 'react-native';
 import { StyleSheet } from 'react-native';
@@ -6,6 +6,9 @@ import { Text, View } from 'react-native';
 const Map = ({ myCords, helpCords, help, familyLocation }) => {
   const { latitude, longitude } = myCords;
   const { height, width } = Dimensions.get('window');
+  useEffect(() => {
+
+  }, [])
   return (
     <>
       <MapView
