@@ -3,15 +3,33 @@ import MapView, { Marker } from "react-native-maps";
 import { Dimensions, PixelRatio } from 'react-native';
 import { StyleSheet } from 'react-native';
 import { Text, View } from 'react-native';
-const Map = ({ myCords, helpCords, help, familyLocation }) => {
-  const { latitude, longitude } = myCords;
+import { getCurrentLocation } from '../../../Utility/CurrentLocation';
+const Map = ({ familyLocation }) => {
+  const mapRef = useRef();
   const { height, width } = Dimensions.get('window');
-  useEffect(() => {
+  const [myCords, setMapCords] = useState({
 
+    latitudeDelta: 45.0254,
+    longitudeDelta: 15.684,
+  })
+
+  useEffect(() => {
+    let mounted = true;
+    const interval = setInterval(async () => {
+      setMapCords(await getCurrentLocation())
+    }, 4000)
+    mounted = false;
+    return () => clearInterval(interval)
   }, [])
+
+  useEffect(() => {
+    mapRef.current.animateCamera({ center: { latitude: myCords.latitude, longitude: myCords.longitude }, pitch: 2, heading: 20, altitude: 200, zoom: 400 }, 1000)
+  }, [myCords])
+  console.log("ola")
   return (
     <>
       <MapView
+        ref={(map) => mapRef.current = map}
         fitToElements={true}
         fitToSuppliedMarkers={true}
         fitToCoordinates={true}
@@ -20,26 +38,48 @@ const Map = ({ myCords, helpCords, help, familyLocation }) => {
           zIndex: -1000,
           width: width,
           height: height,
-          // top: 20,
         }}
-        streetViewControl={true}
-        mapTypeControl={true}
+        region={{
+          latitude: myCords.latitude,
+          longitude: myCords.longitude,
+          latitudeDelta: 0.001663,
+          longitudeDelta: 0.002001,
+        }}
+        onLayout={() => {
+          mapRef.animateCamera({
+            center: {
+              latitude: myCords.latitude,
+              longitude: myCords.longitude,
+            },
+            heading: 0,
+            pitch: 90,
+          });
+        }}
+
         mapTypeControlOptions={{
           style: "horizontalBar",
           position: "topCenter",
         }}
-        initialRegion={myCords}
+        showsMyLocationButton={true}
+        initialRegion={{
+          latitude: 20.5937,
+          longitude: 78.9629,
+          latitudeDelta: myCords.latitudeDelta,
+          longitudeDelta: myCords.longitudeDelta,
+        }}
+        moveOnMarkerPress={true}
       >
-        <Marker
-          coordinate={{ latitude: latitude, longitude: longitude }}
-          title='Your Location'
-          description={`${[latitude, longitude]}`}
-        ></Marker >
-        {familyLocation ? <Marker
+        {
+          typeof (myCords.latitude) === "undefined" ? <></> :
+            <Marker
+              coordinate={{ latitude: myCords.latitude, longitude: myCords.longitude }}
+              title='Your Location'
+            />
+        }
+        {/* {familyLocation ? <Marker
           coordinate={familyLocation}
           title='Your Location'
-        // description={`${familyLocation.latitude, familyLocation.longitude}`}
-        ></Marker > : null}
+        ></Marker > : null} */}
       </MapView>
     </>
   );

@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { Dimensions } from "react-native";
-const Home = ({ myCords }) => {
+const Home = () => {
   const { height, width } = Dimensions.get('window');
   return (
     <View style={{

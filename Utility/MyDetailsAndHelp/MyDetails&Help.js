@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { View, Text, Button, TouchableOpacity } from 'react-native'
 import VerticalSlider from '../VerticalSlidder';
 import fetchMyDeviceStatus from '../fetchMyDeviceStatus'
-const DetailAndHelp = ({ myCords }) => {
+const DetailAndHelp = () => {
   const [DeviceState, setDeviceState] = useState({
     phoneNumber: "",
     brand: "",
@@ -66,7 +66,7 @@ const DetailAndHelp = ({ myCords }) => {
           </TouchableOpacity>
         </View>
         <Text style={{ fontSize: 30, fontWeight: "bold" }}>My Details</Text>
-        <Text>Location: {myCords.latitude} , {myCords.longitude}</Text>
+        {/* <Text>Location: {myCords.latitude} , {myCords.longitude}</Text> */}
         <Text>Phone Number: {phoneNumber}</Text>
         <Text>Mobile Brand: {brand}</Text>
         <Text>Model: {model}</Text>
