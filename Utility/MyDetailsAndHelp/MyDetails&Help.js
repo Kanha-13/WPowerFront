@@ -17,8 +17,10 @@ const DetailAndHelp = () => {
     const details = await fetchMyDeviceStatus()
     setDeviceState(details)
   }
-  useEffect(() => {
-    getDeviceState()
+  useEffect(async() => {
+    let mounted = true;
+    await getDeviceState()
+    mounted = false;
   }, [])
   const { phoneNumber, brand, powerState, fingerPrint, model, deviceType, mnf, ipAdd, uniqueId, carrier } = DeviceState
   return (

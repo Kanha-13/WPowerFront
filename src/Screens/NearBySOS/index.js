@@ -5,8 +5,6 @@ import DetailAndHelp from "../../../Utility/MyDetailsAndHelp/MyDetails&Help";
 const NearBySOS = ({ familyLocation }) => {
   const [help, setHelp] = useState(false)
   const helpCords = {}
-
-  // const mapRef = useRef();
   return (
     <>
       <DetailAndHelp />

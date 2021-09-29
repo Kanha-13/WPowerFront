@@ -4,6 +4,7 @@ import getMyDetails from './Utility/fetchProfileDetails';
 import { StatusBar } from 'react-native';
 import { NativeRouter, Route } from "react-router-native";
 import { getCurrentLocation } from "./Utility/CurrentLocation"
+
 //screens
 import Drawer from './Drawer/DrawerPallate';
 import Home from './src/Screens/Home';
@@ -33,6 +34,7 @@ const App = () => {
     mounted = false;
     return () => clearInterval(interval)
   }, [socket])
+
 
 
   return (

@@ -14,17 +14,18 @@ const BottomNavigation = ({ setCurrentTab, setCurrentNavigation, currentNavigati
         display: "flex",
         flexDirection: "column",
         height: "100%",
-        width: "20%",
+        width: "33.1%",
         alignItems: "center",
         paddingTop: 5,
+        backgroundColor: "gray",
       }}>
-        <TouchableOpacity>
+        <TouchableOpacity style={{ width: "100%" }}>
           <Link to="/Home" underlayColor="none" onPress={() => {
             setCurrentTab("Home")
             setCurrentNavigation("Home")
           }}>
             <View style={{ alignItems: "center" }}>
-              <Image height={1} width={1} style={{ height: 30, width: 30, tintColor: currentNavigation === 'Home' ? "#A7BBC7" : "#000000", }} source={home} />
+              <Image height={1} width={1} style={{ height: 30, width: 30, tintColor: currentNavigation === 'Home' ? "#ffffff" : "#000000", }} source={home} />
               <Text style={{ fontWeight: "600" }} >Home</Text>
             </View>
           </Link>
@@ -34,18 +35,18 @@ const BottomNavigation = ({ setCurrentTab, setCurrentNavigation, currentNavigati
         display: "flex",
         flexDirection: "column",
         height: "100%",
-        width: "20%",
+        width: "33.1%",
         alignItems: "center",
         paddingTop: 5,
-
+        backgroundColor: "gray"
       }}>
-        <TouchableOpacity>
+        <TouchableOpacity style={{ width: "100%" }}>
           <Link to="/NearBySOS" underlayColor="none" onPress={() => {
             setCurrentTab("NearBySOS")
             setCurrentNavigation("NearBySOS")
           }}>
             <View style={{ alignItems: "center" }}>
-              <Image height={1} width={1} style={{ height: 30, width: 30, tintColor: currentNavigation === 'NearBySOS' ? "#A7BBC7" : "#000000", }} source={nearBySos} />
+              <Image height={1} width={1} style={{ height: 30, width: 30, tintColor: currentNavigation === 'NearBySOS' ? "#ffffff" : "#000000", }} source={nearBySos} />
               <Text style={{ fontWeight: "600" }} >NearSOS</Text>
             </View>
           </Link>
@@ -55,18 +56,18 @@ const BottomNavigation = ({ setCurrentTab, setCurrentNavigation, currentNavigati
         display: "flex",
         flexDirection: "column",
         height: "100%",
-        width: "20%",
+        width: "33.1%",
         alignItems: "center",
         paddingTop: 5,
-
+        backgroundColor: "gray"
       }}>
-        <TouchableOpacity>
+        <TouchableOpacity style={{ width: "100%" }}>
           <Link to="/MyAccount" underlayColor="none" onPress={() => {
             setCurrentTab("MyAccount")
             setCurrentNavigation("MyAccount")
           }}>
             <View style={{ alignItems: "center" }}>
-              <Image height={1} width={1} style={{ height: 30, width: 30, tintColor: currentNavigation === 'MyAccount' ? "#A7BBC7" : "#000000", }} source={account} />
+              <Image height={1} width={1} style={{ height: 30, width: 30, tintColor: currentNavigation === 'MyAccount' ? "#ffffff" : "#000000", }} source={account} />{/* #A7BBC7*/}
               <Text style={{ fontWeight: "600" }} >Account</Text>
             </View>
           </Link>
