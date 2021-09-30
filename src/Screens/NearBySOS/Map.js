@@ -1,26 +1,31 @@
 import React, { useEffect, useRef, useState } from 'react'
-import MapView, { Marker } from "react-native-maps";
-import { Dimensions, PixelRatio } from 'react-native';
+import MapView, { Camera, Marker, PROVIDER_GOOGLE } from "react-native-maps";
+import { Button, Dimensions, PixelRatio, TouchableOpacity } from 'react-native';
 import { StyleSheet } from 'react-native';
 import { Text, View, Image } from 'react-native';
 import PropTypes from 'prop-types';
 import { getCurrentLocation } from '../../../Utility/CurrentLocation';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import marker from '../../../assets/marker.png'
+// import { locateMe } from './helper';
 const CustomMarker = () => (
   <View
     style={{
-      height: 100,
-      width: 70,
-      backgroundColor: "#007bff",
+      height: 90,
+      width: 80,
       borderRadius: 250,
       borderRadius: 15,
       overflow: "hidden"
     }}
   >
-    <Image style={{ width: 70, height: 70 }} source={require("../../../assets/kanha.jpg")} />
+    <Image style={{ tintColor: "black", zIndex: 1, width: 75, height: 90, position: "absolute", alignSelf: "center" }} source={marker} />
+    <View style={{ borderRadius: 50, width: 85, height: 95, overflow: "hidden", alignSelf: "center" }}>
+      <Image style={{ top: 7, width: 63, height: 62, alignSelf: "center", borderRadius: 50 }} source={require("../../../assets/kanha.jpg")} />
+    </View>
   </View>
 );
 const Map = ({ }) => {
+  const zoomed = useRef(false)
   const mapRef = useRef();
   const { height, width } = Dimensions.get('window');
   const [myCords, setMyCords] = useState({
@@ -51,29 +56,42 @@ const Map = ({ }) => {
     mounted = false;
     return () => clearInterval(interval)
   }, [])
-
   useEffect(() => {
-    if (mapRef.current) {
-      mapRef.current.animateCamera(
-        {
-          center: {
-            latitude: myCords.latitude,
-            longitude: myCords.longitude
-          },
-          zoom: 20
-        },
-        5000
-      );
-    }
-  }, [myCords]);
+    setTimeout(
+      () => {
+        const newCamera = {
+          center: { latitude: myCords.latitude, longitude: myCords.longitude },
+          zoom: 15,
+          heading: 0,
+          pitch: 0,
+          altitude: 5
+        }
+        mapRef.current.animateCamera(newCamera, { duration: 600 });
+        // mapRef.current.initialRegion({
+        //   latitude: myCords.latitude, longitude: myCords.longitude,
+        //   latitudeDelta: 0.0254,
+        //   longitudeDelta: 0.684,
+        // })
+      }, 1000
+    );
+  }, [mapRef.current]);
 
   return (
     <>
       <MapView
+        provider={PROVIDER_GOOGLE}
         ref={(map) => mapRef.current = map}
         fitToElements={true}
         fitToSuppliedMarkers={true}
         fitToCoordinates={true}
+        animateCamera={
+          {
+            center: {
+              latitude: 3.0256,
+              longitude: 3.0256
+            }, zoom: 200
+          }, 5000
+        }
         style={{
           ...StyleSheet.absoluteFillObject,
           zIndex: -1000,
@@ -106,7 +124,7 @@ const Map = ({ }) => {
             <Marker
               coordinate={{ latitude: myCords.latitude, longitude: myCords.longitude }}
             >
-              {/* <CustomMarker /> */}
+              <CustomMarker />
             </Marker>
         }
         {/* {familyLocation ? <Marker
@@ -114,6 +132,15 @@ const Map = ({ }) => {
           title='Your Location'
         ></Marker > : null} */}
       </MapView>
+      <TouchableOpacity style={{
+        top: 10,
+        width: 60,
+        height: 60,
+        zIndex: 100,
+        backgroundColor: "pink",
+      }}>
+        <Text>Touch</Text>
+      </TouchableOpacity>
     </>
   );
 }
