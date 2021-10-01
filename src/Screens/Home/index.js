@@ -5,7 +5,6 @@ import { generateSOS } from "../../../socket_transport";
 const Home = ({ socket }) => {
   const { height, width } = Dimensions.get('window');
   const callHelp = async () => {
-    console.log("called")
     await generateSOS(socket)
   }
   return (

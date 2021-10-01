@@ -130,7 +130,7 @@ const Map = ({ helpCords }) => {
         }
         {helpCords.latitude ? <Marker
           coordinate={helpCords}
-          title='Your Location'
+          title='Help'
         ></Marker > : null}
       </MapView>
       <TouchableOpacity style={{
