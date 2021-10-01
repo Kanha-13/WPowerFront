@@ -24,7 +24,8 @@ const CustomMarker = () => (
     </View>
   </View>
 );
-const Map = ({ }) => {
+const Map = ({ helpCords }) => {
+  console.log(helpCords)
   const zoomed = useRef(false)
   const mapRef = useRef();
   const { height, width } = Dimensions.get('window');
@@ -127,10 +128,10 @@ const Map = ({ }) => {
               <CustomMarker />
             </Marker>
         }
-        {/* {familyLocation ? <Marker
-          coordinate={familyLocation}
+        {helpCords.latitude ? <Marker
+          coordinate={helpCords}
           title='Your Location'
-        ></Marker > : null} */}
+        ></Marker > : null}
       </MapView>
       <TouchableOpacity style={{
         top: 10,

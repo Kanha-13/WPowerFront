@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { View, Text, Button, TouchableOpacity } from 'react-native'
 import VerticalSlider from '../VerticalSlidder';
 import fetchMyDeviceStatus from '../fetchMyDeviceStatus'
-const DetailAndHelp = () => {
+const DetailAndHelp = ({ callHelp }) => {
   const [DeviceState, setDeviceState] = useState({
     phoneNumber: "",
     brand: "",
@@ -17,7 +17,7 @@ const DetailAndHelp = () => {
     const details = await fetchMyDeviceStatus()
     setDeviceState(details)
   }
-  useEffect(async() => {
+  useEffect(async () => {
     let mounted = true;
     await getDeviceState()
     mounted = false;
@@ -51,7 +51,7 @@ const DetailAndHelp = () => {
             }}
             onPress={() => {
               console.log("touched")
-              // CallHelp(myCords);
+              callHelp();
             }}
           >
             <Text style={{
