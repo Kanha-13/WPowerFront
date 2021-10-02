@@ -60,19 +60,16 @@ const Map = ({ helpCords }) => {
   useEffect(() => {
     setTimeout(
       () => {
-        const newCamera = {
-          center: { latitude: myCords.latitude, longitude: myCords.longitude },
-          zoom: 15,
-          heading: 0,
-          pitch: 0,
-          altitude: 5
+        if (mapRef.current && myCords.latitude) {
+          const newCamera = {
+            center: { latitude: myCords.latitude, longitude: myCords.longitude },
+            zoom: 15,
+            heading: 0,
+            pitch: 0,
+            altitude: 5
+          }
+          mapRef.current.animateCamera(newCamera, { duration: 600 });
         }
-        mapRef.current.animateCamera(newCamera, { duration: 600 });
-        // mapRef.current.initialRegion({
-        //   latitude: myCords.latitude, longitude: myCords.longitude,
-        //   latitudeDelta: 0.0254,
-        //   longitudeDelta: 0.684,
-        // })
       }, 1000
     );
   }, [mapRef.current]);

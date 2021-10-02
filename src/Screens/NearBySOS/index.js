@@ -6,12 +6,12 @@ import DetailAndHelp from "../../../Utility/MyDetailsAndHelp/MyDetails&Help";
 const NearBySOS = ({ callHelp, socket, familyLocation }) => {
   const [helpCords, setHelpCords] = useState({})
   useEffect(() => {
-    socket.on("help", (payload) => {
-      console.log("got help")
-      console.log(payload)
-      setHelpCords(payload)
-    })
-  }, [])
+    if (socket) {
+      socket.on("help", (payload) => {
+        setHelpCords(payload)
+      })
+    }
+  }, [socket])
 
   return (
     <>

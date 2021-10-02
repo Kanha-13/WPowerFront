@@ -17,7 +17,7 @@ import Settings from './src/Screens/Settings';
 window.navigator.userAgent = 'react-native';
 const App = () => {
   const [shareMyLocation, setShareMyLocation] = useState(false);
-  const [socket, setSocket] = useState();
+  const [socket, setSocket] = useState({});
   const [familyLocation, setFamilyLocation] = useState();
   const [currentNavigation, setCurrentNavigation] = useState('Home')
   const { mydetails } = async () => await getMyDetails()
@@ -32,21 +32,9 @@ const App = () => {
     }
   }, [shareMyLocation])
 
-
   useEffect(() => {
     setSocket(makeConnection());
   }, [])
-
-  // useEffect(() => {
-  //   let mounted = true;
-  //   const interval = setInterval(async () => {
-  //     socket.emit("location", await getCurrentLocation())
-  //   }, 4000)
-  //   mounted = false;
-  //   return () => clearInterval(interval)
-  // }, [socket])
-
-
 
   return (
     <NativeRouter>
