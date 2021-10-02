@@ -25,7 +25,6 @@ const CustomMarker = () => (
   </View>
 );
 const Map = ({ helpCords }) => {
-  console.log(helpCords)
   const zoomed = useRef(false)
   const mapRef = useRef();
   const { height, width } = Dimensions.get('window');
@@ -73,7 +72,7 @@ const Map = ({ helpCords }) => {
       }, 1000
     );
   }, [mapRef.current]);
-
+  console.log(helpCords, "in map")
   return (
     <>
       <MapView

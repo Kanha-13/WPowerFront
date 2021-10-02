@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { Dimensions } from "react-native";
-import { generateSOS } from "../../../socket_transport";
+import { generateSOS, iAMsafe } from "../../../socket_transport";
 const Home = ({ socket }) => {
   const { height, width } = Dimensions.get('window');
+  const [helpBtn, setHelpBtn] = useState(true);
   const callHelp = async () => {
     await generateSOS(socket)
   }
+
   return (
     <View style={{
       paddingTop: 90,
@@ -27,14 +29,15 @@ const Home = ({ socket }) => {
         <View style={{ width: width, display: "flex", flexDirection: "row", justifyContent: "space-evenly" }}>
 
           <TouchableOpacity style={{ backgroundColor: "pink", alignItems: "center" }}>
-            <Text style={{
-              fontSize: 40,
-              fontWeight: "bold",
-              paddingLeft: 15,
-              color: 'white',
-              textAlign: "center",
-              alignSelf: "center"
-            }}>Help</Text>
+            <Text
+              style={{
+                fontSize: 40,
+                fontWeight: "bold",
+                paddingLeft: 15,
+                color: 'white',
+                textAlign: "center",
+                alignSelf: "center"
+              }}>Help</Text>
           </TouchableOpacity>
           <TouchableOpacity style={{ backgroundColor: "pink" }}>
             <Text style={{
@@ -52,14 +55,19 @@ const Home = ({ socket }) => {
           style={{
             width: "50%",
             height: 185,
-            backgroundColor: "red",
+            backgroundColor: helpBtn ? "red" : "green",
             borderRadius: 130,
             justifyContent: "center",
             alignSelf: "center"
           }}
-          onPress={() => {
-            console.log("touched")
-            callHelp();
+          onPress={(e) => {
+            if (helpBtn) {
+              callHelp();
+              setHelpBtn(false)
+            } else {
+              iAMsafe()
+              setHelpBtn(true)
+            }
           }}
         >
           <Text style={{
@@ -70,7 +78,7 @@ const Home = ({ socket }) => {
             textAlign: "center",
             alignSelf: "center"
 
-          }}>Help</Text>
+          }}>{helpBtn ? "Help" : "I am safe Now"}</Text>
         </TouchableOpacity>
         <TouchableOpacity style={{ backgroundColor: "pink" }}>
           <Text style={{
