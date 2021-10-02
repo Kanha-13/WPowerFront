@@ -2,9 +2,13 @@ import React, { useEffect, useState, useRef } from "react"
 import { View } from "react-native";
 import Map from "./Map";
 import DetailAndHelp from "../../../Utility/MyDetailsAndHelp/MyDetails&Help";
+import { generateSOS } from "../../../socket_transport";
 
-const NearBySOS = ({ callHelp, socket, familyLocation }) => {
+const NearBySOS = ({ socket, familyLocation }) => {
   const [helpCords, setHelpCords] = useState({})
+  const callSOS = async () => {
+    await generateSOS(socket)
+  }
   useEffect(() => {
     let mounted = true;
     if (socket) {
@@ -17,8 +21,8 @@ const NearBySOS = ({ callHelp, socket, familyLocation }) => {
 
   return (
     <>
-      <DetailAndHelp callHelp={callHelp} />
-      <Map helpCords={helpCords} socket={socket} familyLocation={familyLocation} />
+      <DetailAndHelp callSOS={callSOS} />
+      <Map helpCords={helpCords} />
     </>
   );
 }

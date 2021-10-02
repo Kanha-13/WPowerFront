@@ -1,22 +1,20 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { View, Text, Button, TouchableOpacity } from 'react-native'
 import VerticalSlider from '../VerticalSlidder';
 import fetchMyDeviceStatus from '../fetchMyDeviceStatus'
-const DetailAndHelp = ({ callHelp }) => {
-  const [DeviceState, setDeviceState] = useState({
-    phoneNumber: "",
-    brand: "",
-    powerState: { batteryLevel: "", batteryState: "", lowPowerMode: true },
-    fingerPrint: "",
-    mnf: "",
-    ipAdd: "",
-    uniqueId: "",
-    carrier: "",
-  })
+import { generateSOS, iAMsafe } from '../../socket_transport'
+import { StateContext } from '../StateProvider';
+
+const DetailAndHelp = ({ callSOS }) => {
+  const HelpBtnState = useContext(StateContext)
+  const { helpCalled, setHelpCalled } = HelpBtnState
+
+  const [DeviceState, setDeviceState] = useState({ phoneNumber: "", brand: "", powerState: { batteryLevel: "", batteryState: "", lowPowerMode: true }, fingerPrint: "", mnf: "", ipAdd: "", uniqueId: "", carrier: "", })
   const getDeviceState = async () => {
     const details = await fetchMyDeviceStatus()
     setDeviceState(details)
   }
+
   useEffect(async () => {
     let mounted = true;
     await getDeviceState()
@@ -42,29 +40,31 @@ const DetailAndHelp = ({ callHelp }) => {
 
           <TouchableOpacity
             style={{
-              width: "100%",
-              height: 250,
-              alignSelf: "center",
-              backgroundColor: "red",
+              width: "70%",
+              height: 185,
+              backgroundColor: helpCalled ? "green" : "red",
               borderRadius: 130,
-              justifyContent: "center"
+              justifyContent: "center",
+              alignSelf: "center"
             }}
-            onPress={() => {
-              console.log("touched")
-              callHelp();
+            onPress={(e) => {
+              if (helpCalled) {
+                iAMsafe()
+                setHelpCalled(false)
+              } else {
+                callSOS();
+                setHelpCalled(true)
+              }
             }}
           >
             <Text style={{
-              fontSize: 60,
+              fontSize: helpCalled ? 40 : 60,
               fontWeight: "bold",
-              paddingLeft: 15,
               color: 'white',
               textAlign: "center",
               alignSelf: "center"
 
-            }}>Help</Text>
-            {/* </View> */}
-
+            }}>{helpCalled ? "I am safe Now" : "Help"}</Text>
           </TouchableOpacity>
         </View>
         <Text style={{ fontSize: 30, fontWeight: "bold" }}>My Details</Text>

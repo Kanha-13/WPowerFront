@@ -13,6 +13,7 @@ import Profile from './src/Screens/Profile';
 import MyAccount from './src/Screens/MyAccount';
 import MyGuardian from './src/Screens/MyGuardian';
 import Settings from './src/Screens/Settings';
+import StateProvide from './Utility/StateProvider';
 // import { liveFamilyLocation } from './socket_transport'
 window.navigator.userAgent = 'react-native';
 const App = () => {
@@ -37,18 +38,20 @@ const App = () => {
   }, [])
 
   return (
-    <NativeRouter>
-      <StatusBar backgroundColor="transparent" translucent={true} barStyle="dark-content" type="dark" />
-      <Drawer currentTab={currentTab} setCurrentTab={setCurrentTab} setCurrentNavigation={setCurrentNavigation} currentNavigation={currentNavigation}>
-        <Route exact path={`/`} component={() => <Home socket={socket} />} />
-        <Route exact path={`/Home`} component={() => <Home socket={socket} />} />
-        <Route exact path={`/Profile`} component={Profile} />
-        <Route exact path={`/MyAccount`} component={() => <MyAccount currentTab={currentTab} setCurrentTab={setCurrentTab} />} />
-        <Route exact path={`/MyGuardian`} component={MyGuardian} />
-        <Route exact path={`/Settings`} component={Settings} />
-        <Route exact path={`/NearBySOS`} component={() => <NearBySOS callHelp={callHelp} socket={socket} familyLocation={familyLocation} />} />
-      </Drawer>
-    </NativeRouter>
+    <StateProvide>
+      <NativeRouter>
+        <StatusBar backgroundColor="transparent" translucent={true} barStyle="dark-content" type="dark" />
+        <Drawer currentTab={currentTab} setCurrentTab={setCurrentTab} setCurrentNavigation={setCurrentNavigation} currentNavigation={currentNavigation}>
+          <Route exact path={`/`} component={() => <Home socket={socket} />} />
+          <Route exact path={`/Home`} component={() => <Home socket={socket} />} />
+          <Route exact path={`/Profile`} component={Profile} />
+          <Route exact path={`/MyAccount`} component={() => <MyAccount currentTab={currentTab} setCurrentTab={setCurrentTab} />} />
+          <Route exact path={`/MyGuardian`} component={MyGuardian} />
+          <Route exact path={`/Settings`} component={Settings} />
+          <Route exact path={`/NearBySOS`} component={() => <NearBySOS callHelp={callHelp} socket={socket} familyLocation={familyLocation} />} />
+        </Drawer>
+      </NativeRouter>
+    </StateProvide>
   );
 }
 export default App;

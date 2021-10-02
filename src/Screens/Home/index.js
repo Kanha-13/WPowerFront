@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { Dimensions } from "react-native";
 import { generateSOS, iAMsafe } from "../../../socket_transport";
+import { StateContext } from "../../../Utility/StateProvider";
 const Home = ({ socket }) => {
+  const HelpBtn = useContext(StateContext);
+  const { helpCalled, setHelpCalled } = HelpBtn
   const { height, width } = Dimensions.get('window');
-  const [helpBtn, setHelpBtn] = useState(true);
-  const callHelp = async () => {
+  const callSOS = async () => {
     await generateSOS(socket)
   }
 
@@ -55,30 +57,29 @@ const Home = ({ socket }) => {
           style={{
             width: "50%",
             height: 185,
-            backgroundColor: helpBtn ? "red" : "green",
+            backgroundColor: helpCalled ? "green" : "red",
             borderRadius: 130,
             justifyContent: "center",
             alignSelf: "center"
           }}
           onPress={(e) => {
-            if (helpBtn) {
-              callHelp();
-              setHelpBtn(false)
-            } else {
+            if (helpCalled) {
               iAMsafe()
-              setHelpBtn(true)
+              setHelpCalled(false)
+            } else {
+              callSOS();
+              setHelpCalled(true)
             }
           }}
         >
           <Text style={{
-            fontSize: 60,
+            fontSize: helpCalled ? 40 : 60,
             fontWeight: "bold",
-            paddingLeft: 15,
             color: 'white',
             textAlign: "center",
             alignSelf: "center"
 
-          }}>{helpBtn ? "Help" : "I am safe Now"}</Text>
+          }}>{helpCalled ? "I am safe Now" : "Help"}</Text>
         </TouchableOpacity>
         <TouchableOpacity style={{ backgroundColor: "pink" }}>
           <Text style={{
