@@ -4,8 +4,6 @@ import { Button, Dimensions, TouchableOpacity } from 'react-native';
 import { StyleSheet } from 'react-native';
 import { Text, View, Image } from 'react-native';
 import PropTypes from 'prop-types';
-import { getCurrentLocation } from '../../../Utility/CurrentLocation';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import marker from '../../../assets/marker.png'
 // import { locateMe } from './helper';
 import { StateContext } from '../../../Utility/StateProvider';
@@ -27,37 +25,8 @@ const CustomMarker = () => (
 );
 const Map = ({ helpCords }) => {
   const State = useContext(StateContext);
-  const mapRef = State.mapRef
+  const { mapRef, myCords } = State
   const { height, width } = Dimensions.get('window');
-  const [myCords, setMyCords] = useState({
-    latitudeDelta: 45.0254,
-    longitudeDelta: 15.684,
-  })
-  useEffect(async () => {
-    let mounted = true;
-    let oldLocation = await AsyncStorage.getItem('oldLocation')
-    if (oldLocation === null) {
-    } else {
-      setMyCords(JSON.parse(oldLocation))
-    }
-    mounted = false;
-  }, [])
-
-  useEffect(() => {
-    let mounted = true;
-    const interval = setInterval(async () => {
-      try {
-        console.log("called")
-        const cords = await getCurrentLocation()
-        setMyCords(cords)
-        await AsyncStorage.setItem('oldLocation', JSON.stringify(cords))
-      } catch (error) {
-        console.log(error)
-      }
-    }, 4000)
-    mounted = false;
-    return () => clearInterval(interval)
-  }, [])
 
   useEffect(() => {
     setTimeout(

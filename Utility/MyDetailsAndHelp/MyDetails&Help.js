@@ -6,20 +6,8 @@ import { generateSOS, iAMsafe } from '../../socket_transport'
 import { StateContext } from '../StateProvider';
 
 const DetailAndHelp = ({ callSOS }) => {
-  const HelpBtnState = useContext(StateContext)
-  const { helpCalled, setHelpCalled } = HelpBtnState
-
-  const [DeviceState, setDeviceState] = useState({ phoneNumber: "", brand: "", powerState: { batteryLevel: "", batteryState: "", lowPowerMode: true }, fingerPrint: "", mnf: "", ipAdd: "", uniqueId: "", carrier: "", })
-  const getDeviceState = async () => {
-    const details = await fetchMyDeviceStatus()
-    setDeviceState(details)
-  }
-
-  useEffect(async () => {
-    let mounted = true;
-    await getDeviceState()
-    mounted = false;
-  }, [])
+  const controllerStore = useContext(StateContext)
+  const { helpCalled, setHelpCalled, DeviceState } = controllerStore
   const { phoneNumber, brand, powerState, fingerPrint, model, deviceType, mnf, ipAdd, uniqueId, carrier } = DeviceState
   return (
     <VerticalSlider>

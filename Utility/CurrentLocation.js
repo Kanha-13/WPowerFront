@@ -1,8 +1,8 @@
 import { PermissionsAndroid, Platform, Linking } from "react-native";
 import Geolocation from 'react-native-geolocation-service'
-import DeviceInfo from 'react-native-device-info'
-import IntentLauncher, { IntentConstant } from 'react-native-intent-launcher'
-const pkg = DeviceInfo.getBundleId();
+
+import AndroidOpenSettings from 'react-native-android-open-settings'
+
 
 const getCurrentCords = () => new Promise((resolve, reject) => {
   Geolocation.getCurrentPosition(
@@ -23,18 +23,6 @@ const getCurrentCords = () => new Promise((resolve, reject) => {
   )
 })
 
-const openAppSettings = () => {
-  if (Platform.OS === 'ios') {
-    Linking.openURL('app-settings:')
-  } else {
-    // Linking.openSettings();
-    IntentLauncher.startActivity({
-      action: 'android.settings.APPLICATION_DETAILS_SETTINGS',
-      data: 'package:' + pkg
-    })
-  }
-}
-
 const locationPermission = () => new Promise(async (resolve, reject) => {
   if (Platform === "ios") {
     try {
@@ -49,15 +37,13 @@ const locationPermission = () => new Promise(async (resolve, reject) => {
       return reject(error)
     }
   }
-  debugger;
   return PermissionsAndroid.request(
     PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
   ).then((granted) => {
     if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-      openAppSettings()
+      // AndroidOpenSettings.appDetailsSettings()
       resolve('granted');
     }
-    console.log(granted)
     return reject("Location permission denied");
   }).catch(error => {
     console.log("Ask location permission error:  ".error)
