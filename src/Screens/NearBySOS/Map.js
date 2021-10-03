@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import MapView, { Camera, Marker, PROVIDER_GOOGLE } from "react-native-maps";
-import { Button, Dimensions, PixelRatio, TouchableOpacity } from 'react-native';
+import { Button, Dimensions, TouchableOpacity } from 'react-native';
 import { StyleSheet } from 'react-native';
 import { Text, View, Image } from 'react-native';
 import PropTypes from 'prop-types';
@@ -8,6 +8,7 @@ import { getCurrentLocation } from '../../../Utility/CurrentLocation';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import marker from '../../../assets/marker.png'
 // import { locateMe } from './helper';
+import { StateContext } from '../../../Utility/StateProvider';
 const CustomMarker = () => (
   <View
     style={{
@@ -25,8 +26,8 @@ const CustomMarker = () => (
   </View>
 );
 const Map = ({ helpCords }) => {
-  const zoomed = useRef(false)
-  const mapRef = useRef();
+  const State = useContext(StateContext);
+  const mapRef = State.mapRef
   const { height, width } = Dimensions.get('window');
   const [myCords, setMyCords] = useState({
     latitudeDelta: 45.0254,
@@ -45,17 +46,19 @@ const Map = ({ helpCords }) => {
   useEffect(() => {
     let mounted = true;
     const interval = setInterval(async () => {
-      const cords = await getCurrentLocation()
-      setMyCords(cords)
       try {
+        console.log("called")
+        const cords = await getCurrentLocation()
+        setMyCords(cords)
         await AsyncStorage.setItem('oldLocation', JSON.stringify(cords))
       } catch (error) {
-        console.log("error in saving number", error)
+        console.log(error)
       }
     }, 4000)
     mounted = false;
     return () => clearInterval(interval)
   }, [])
+
   useEffect(() => {
     setTimeout(
       () => {
@@ -72,7 +75,7 @@ const Map = ({ helpCords }) => {
       }, 1000
     );
   }, [mapRef.current]);
-  console.log(helpCords, "in map")
+
   return (
     <>
       <MapView

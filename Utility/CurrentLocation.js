@@ -1,5 +1,8 @@
-import { PermissionsAndroid, Platform } from "react-native";
+import { PermissionsAndroid, Platform, Linking } from "react-native";
 import Geolocation from 'react-native-geolocation-service'
+import DeviceInfo from 'react-native-device-info'
+import IntentLauncher, { IntentConstant } from 'react-native-intent-launcher'
+const pkg = DeviceInfo.getBundleId();
 
 const getCurrentCords = () => new Promise((resolve, reject) => {
   Geolocation.getCurrentPosition(
@@ -20,12 +23,24 @@ const getCurrentCords = () => new Promise((resolve, reject) => {
   )
 })
 
+const openAppSettings = () => {
+  if (Platform.OS === 'ios') {
+    Linking.openURL('app-settings:')
+  } else {
+    // Linking.openSettings();
+    IntentLauncher.startActivity({
+      action: 'android.settings.APPLICATION_DETAILS_SETTINGS',
+      data: 'package:' + pkg
+    })
+  }
+}
 
 const locationPermission = () => new Promise(async (resolve, reject) => {
   if (Platform === "ios") {
     try {
-      const permissionStatus = await Geolocation.requestAuthorization('whenInUse');
+      const permissionStatus = await Geolocation.requestAuthorization('always');
       if (permissionStatus === 'granted') {
+        openAppSettings()
         return resolve('granted')
       }
       reject('permission not granted')
@@ -34,12 +49,15 @@ const locationPermission = () => new Promise(async (resolve, reject) => {
       return reject(error)
     }
   }
+  debugger;
   return PermissionsAndroid.request(
     PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
   ).then((granted) => {
     if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+      openAppSettings()
       resolve('granted');
     }
+    console.log(granted)
     return reject("Location permission denied");
   }).catch(error => {
     console.log("Ask location permission error:  ".error)
@@ -47,9 +65,16 @@ const locationPermission = () => new Promise(async (resolve, reject) => {
   })
 })
 export const getCurrentLocation = async () => {
-  const permission = await locationPermission();
-  if (permission) {
-    return await getCurrentCords()
+  try {
+    const permission = await locationPermission();
+    if (permission) {
+      return await getCurrentCords()
+    } else {
+      throw "Location permission denied"
+    }
+  } catch (error) {
+    console.log(error)
+    return error
   }
 }
 

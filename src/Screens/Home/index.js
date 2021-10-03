@@ -3,13 +3,10 @@ import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { Dimensions } from "react-native";
 import { generateSOS, iAMsafe } from "../../../socket_transport";
 import { StateContext } from "../../../Utility/StateProvider";
-const Home = ({ socket }) => {
-  const HelpBtn = useContext(StateContext);
-  const { helpCalled, setHelpCalled } = HelpBtn
+const Home = () => {
+  const Controller = useContext(StateContext);
+  const { helpCalled, setHelpCalled, callSOS } = Controller
   const { height, width } = Dimensions.get('window');
-  const callSOS = async () => {
-    await generateSOS(socket)
-  }
 
   return (
     <View style={{
