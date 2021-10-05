@@ -71,6 +71,10 @@ const StateProvide = (props) => {
     mounted = false
   }, [socket])
 
+  // useEffect(()=>{
+
+  // },[])
+
   return (
     <StateContext.Provider
       value={{

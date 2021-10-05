@@ -1,40 +1,26 @@
-import React from 'react'
-import { Text, View } from 'react-native'
-import AddGurdianButton from './AddGuardianButton';
+import React, { useEffect, useState } from "react"
+import { View, Text, TouchableOpacity, Image } from "react-native";
+import { Link } from "react-router-native";
 const MyGuardian = () => {
   return (
     <View style={{
-      paddingTop: 50,
+      paddingTop: 90,
     }}>
       <View style={{
-        backgroundColor: "white",
-        padding: 10,
-        paddingTop: 20,
-        width: "100%",
-        borderTopRightRadius: 20,
-        borderTopLeftRadius: 20,
-        alignSelf: "center"
+        backgroundColor: "white", padding: 20, width: "100%", borderRadius: 20, alignSelf: "center", height: "90%",
       }}
       >
+        <TouchableOpacity>
+          <Link to="/MyAccount" underlayColor="none" >
+            <Image style={{ width: 35, height: 25 }} source={require('../../../assets/backArrow.png')}></Image>
+          </Link>
+        </TouchableOpacity>
         <Text style={{
-          fontSize: 20,
-          fontWeight: "400"
-        }}
-        >My Gurdians</Text>
-        <View style={{
-          height: 0.5,
-          width: "100%",
-          backgroundColor: "#000000",
-          alignSelf: "center",
-          borderRadius: 5,
-          marginVertical: 2,
-        }}></View>
-        <AddGurdianButton />
-        {
-          //added gurdian list render here
-        }
+          fontSize: 20, alignSelf: "center",
+        }}>My Guardians</Text>
       </View>
-    </View>
+    </View >
   );
+
 }
-export default MyGuardian;
+export default MyGuardian

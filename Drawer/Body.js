@@ -12,12 +12,12 @@ const Body = ({ currentTab, setCurrentTab }) => {
     <>
       <View style={{ flexGrow: 1, marginTop: 50 }} >
         {
-          //tab bar butrtons....
+          //tab bar buttons....
         }
         {TabButton(currentTab, setCurrentTab, "Home", home)}
         {TabButton(currentTab, setCurrentTab, "Profile", profile)}
-        {TabButton(currentTab, setCurrentTab, "MyAccount", account)}
         {TabButton(currentTab, setCurrentTab, "NearBySOS", nearBySos)}
+        {TabButton(currentTab, setCurrentTab, "MyAccount", account)}
         {TabButton(currentTab, setCurrentTab, "Settings", settings)}
         {/* {TabButton(currentTab, setCurrentTab, "Notification", notification)}
         {TabButton(currentTab, setCurrentTab, "Settings", setting)} */}

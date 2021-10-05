@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
 import { Dimensions } from "react-native";
 import { generateSOS, iAMsafe } from "../../../socket_transport";
 import { StateContext } from "../../../Utility/StateProvider";
@@ -13,41 +13,14 @@ const Home = () => {
       paddingTop: 90,
     }}>
       <View style={{
-        backgroundColor: "#C6CDCE",
-        color: "white",
-        padding: 30,
-        width: "100%",
-        borderRadius: 20,
-        height: "90%",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center"
-      }}
-      >
+        backgroundColor: "#C6CDCE", color: "white", padding: 30, width: "100%", borderRadius: 20, height: "90%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center"
+      }}>
         <View style={{ width: width, display: "flex", flexDirection: "row", justifyContent: "space-evenly" }}>
-
-          <TouchableOpacity style={{ backgroundColor: "pink", alignItems: "center" }}>
-            <Text
-              style={{
-                fontSize: 40,
-                fontWeight: "bold",
-                paddingLeft: 15,
-                color: 'white',
-                textAlign: "center",
-                alignSelf: "center"
-              }}>Help</Text>
+          <TouchableOpacity style={{ backgroundColor: "#fff", borderRadius: 10, alignItems: "center", top: 75, height: 150, width: 180 }}>
+            <Image style={{ top: 10, right: 20, width: 100, height: 100 }} source={require('../../../assets/police.png')} ></Image>
           </TouchableOpacity>
-          <TouchableOpacity style={{ backgroundColor: "pink" }}>
-            <Text style={{
-              fontSize: 40,
-              fontWeight: "bold",
-              paddingLeft: 15,
-              color: 'white',
-              textAlign: "center",
-              alignSelf: "center"
-
-            }}>Help</Text>
+          <TouchableOpacity style={{ backgroundColor: "#fff", borderRadius: 10, top: 75, height: 150, width: 180 }}>
+            <Image style={{ left: 50, top: 10, width: 115, height: 90 }} source={require('../../../assets/ambulance.png')} ></Image>
           </TouchableOpacity>
         </View>
         <TouchableOpacity
@@ -55,6 +28,9 @@ const Home = () => {
             width: "50%",
             height: 185,
             backgroundColor: helpCalled ? "green" : "red",
+            borderColor: "#C6CDCE",
+            // borderColor: "#fff",
+            borderWidth: 5,
             borderRadius: 130,
             justifyContent: "center",
             alignSelf: "center"
@@ -78,17 +54,15 @@ const Home = () => {
 
           }}>{helpCalled ? "I am safe Now" : "Help"}</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={{ backgroundColor: "pink" }}>
-          <Text style={{
-            fontSize: 60,
-            fontWeight: "bold",
-            paddingLeft: 15,
-            color: 'white',
-            textAlign: "center",
-            alignSelf: "center"
+        <View style={{ width: width, display: "flex", flexDirection: "row", justifyContent: "space-evenly" }}>
 
-          }}>Help</Text>
-        </TouchableOpacity>
+          <TouchableOpacity style={{ backgroundColor: "#fff", borderRadius: 10, alignItems: "center", bottom: 90, zIndex: -1, height: 150, width: 180 }}>
+            <Image style={{ top: 30, width: 120, right: 10, height: 100 }} source={require('../../../assets/family.png')} ></Image>
+          </TouchableOpacity>
+          <TouchableOpacity style={{ backgroundColor: "white", borderRadius: 10, bottom: 90, zIndex: -1, height: 150, width: 180 }}>
+            <Image style={{ top: 30, left: 50, width: 100, height: 100 }} source={require('../../../assets/nearHelp.png')} ></Image>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
