@@ -15,7 +15,6 @@ window.navigator.userAgent = 'react-native';
 const App = () => {
   const [currentNavigation, setCurrentNavigation] = useState('Home')
   const [currentTab, setCurrentTab] = useState('Home')
-
   return (
     <StateProvide>
       <NativeRouter>

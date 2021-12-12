@@ -8,6 +8,7 @@ import fetchMyDeviceStatus from "../fetchMyDeviceStatus";
 export const StateContext = React.createContext();
 const StateProvide = (props) => {
   const [socket, setSocket] = useState();
+  const [helpCords, setHelpCords] = useState('')
   const [helpCalled, setHelpCalled] = useState(false)
   const mapRef = useRef()
   const [myCords, setMyCords] = useState({
@@ -27,23 +28,24 @@ const StateProvide = (props) => {
   const callSOS = async () => {
     await generateSOS(socket)
   }
-
-  useEffect(async () => {
-    //Start here first create socket
-    setSocket(makeConnection());
-
+  const getData = async () => {
     //check for local storage
     let oldLocation = await AsyncStorage.getItem('oldLocation')
     if (oldLocation === null) {
     } else {
       setMyCords(JSON.parse(oldLocation))
     }
-
     //then fetch device details
     await getDeviceState()
+
+  }
+  useEffect(() => {
+    //Start here first create socket
+    setSocket(makeConnection());
+    getData();
   }, [])
 
-  useEffect(async () => {
+  useEffect(() => {
     let mounted = true;
     //then get location cords continuously
     const interval = setInterval(async () => {
@@ -65,20 +67,19 @@ const StateProvide = (props) => {
     let mounted = true;
     if (socket) {
       socket.on("help", (payload) => {
+        console.log(payload, "cords ")
+        console.log("someone need help")
         setHelpCords(payload)
       })
     }
     mounted = false
   }, [socket])
 
-  // useEffect(()=>{
-
-  // },[])
-
   return (
     <StateContext.Provider
       value={{
         helpCalled,
+        helpCords,
         setHelpCalled,
         mapRef,
         myCords,

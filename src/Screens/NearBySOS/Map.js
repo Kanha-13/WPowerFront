@@ -23,11 +23,11 @@ const CustomMarker = () => (
     </View>
   </View>
 );
-const Map = ({ helpCords }) => {
+const Map = () => {
   const State = useContext(StateContext);
-  const { mapRef, myCords } = State
+  const { mapRef, myCords, helpCords } = State
   const { height, width } = Dimensions.get('window');
-
+  console.log(helpCords, "help")
   useEffect(() => {
     setTimeout(
       () => {
@@ -99,7 +99,10 @@ const Map = ({ helpCords }) => {
         {helpCords.latitude ? <Marker
           coordinate={helpCords}
           title='Help'
-        ></Marker > : null}
+        >
+          <CustomMarker />
+
+        </Marker > : null}
       </MapView>
       <TouchableOpacity style={{
         top: 10,

@@ -7,7 +7,6 @@ import { StateContext } from "../../../Utility/StateProvider";
 const NearBySOS = () => {
   const State = useContext(StateContext)
   const { socket } = State
-  const [helpCords, setHelpCords] = useState({})
   const callSOS = async () => {
     await generateSOS(socket)
   }
@@ -15,7 +14,7 @@ const NearBySOS = () => {
   return (
     <>
       <DetailAndHelp callSOS={callSOS} />
-      <Map helpCords={helpCords} />
+      <Map />
     </>
   );
 }

@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Linking } from 'react-native'
+import { Linking, Pressable } from 'react-native'
 import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
 import { Dimensions } from "react-native";
 import { generateSOS, iAMsafe } from "../../../socket_transport";
@@ -16,15 +16,15 @@ const Home = () => {
     }}>
       <View style={{
         backgroundColor: "#C6CDCE",
-        color: "white",
-        paddingHorizontal: 30,
-        width: width,
+        width: "100%",
         borderRadius: 20,
-        height: height / 1.3,
-        zIndex: -1,
+        height: "90%",
+        padding: 20,
+        paddingVertical: 30,
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
+        alignSelf: "center",
         justifyContent: "center"
       }}>
         <View style={{
@@ -34,18 +34,20 @@ const Home = () => {
           zIndex: -1, padding: 6
         }}>
           <TouchableOpacity
+            activeOpacity={0.75}
             onPress={() => { RNImmediatePhoneCall.immediatePhoneCall('1091'); }}
             style={{ backgroundColor: "#fff", padding: 10, borderRadius: 10, alignItems: "flex-start", height: "60%", width: "45%" }}>
             <Image style={{ width: "60%", height: "70%" }} source={require('../../../assets/police.png')} ></Image>
           </TouchableOpacity>
 
           <TouchableOpacity
+            activeOpacity={0.75}
             onPress={() => { RNImmediatePhoneCall.immediatePhoneCall('104'); }}
             style={{ backgroundColor: "#fff", padding: 10, borderRadius: 10, alignItems: "flex-end", height: "60%", width: "45%" }}>
             <Image style={{ width: "68%", height: "60%" }} source={require('../../../assets/ambulance.png')} ></Image>
           </TouchableOpacity>
         </View>
-        <TouchableOpacity
+        <Pressable
           style={{
             width: "50%",
             height: "28%",
@@ -75,19 +77,21 @@ const Home = () => {
             alignSelf: "center"
 
           }}>{helpCalled ? "I am safe Now" : "Help"}</Text>
-        </TouchableOpacity>
+        </Pressable>
         <View style={{
           width: width, height: "40%", display: "flex",
           flexDirection: "row", justifyContent: "space-evenly", alignItems: "flex-start",
           zIndex: -1, padding: 6
         }}>
           <TouchableOpacity
+            activeOpacity={0.75}
             // onPress={() => { RNImmediatePhoneCall.immediatePhoneCall('0123456789'); }}
             style={{ backgroundColor: "#fff", padding: 10, borderRadius: 10, justifyContent: "flex-end", alignItems: "flex-start", height: "60%", width: "45%" }}>
             <Image style={{ width: "70%", height: "80%" }} source={require('../../../assets/family.png')} ></Image>
           </TouchableOpacity>
 
           <TouchableOpacity
+            activeOpacity={0.75}
             style={{ backgroundColor: "#fff", padding: 10, borderRadius: 10, justifyContent: "flex-end", alignItems: "flex-end", height: "60%", width: "45%" }}>
             <Image style={{ width: "65%", height: "70%" }} source={require('../../../assets/nearHelp.png')} ></Image>
           </TouchableOpacity>

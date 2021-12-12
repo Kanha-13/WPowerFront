@@ -6,7 +6,6 @@ const makeConnection = () => {
   return socket = io('http://192.168.29.59:1312/', {
     transports: ['websocket'] // you need to explicitly tell it to use websockets
   });
-
 }
 export default makeConnection;
 //==============================================

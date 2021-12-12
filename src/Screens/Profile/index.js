@@ -13,8 +13,11 @@ const Profile = () => {
     emailAddress: "",
   })
   const [editMode, setEditMode] = useState(false)
-  useEffect(async () => {
+  const getDetails = async () => {
     setMyDetails({ ...myDetails, mobileNumber: await AsyncStorage.getItem('mobileNumber') })
+  }
+  useEffect(() => {
+    getDetails()
   }, [])
   return (
 
