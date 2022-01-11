@@ -14,7 +14,6 @@ const VerticalSlider = (props) => {
   const movementValue = (moveY) => height - moveY;
   //=========================================================================
 
-
   const onPanResponderMove = (_, _a) => {
     var moveY = _a.moveY;
     var val = movementValue(moveY);
@@ -47,15 +46,13 @@ const VerticalSlider = (props) => {
     <Animated.View
       style={[
         {
-          zIndex: 1000,
+          top: height - height * 0.13,
           width: width,
           height: height - 25,
           borderRadius: 20,
-          // backgroundColor: '#DA7F8F',
           backgroundColor: "#E1E5EA",
-
+          position: "absolute",
           transform: [{ translateY: y }],
-          marginTop: 700,
         },
       ]}
       {...panResponder.panHandlers}>

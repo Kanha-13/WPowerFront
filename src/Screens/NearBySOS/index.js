@@ -1,9 +1,10 @@
-import React, { useEffect, useState, useRef, useContext } from "react"
+import React, { useContext } from "react"
 import { View } from "react-native";
 import Map from "./Map";
 import DetailAndHelp from "../../../Utility/MyDetailsAndHelp/MyDetails&Help";
 import { generateSOS } from "../../../socket_transport";
 import { StateContext } from "../../../Utility/StateProvider";
+import { style } from "./style";
 const NearBySOS = () => {
   const State = useContext(StateContext)
   const { socket } = State
@@ -12,10 +13,10 @@ const NearBySOS = () => {
   }
 
   return (
-    <>
-      <DetailAndHelp callSOS={callSOS} />
+    <View style={style.mainContaienr}>
       <Map />
-    </>
+      <DetailAndHelp callSOS={callSOS} />
+    </View>
   );
 }
 export default NearBySOS

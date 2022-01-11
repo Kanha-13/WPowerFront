@@ -1,11 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react'
-import MapView, { Camera, Marker, PROVIDER_GOOGLE } from "react-native-maps";
-import { Button, Dimensions, TouchableOpacity } from 'react-native';
-import { StyleSheet } from 'react-native';
-import { Text, View, Image } from 'react-native';
+import React, { useContext, useEffect } from 'react'
+import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
+import { View, Image } from 'react-native';
 import PropTypes from 'prop-types';
 import marker from '../../../assets/marker.png'
-// import { locateMe } from './helper';
 import { StateContext } from '../../../Utility/StateProvider';
 const CustomMarker = () => (
   <View
@@ -26,15 +23,13 @@ const CustomMarker = () => (
 const Map = () => {
   const State = useContext(StateContext);
   const { mapRef, myCords, helpCords } = State
-  const { height, width } = Dimensions.get('window');
-  console.log(helpCords, "help")
   useEffect(() => {
     setTimeout(
       () => {
         if (mapRef.current && myCords.latitude) {
           const newCamera = {
             center: { latitude: myCords.latitude, longitude: myCords.longitude },
-            zoom: 15,
+            zoom: 16,
             heading: 0,
             pitch: 0,
             altitude: 5
@@ -46,77 +41,50 @@ const Map = () => {
   }, [mapRef.current]);
 
   return (
-    <>
-      <MapView
-        provider={PROVIDER_GOOGLE}
-        ref={(map) => mapRef.current = map}
-        fitToElements={true}
-        fitToSuppliedMarkers={true}
-        fitToCoordinates={true}
-        animateCamera={
-          {
-            center: {
-              latitude: 3.0256,
-              longitude: 3.0256
-            }, zoom: 200
-          }, 5000
-        }
-        style={{
-          ...StyleSheet.absoluteFillObject,
-          zIndex: -1000,
-          width: width,
-          // height: 800,
-          height: height,
-        }}
-        // region={{
-        //   latitude: myCords.latitude,
-        //   longitude: myCords.longitude,
-        //   latitudeDelta: 0.045,
-        //   longitudeDelta: 0.0114,
-        // }}
-
-        mapTypeControlOptions={{
-          style: "horizontalBar",
-          position: "topCenter",
-        }}
-        showsMyLocationButton={true}
-        initialRegion={{
-          latitude: 20.5937,
-          longitude: 78.9629,
-          latitudeDelta: 45.0254,
-          longitudeDelta: 15.684,
-        }}
-        moveOnMarkerPress={true}
-      >
+    <MapView
+      provider={PROVIDER_GOOGLE}
+      ref={(map) => mapRef.current = map}
+      animateCamera={
         {
-          typeof (myCords.latitude) === "undefined" ? <></> :
-            <Marker
-              coordinate={{ latitude: myCords.latitude, longitude: myCords.longitude }}
-            >
-              <CustomMarker />
-            </Marker>
-        }
-        {helpCords.latitude ? <Marker
-          coordinate={helpCords}
-          title='Help'
-        >
-          <CustomMarker />
+          center: {
+            latitude: 3.0256,
+            longitude: 3.0256
+          }, zoom: 200
+        }, 5000
+      }
+      style={{
+        width: "100%",
+        height: "100%",
+      }}
+      mapTypeControlOptions={{
+        style: "horizontalBar",
+        position: "topCenter",
+      }}
+      showsMyLocationButton={true}
+      initialRegion={{
+        latitude: 20.5937,
+        longitude: 78.9629,
+        latitudeDelta: 45.0254,
+        longitudeDelta: 15.684,
+      }}
+      moveOnMarkerPress={true}
+    >
+      {
+        typeof (myCords.latitude) === "undefined" ? <></> :
+          <Marker
+            coordinate={{ latitude: myCords.latitude, longitude: myCords.longitude }}
+          >
+            <CustomMarker />
+          </Marker>
+      }
+      {helpCords.latitude ? <Marker
+        coordinate={helpCords}
+        title='Help'
+      >
+        <CustomMarker />
 
-        </Marker > : null}
-      </MapView>
-      <TouchableOpacity style={{
-        top: 10,
-        width: 60,
-        height: 60,
-        zIndex: 100,
-        backgroundColor: "pink",
-      }}>
-        <Text>Touch</Text>
-      </TouchableOpacity>
-    </>
+      </Marker > : null}
+    </MapView>
   );
 }
-Map.propTypes = {
-  name: PropTypes.string
-};
 export default Map;
