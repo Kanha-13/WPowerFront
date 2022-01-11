@@ -50,7 +50,7 @@ const StateProvide = (props) => {
     //then get location cords continuously
     const interval = setInterval(async () => {
       try {
-        console.log("called")
+        console.log("fetching location..")
         const cords = await getCurrentLocation()
         setMyCords(cords)
         await AsyncStorage.setItem('oldLocation', JSON.stringify(cords))
@@ -67,8 +67,6 @@ const StateProvide = (props) => {
     let mounted = true;
     if (socket) {
       socket.on("help", (payload) => {
-        console.log(payload, "cords ")
-        console.log("someone need help")
         setHelpCords(payload)
       })
     }

@@ -5,7 +5,7 @@ import { Link } from "react-router-native";
 const TabButton = (currentTab, setCurrentTab, title, image) => {
   return (
     <TouchableOpacity>
-      <Link to={`/${title}`}
+      <Link to={title === 'Home' ? '/' : `/${title}`}
         underlayColor="none"
         onPress={() => {
           if (title == "Logout") {

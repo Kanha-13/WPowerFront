@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react"
 import { View, Text, TouchableOpacity, Image } from "react-native";
 import { Link } from "react-router-native";
+import { getGurdiansList } from "../../../Utility/action.Gurdians";
 const MyGuardian = () => {
+  useEffect(() => {
+    getGurdiansList()
+  }, [])
   return (
     <View style={{
       paddingTop: 90,

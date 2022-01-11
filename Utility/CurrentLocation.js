@@ -1,9 +1,6 @@
 import { PermissionsAndroid, Platform, Linking } from "react-native";
 import Geolocation from 'react-native-geolocation-service'
 
-import AndroidOpenSettings from 'react-native-android-open-settings'
-
-
 const getCurrentCords = () => new Promise((resolve, reject) => {
   Geolocation.getCurrentPosition(
     position => {
@@ -28,7 +25,6 @@ const locationPermission = () => new Promise(async (resolve, reject) => {
     try {
       const permissionStatus = await Geolocation.requestAuthorization('always');
       if (permissionStatus === 'granted') {
-        openAppSettings()
         return resolve('granted')
       }
       reject('permission not granted')
@@ -41,7 +37,7 @@ const locationPermission = () => new Promise(async (resolve, reject) => {
     PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
   ).then((granted) => {
     if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-      // AndroidOpenSettings.appDetailsSettings()
+      // Linking.openSettings()
       resolve('granted');
     }
     return reject("Location permission denied");

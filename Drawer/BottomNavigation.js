@@ -1,5 +1,5 @@
 import React from "react";
-import { TouchableOpacity, View, Text, Image } from "react-native";
+import { Pressable, View, Text, Image, Pressablege } from "react-native";
 import { Dimensions } from "react-native";
 import home from '../assets/home.png'
 import nearBySos from '../assets/nearBySos.png'
@@ -7,9 +7,8 @@ import account from '../assets/account.png'
 import { Link } from "react-router-native";
 const BottomNavigation = ({ setCurrentTab, setCurrentNavigation, currentNavigation }) => {
   const { height, width } = Dimensions.get('window');
-  console.log(height)
   return (
-    <View style={{ top: height - 67, width: width, height: height - 820, display: "flex", justifyContent: "space-around", flexDirection: "row", backgroundColor: "#ffffff", zIndex: 1000000 }}>
+    <View style={{ flexDirection: "row", backgroundColor: "gray", height: height * 0.07, width: width }}>
       <View style={{
         display: "flex",
         flexDirection: "column",
@@ -17,10 +16,10 @@ const BottomNavigation = ({ setCurrentTab, setCurrentNavigation, currentNavigati
         width: "33.1%",
         alignItems: "center",
         paddingTop: 5,
-        backgroundColor: "gray",
+
       }}>
-        <TouchableOpacity style={{ width: "100%" }}>
-          <Link to="/Home" underlayColor="none" onPress={() => {
+        <Pressable style={{ width: "100%" }}>
+          <Link to="/" underlayColor="none" onPress={() => {
             setCurrentTab("Home")
             setCurrentNavigation("Home")
           }}>
@@ -29,7 +28,7 @@ const BottomNavigation = ({ setCurrentTab, setCurrentNavigation, currentNavigati
               <Text style={{ fontWeight: "600" }} >Home</Text>
             </View>
           </Link>
-        </TouchableOpacity>
+        </Pressable>
       </View>
       <View style={{
         display: "flex",
@@ -38,9 +37,8 @@ const BottomNavigation = ({ setCurrentTab, setCurrentNavigation, currentNavigati
         width: "33.1%",
         alignItems: "center",
         paddingTop: 5,
-        backgroundColor: "gray"
       }}>
-        <TouchableOpacity style={{ width: "100%" }}>
+        <Pressable style={{ width: "100%" }}>
           <Link to="/NearBySOS" underlayColor="none" onPress={() => {
             setCurrentTab("NearBySOS")
             setCurrentNavigation("NearBySOS")
@@ -50,7 +48,7 @@ const BottomNavigation = ({ setCurrentTab, setCurrentNavigation, currentNavigati
               <Text style={{ fontWeight: "600" }} >NearSOS</Text>
             </View>
           </Link>
-        </TouchableOpacity>
+        </Pressable>
       </View>
       <View style={{
         display: "flex",
@@ -59,9 +57,8 @@ const BottomNavigation = ({ setCurrentTab, setCurrentNavigation, currentNavigati
         width: "33.1%",
         alignItems: "center",
         paddingTop: 5,
-        backgroundColor: "gray"
       }}>
-        <TouchableOpacity style={{ width: "100%" }}>
+        <Pressable style={{ width: "100%" }}>
           <Link to="/MyAccount" underlayColor="none" onPress={() => {
             setCurrentTab("MyAccount")
             setCurrentNavigation("MyAccount")
@@ -71,7 +68,7 @@ const BottomNavigation = ({ setCurrentTab, setCurrentNavigation, currentNavigati
               <Text style={{ fontWeight: "600" }} >Account</Text>
             </View>
           </Link>
-        </TouchableOpacity>
+        </Pressable>
       </View>
 
     </View>

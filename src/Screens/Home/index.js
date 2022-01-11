@@ -1,64 +1,33 @@
-import React, { useContext, useState } from "react";
-import { Linking, Pressable } from 'react-native'
-import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
-import { Dimensions } from "react-native";
-import { generateSOS, iAMsafe } from "../../../socket_transport";
+import React, { useContext } from "react";
+import { Pressable } from 'react-native'
+import { View, Text, TouchableOpacity, Image } from "react-native";
 import { StateContext } from "../../../Utility/StateProvider";
 import RNImmediatePhoneCall from 'react-native-immediate-phone-call';
+import { style } from "./style";
 const Home = () => {
   const Controller = useContext(StateContext);
   const { helpCalled, setHelpCalled, callSOS } = Controller
-  const { height, width } = Dimensions.get('window');
 
   return (
-    <View style={{
-      top: height / 9.8,
-    }}>
-      <View style={{
-        backgroundColor: "#C6CDCE",
-        width: "100%",
-        borderRadius: 20,
-        height: "90%",
-        padding: 20,
-        paddingVertical: 30,
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        alignSelf: "center",
-        justifyContent: "center"
-      }}>
-        <View style={{
-          width: width, height: "40%", display: "flex",
-          flexDirection: "row", justifyContent: "space-evenly",
-          alignItems: "flex-end",
-          zIndex: -1, padding: 6
-        }}>
+    <View style={style.containerWrapper}>
+      <View style={style.container}>
+        <View style={style.buttonContainer}>
           <TouchableOpacity
             activeOpacity={0.75}
             onPress={() => { RNImmediatePhoneCall.immediatePhoneCall('1091'); }}
-            style={{ backgroundColor: "#fff", padding: 10, borderRadius: 10, alignItems: "flex-start", height: "60%", width: "45%" }}>
+            style={style.buttons}>
             <Image style={{ width: "60%", height: "70%" }} source={require('../../../assets/police.png')} ></Image>
           </TouchableOpacity>
 
           <TouchableOpacity
             activeOpacity={0.75}
             onPress={() => { RNImmediatePhoneCall.immediatePhoneCall('104'); }}
-            style={{ backgroundColor: "#fff", padding: 10, borderRadius: 10, alignItems: "flex-end", height: "60%", width: "45%" }}>
+            style={[style.buttons, { alignItems: "flex-end" }]}>
             <Image style={{ width: "68%", height: "60%" }} source={require('../../../assets/ambulance.png')} ></Image>
           </TouchableOpacity>
         </View>
         <Pressable
-          style={{
-            width: "50%",
-            height: "28%",
-            backgroundColor: helpCalled ? "green" : "red",
-            borderColor: "#C6CDCE",
-            borderWidth: 5,
-            borderRadius: 100,
-            justifyContent: "center",
-            alignSelf: "center",
-            position: "absolute"
-          }}
+          style={[style.helpContainer, { backgroundColor: helpCalled ? "green" : "red" }]}
           onPress={(e) => {
             if (helpCalled) {
               iAMsafe()
@@ -78,21 +47,16 @@ const Home = () => {
 
           }}>{helpCalled ? "I am safe Now" : "Help"}</Text>
         </Pressable>
-        <View style={{
-          width: width, height: "40%", display: "flex",
-          flexDirection: "row", justifyContent: "space-evenly", alignItems: "flex-start",
-          zIndex: -1, padding: 6
-        }}>
+        <View style={style.buttonContainer}>
           <TouchableOpacity
             activeOpacity={0.75}
-            // onPress={() => { RNImmediatePhoneCall.immediatePhoneCall('0123456789'); }}
-            style={{ backgroundColor: "#fff", padding: 10, borderRadius: 10, justifyContent: "flex-end", alignItems: "flex-start", height: "60%", width: "45%" }}>
+            style={[style.buttons, { justifyContent: "flex-end" }]}>
             <Image style={{ width: "70%", height: "80%" }} source={require('../../../assets/family.png')} ></Image>
           </TouchableOpacity>
 
           <TouchableOpacity
             activeOpacity={0.75}
-            style={{ backgroundColor: "#fff", padding: 10, borderRadius: 10, justifyContent: "flex-end", alignItems: "flex-end", height: "60%", width: "45%" }}>
+            style={[style.buttons, { alignItems: "flex-end", justifyContent: "flex-end" }]}>
             <Image style={{ width: "65%", height: "70%" }} source={require('../../../assets/nearHelp.png')} ></Image>
           </TouchableOpacity>
         </View>
