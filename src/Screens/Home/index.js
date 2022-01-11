@@ -4,6 +4,7 @@ import { View, Text, TouchableOpacity, Image } from "react-native";
 import { StateContext } from "../../../Utility/StateProvider";
 import RNImmediatePhoneCall from 'react-native-immediate-phone-call';
 import { style } from "./style";
+import { iAMsafe } from "../../../socket_transport";
 const Home = () => {
   const Controller = useContext(StateContext);
   const { helpCalled, setHelpCalled, callSOS } = Controller
@@ -21,7 +22,7 @@ const Home = () => {
 
           <TouchableOpacity
             activeOpacity={0.75}
-            onPress={() => { RNImmediatePhoneCall.immediatePhoneCall('104'); }}
+            onPress={() => { RNImmediatePhoneCall.immediatePhoneCall('8319115373'); }}
             style={[style.buttons, { alignItems: "flex-end" }]}>
             <Image style={{ width: "68%", height: "60%" }} source={require('../../../assets/ambulance.png')} ></Image>
           </TouchableOpacity>

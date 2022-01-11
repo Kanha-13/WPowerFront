@@ -1,6 +1,7 @@
 package com.awesomeproject;
 
 import com.facebook.react.ReactActivity;
+import com.github.wumke.RNImmediatePhoneCall.RNImmediatePhoneCallPackage;
 
 public class MainActivity extends ReactActivity {
 

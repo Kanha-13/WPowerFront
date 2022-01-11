@@ -78,7 +78,10 @@ const Map = () => {
           </Marker>
       }
       {helpCords.latitude ? <Marker
-        coordinate={helpCords}
+        coordinate={{
+          latitude: helpCords.latitude + 0.0019,
+          longitude: helpCords.longitude + 0.0046
+        }}
         title='Help'
       >
         <CustomMarker />
