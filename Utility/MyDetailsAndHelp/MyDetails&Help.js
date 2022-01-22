@@ -8,8 +8,8 @@ import { style } from './style';
 
 const DetailAndHelp = ({ callSOS }) => {
   const controllerStore = useContext(StateContext)
-  const { helpCalled, setHelpCalled, DeviceState } = controllerStore
-  const { phoneNumber, brand, powerState, fingerPrint, model, deviceType, mnf, ipAdd, uniqueId, carrier } = DeviceState
+  const { helpCalled, setHelpCalled, DeviceState, socket } = controllerStore
+  const { phoneNumber, brand, powerState, model, deviceType, mnf, ipAdd, uniqueId, carrier } = DeviceState
   return (
     <VerticalSlider >
       <View style={style.containerWrapper}>
@@ -18,7 +18,7 @@ const DetailAndHelp = ({ callSOS }) => {
             style={[style.button, { backgroundColor: helpCalled ? "green" : "red" }]}
             onPress={(e) => {
               if (helpCalled) {
-                iAMsafe()
+                iAMsafe(socket)
                 setHelpCalled(false)
               } else {
                 callSOS();

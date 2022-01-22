@@ -1,7 +1,6 @@
 import React, { useContext, useEffect } from 'react'
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import { View, Image } from 'react-native';
-import PropTypes from 'prop-types';
 import marker from '../../../assets/marker.png'
 import { StateContext } from '../../../Utility/StateProvider';
 const CustomMarker = () => (
@@ -22,7 +21,7 @@ const CustomMarker = () => (
 );
 const Map = () => {
   const State = useContext(StateContext);
-  const { mapRef, myCords, helpCords } = State
+  const { mapRef, myCords, helpCords = [] } = State
   useEffect(() => {
     setTimeout(
       () => {
@@ -39,9 +38,17 @@ const Map = () => {
       }, 1000
     );
   }, [mapRef.current]);
-
+  // useEffect(() => {
+  //   var bounds = new mapRef.current.LatLngBounds();
+  //   for (i = 0; i < helpCords.length; i++) {
+  //     let position = new mapRef.current.LatLng(helpCords[i].latitude, helpCords[i].longitude);
+  //     bounds.extend(position)
+  //   }
+  //   mapRef.current.fitBounds(bounds)
+  // }, [helpCords])
   return (
     <MapView
+
       provider={PROVIDER_GOOGLE}
       ref={(map) => mapRef.current = map}
       animateCamera={
@@ -68,6 +75,11 @@ const Map = () => {
         longitudeDelta: 15.684,
       }}
       moveOnMarkerPress={true}
+      onMapReady={() => {
+        mapRef.current.fitToCoordinates(helpCords.map((helpCord) => {
+          return { latitude: helpCord.latitude, longitude: helpCord.longitude }
+        }))
+      }}
     >
       {
         typeof (myCords.latitude) === "undefined" ? <></> :
@@ -77,16 +89,17 @@ const Map = () => {
             <CustomMarker />
           </Marker>
       }
-      {helpCords.latitude ? <Marker
+      {helpCords.map((helpCord, index) => <Marker
+        key={index}
         coordinate={{
-          latitude: helpCords.latitude + 0.0019,
-          longitude: helpCords.longitude + 0.0046
+          latitude: helpCord.cords.latitude,
+          longitude: helpCord.cords.longitude
         }}
         title='Help'
       >
         <CustomMarker />
 
-      </Marker > : null}
+      </Marker >)}
     </MapView>
   );
 }

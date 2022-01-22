@@ -7,7 +7,7 @@ import { style } from "./style";
 import { iAMsafe } from "../../../socket_transport";
 const Home = () => {
   const Controller = useContext(StateContext);
-  const { helpCalled, setHelpCalled, callSOS } = Controller
+  const { helpCalled, setHelpCalled, callSOS, socket } = Controller
 
   return (
     <View style={style.containerWrapper}>
@@ -31,7 +31,7 @@ const Home = () => {
           style={[style.helpContainer, { backgroundColor: helpCalled ? "green" : "red" }]}
           onPress={(e) => {
             if (helpCalled) {
-              iAMsafe()
+              iAMsafe(socket)
               setHelpCalled(false)
             } else {
               callSOS();

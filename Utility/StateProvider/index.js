@@ -8,13 +8,13 @@ import fetchMyDeviceStatus from "../fetchMyDeviceStatus";
 export const StateContext = React.createContext();
 const StateProvide = (props) => {
   const [socket, setSocket] = useState();
-  const [helpCords, setHelpCords] = useState('')
   const [helpCalled, setHelpCalled] = useState(false)
   const mapRef = useRef()
   const [myCords, setMyCords] = useState({
     latitudeDelta: 45.0254,
     longitudeDelta: 15.684,
   })
+  const [helpCords, setHelpCords] = useState([])
   const [DeviceState, setDeviceState] = useState({
     phoneNumber: "",
     brand: "",
@@ -46,7 +46,6 @@ const StateProvide = (props) => {
   }, [])
 
   useEffect(() => {
-    let mounted = true;
     //then get location cords continuously
     const interval = setInterval(async () => {
       try {
@@ -59,20 +58,32 @@ const StateProvide = (props) => {
       }
     }, 4000)
 
-    mounted = false;
     return () => clearInterval(interval)
   }, [])
 
   useEffect(() => {
-    let mounted = true;
     if (socket) {
       socket.on("help", (payload) => {
-        setHelpCords(payload)
+        console.log("still recieving for help")
+        if (helpCords.length) {
+          setHelpCords(helpCords.map(helpcord => {
+            if (helpcord.id === payload.id) {
+              return { id: helpCords.id, cords: payload.cords }
+            } else return helpcord
+          }))
+        } else {
+          setHelpCords([{ id: payload.id, cords: payload.cords }])
+        }
+      })
+      socket.on("iamsafe", (payload) => {
+        console.log("stoped getting")
+        setHelpCords(helpCords.filter(helpcord => helpcord.id !== payload.id))
       })
     }
-    mounted = false
   }, [socket])
-
+  // useEffect(() => {
+  // console.log(helpCords)
+  // }, [helpCords])
   return (
     <StateContext.Provider
       value={{

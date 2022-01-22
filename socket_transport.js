@@ -5,26 +5,28 @@ export const liveFamilyLocation = (socket) => {
     console.log(payload)
   })
 }
+
 const emitMyLocation = (socket) => {
-  let mounted = true;
-  console.log(CallHelp)
   const interval = setInterval(async () => {
     if (CallHelp) {
       socket.emit("help", await getCurrentLocation())
       // socket.emit("location", await getCurrentLocation())
     } else {
+      clearInterval(interval)
       return
     }
   }, 4000)
   return () => clearInterval(interval)
-  mounted = false;
 }
 
 export const generateSOS = async (socket) => {
   CallHelp = true;
+  console.log("func is still running 1")
   emitMyLocation(socket)
 }
 
-export const iAMsafe = () => {
+export const iAMsafe = (socket) => {
   CallHelp = false;
+  socket.emit("stop", { message: "stop" })
+  socket.emit("iamsafe", { message: "I am safe now" })
 }

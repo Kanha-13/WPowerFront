@@ -5,6 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import save from '../../../assets/save.png'
 import edit from '../../../assets/edit.png'
 import { Link } from "react-router-native";
+import { style } from "./style";
 const Profile = () => {
   const [myDetails, setMyDetails] = useState({
     firstName: "",
@@ -21,19 +22,9 @@ const Profile = () => {
   }, [])
   return (
 
-    <View style={{
-      paddingTop: 90,
-    }}>
-      <View style={{
-        backgroundColor: "white",
-        padding: 20,
-        width: "100%",
-        borderRadius: 20,
-        alignSelf: "center",
-        height: "90%",
-      }}
-      >
-        <TouchableOpacity>
+    <View style={style.containerWrapper}>
+      <View style={style.container}>
+        <TouchableOpacity style={{ marginTop: "5%", padding: "5%" }}>
           <Link to="/MyAccount" underlayColor="none" >
             <Image style={{ width: 35, height: 25 }} source={require('../../../assets/backArrow.png')}></Image>
           </Link>
