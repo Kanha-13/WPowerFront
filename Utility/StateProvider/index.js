@@ -14,7 +14,7 @@ const StateProvide = (props) => {
     latitudeDelta: 45.0254,
     longitudeDelta: 15.684,
   })
-  const [helpCords, setHelpCords] = useState([])
+  const [helpCords, setHelpCords] = useState([{ id: "testing added", cords: { latitude: 21.14462, longitude: 81.37356 } }])
   const [DeviceState, setDeviceState] = useState({
     phoneNumber: "",
     brand: "",
@@ -41,15 +41,19 @@ const StateProvide = (props) => {
   }
   useEffect(() => {
     //Start here first create socket
-    setSocket(makeConnection());
     getData();
   }, [])
+
+  useEffect(() => {
+    if (DeviceState.phoneNumber.length && myCords.latitude) {
+      setSocket(makeConnection(DeviceState.phoneNumber, myCords));
+    }
+  }, [DeviceState])
 
   useEffect(() => {
     //then get location cords continuously
     const interval = setInterval(async () => {
       try {
-        console.log("fetching location..")
         const cords = await getCurrentLocation()
         setMyCords(cords)
         await AsyncStorage.setItem('oldLocation', JSON.stringify(cords))
@@ -64,26 +68,22 @@ const StateProvide = (props) => {
   useEffect(() => {
     if (socket) {
       socket.on("help", (payload) => {
-        console.log("still recieving for help")
-        if (helpCords.length) {
-          setHelpCords(helpCords.map(helpcord => {
-            if (helpcord.id === payload.id) {
-              return { id: helpCords.id, cords: payload.cords }
-            } else return helpcord
-          }))
+        const changingIndex = helpCords.filter((helpcord, index) => {
+          if (helpcord.id === payload.id) {
+            return index
+          }
+        })
+        if (changingIndex.length) {
+          setHelpCords([...helpCords, helpCords[changingIndex].cords = payload.cords])
         } else {
-          setHelpCords([{ id: payload.id, cords: payload.cords }])
+          setHelpCords([...helpCords, { id: payload.id, cords: payload.cords }])
         }
       })
       socket.on("iamsafe", (payload) => {
-        console.log("stoped getting")
         setHelpCords(helpCords.filter(helpcord => helpcord.id !== payload.id))
       })
     }
   }, [socket])
-  // useEffect(() => {
-  // console.log(helpCords)
-  // }, [helpCords])
   return (
     <StateContext.Provider
       value={{
