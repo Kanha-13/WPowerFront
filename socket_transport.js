@@ -6,10 +6,12 @@ export const liveFamilyLocation = (socket) => {
   })
 }
 
-const emitMyLocation = (socket) => {
+const emitMyLocation = async (socket, mobileNumber) => {
+  socket.emit("create-help-room",
+    { cords: await getCurrentLocation(), mobileNumber: mobileNumber })
   const interval = setInterval(async () => {
     if (CallHelp) {
-      socket.emit("help", await getCurrentLocation())
+      socket.emit("help", { cords: await getCurrentLocation(), mobileNumber: mobileNumber })
     } else {
       clearInterval(interval)
       return
@@ -18,9 +20,9 @@ const emitMyLocation = (socket) => {
   return () => clearInterval(interval)
 }
 
-export const generateSOS = async (socket) => {
+export const generateSOS = async (socket, mobileNumber) => {
   CallHelp = true;
-  emitMyLocation(socket)
+  emitMyLocation(socket, mobileNumber)
 }
 
 export const iAMsafe = (socket) => {

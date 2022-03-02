@@ -7,9 +7,9 @@ import { StateContext } from "../../../Utility/StateProvider";
 import { style } from "./style";
 const NearBySOS = () => {
   const State = useContext(StateContext)
-  const { socket } = State
+  const { socket, DeviceState } = State
   const callSOS = async () => {
-    await generateSOS(socket)
+    await generateSOS(socket, DeviceState.phoneNumber)
   }
 
   return (

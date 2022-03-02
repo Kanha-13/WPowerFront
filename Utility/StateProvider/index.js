@@ -26,7 +26,7 @@ const StateProvide = (props) => {
     setDeviceState(details)
   }
   const callSOS = async () => {
-    await generateSOS(socket)
+    await generateSOS(socket, DeviceState.phoneNumber)
   }
   const getData = async () => {
     //check for local storage

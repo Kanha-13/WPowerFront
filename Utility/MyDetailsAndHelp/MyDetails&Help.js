@@ -1,8 +1,7 @@
 import React, { useContext } from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
 import VerticalSlider from '../VerticalSlidder';
-import fetchMyDeviceStatus from '../fetchMyDeviceStatus'
-import { generateSOS, iAMsafe } from '../../socket_transport'
+import { iAMsafe } from '../../socket_transport'
 import { StateContext } from '../StateProvider';
 import { style } from './style';
 
