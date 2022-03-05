@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Pressable } from 'react-native';
 import Screen1 from './Src/Components/Screens/Screen1';
 import Screen2 from './Src/Components/Screens/Screen2';
 import Screen3 from './Src/Components/Screens/Screen3';
@@ -12,7 +12,7 @@ const App = () => {
         <Screen2 />
         <Screen3 />
       </BottomNavigation>
-    </View>
+    </View >
   );
 }
 

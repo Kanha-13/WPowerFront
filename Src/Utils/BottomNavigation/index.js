@@ -8,7 +8,6 @@ const BottomNavigation = (props) => {
     const [path, setPath] = useState(props.initialRoute)
     // const [backStack, setBackStack] = useState([])
     const navigate = (path) => {
-        console.log(path)
         setPath(path)
     }
     const backAction = () => {
@@ -38,7 +37,7 @@ const BottomNavigation = (props) => {
     return (
         <View style={style.container} >
             {!HIDEFROM.includes(path) && <View style={{ zIndex: 1, height: "6.5%", width: "100%", backgroundColor: "#F5F5F5", alignItems: "center", justifyContent: "center" }}>
-                <Text style={{ color: "#30475E", fontSize: 25, fontWeight: "600" }}>DM</Text>
+                <Text style={{ color: "#30475E", fontSize: 25, fontWeight: "600" }}>Comminity</Text>
             </View>}
             <View style={{ height: "87%", width: "100%" }}>
                 {props.children.map(child => {
@@ -55,30 +54,21 @@ const BottomNavigation = (props) => {
             {!HIDEFROM.includes(path) &&
                 <View style={{ height: "6.5%", width: "100%", backgroundColor: "#F5F5F5", flexDirection: "row", justifyContent: "space-evenly" }}>
                     <View style={{ borderRadius: 25, height: "100%", width: "20%", overflow: "hidden" }}>
-                        <Pressable android_ripple={{ color: "#b6bbbe" }} onPress={() => {
-                            console.log("pressed")
-                            navigate(PATH.SCREEN1)
-                        }} style={{ height: "100%", width: "100%", justifyContent: "center", alignItems: "center", backgroundColor: "red" }}>
+                        <Pressable android_ripple={{ color: "#b6bbbe" }} onPress={() => navigate(PATH.SCREEN1)} style={{ height: "100%", width: "100%", justifyContent: "center", alignItems: "center" }}>
                             {/* <Image style={{ tintColor: path === PATH.HOME ? "#F05454" : "#30475E", height: "55%", width: "55%", resizeMode: "contain" }} source={HomeIcon} /> */}
-                            <Text>Screen1</Text>
+                            <Text style={{ color: "#000000" }} >Screen1</Text>
                         </Pressable>
                     </View>
                     <View style={{ borderRadius: 25, height: "100%", width: "20%", overflow: "hidden" }}>
-                        <Pressable android_ripple={{ color: "#b6bbbe" }} onPress={() => {
-                            console.log("pressed")
-                            navigate(PATH.SCREEN2)
-                        }} style={{ height: "100%", width: "100%", justifyContent: "center", alignItems: "center", backgroundColor: "red" }}>
+                        <Pressable android_ripple={{ color: "#b6bbbe" }} onPress={() => navigate(PATH.SCREEN2)} style={{ height: "100%", width: "100%", justifyContent: "center", alignItems: "center" }}>
                             {/* <Image style={{ tintColor: path === PATH.EXPLORE ? "#F05454" : "#30475E", width: "45%", height: "45%", resizeMode: "contain" }} source={ExploreIcon} /> */}
-                            <Text>Screen2</Text>
+                            <Text style={{ color: "#000000" }} >Screen2</Text>
                         </Pressable>
                     </View>
                     <View style={{ borderRadius: 25, height: "100%", width: "20%", overflow: "hidden" }}>
-                        <Pressable android_ripple={{ color: "#b6bbbe" }} onPress={() => {
-                            console.log("pressed")
-                            navigate(PATH.SCREEN3)
-                        }} style={{ height: "100%", width: "100%", justifyContent: "center", alignItems: "center", backgroundColor: "red" }}>
+                        <Pressable android_ripple={{ color: "#b6bbbe" }} onPress={() => navigate(PATH.SCREEN3)} style={{ height: "100%", width: "100%", justifyContent: "center", alignItems: "center" }}>
                             {/* <Image style={{ tintColor: path === PATH.LIKES ? "#F05454" : "#30475E", width: "45%", height: "45%", resizeMode: "contain" }} source={LikesIcon} /> */}
-                            <Text>Screen3</Text>
+                            <Text style={{ color: "#000000" }} >Screen3</Text>
                         </Pressable>
                     </View>
                 </View>
