@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, Text } from "react-native";
 
-const Screen2 = () => {
+const Map = () => {
+    useEffect(() => {
+        console.log("screen loaded")
+    }, [])
     return (
-        <View><Text style={{ color: "white" }}>Screen2</Text></View>
+        <View><Text style={{ color: "white" }}>Map</Text></View>
     );
 }
-export default Screen2;
+export default Map;

@@ -1,9 +1,9 @@
 import React from 'react';
 import { View, Text } from "react-native";
 
-const Screen3 = () => {
+const Profile = () => {
     return (
-        <View><Text style={{ color: "white" }}>Screen3</Text></View>
+        <View><Text style={{ color: "white" }}>Profile</Text></View>
     );
 }
-export default Screen3;
+export default Profile;

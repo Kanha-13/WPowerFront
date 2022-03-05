@@ -1,4 +1,4 @@
 export const HIDEFROM = [
-    "Profile",
+    // "Profile",
     "Preferences"
 ]
