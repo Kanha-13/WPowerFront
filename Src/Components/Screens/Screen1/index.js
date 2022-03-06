@@ -13,7 +13,7 @@ const Home = () => {
         Animated.sequence([
             Animated.timing(ripple, {
                 toValue: 1.8,
-                duration: 1800,
+                duration: 2000,
                 useNativeDriver: true,
             }),
             Animated.timing(ripple, {
@@ -25,7 +25,7 @@ const Home = () => {
         ]).start()
     }
     useEffect(() => {
-        const interval = setInterval(rippleEffect, 1900);
+        const interval = setInterval(rippleEffect, 2100);
         return () => clearInterval(interval);
     }, [])
     return (
@@ -48,25 +48,25 @@ const Home = () => {
             }}>
                 <Pressable android_ripple={{ color: "gray", foreground: true }} onPress={() => console.log("help")} style={[style.centerAlign, {
                     backgroundColor: 'purple', width: "45%",
-                    height: "45%", margin: 10, borderRadius: 50, overflow: "hidden", borderWidth: 10, borderColor: "gray"
+                    height: "45%", margin: 10, borderRadius: 30, overflow: "hidden", borderWidth: 10, borderColor: "gray"
                 }]}>
                     <Text style={{ color: "#ffffff", fontWeight: "bold", fontSize: 45 }}>Family</Text>
                 </Pressable>
                 <Pressable android_ripple={{ color: "gray", foreground: true }} onPress={() => console.log("help")} style={[style.centerAlign, {
                     backgroundColor: 'purple', width: "45%",
-                    height: "45%", margin: 10, borderRadius: 50, overflow: "hidden", borderWidth: 10, borderColor: "gray"
+                    height: "45%", margin: 10, borderRadius: 30, overflow: "hidden", borderWidth: 10, borderColor: "gray"
                 }]}>
                     <Text style={{ color: "#ffffff", fontWeight: "bold", fontSize: 45 }}>NearBy</Text>
                 </Pressable>
                 <Pressable android_ripple={{ color: "gray", foreground: true }} onPress={() => console.log("help")} style={[style.centerAlign, {
                     backgroundColor: 'purple', width: "45%",
-                    height: "45%", margin: 10, borderRadius: 50, overflow: "hidden", borderWidth: 10, borderColor: "gray"
+                    height: "45%", margin: 10, borderRadius: 30, overflow: "hidden", borderWidth: 10, borderColor: "gray"
                 }]}>
                     <Text style={{ color: "#ffffff", fontWeight: "bold", fontSize: 45 }}>Ambulance</Text>
                 </Pressable>
                 <Pressable android_ripple={{ color: "gray", foreground: true }} onPress={() => console.log("help")} style={[style.centerAlign, {
                     backgroundColor: 'purple', width: "45%",
-                    height: "45%", margin: 10, borderRadius: 50, overflow: "hidden", borderWidth: 10, borderColor: "gray"
+                    height: "45%", margin: 10, borderRadius: 30, overflow: "hidden", borderWidth: 10, borderColor: "gray"
                 }]}>
                     <Text style={{ color: "#ffffff", fontWeight: "bold", fontSize: 45 }}>Police</Text>
                 </Pressable>
