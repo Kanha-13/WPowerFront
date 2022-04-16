@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
-import { View, Text, Pressable, Image, BackHandler, Dimensions, FlatList, PanResponder } from "react-native";
+import { View, Text, Pressable, Image, BackHandler, Dimensions, FlatList, PanResponder, Animated } from "react-native";
 import { style } from "./style";
 import { PATH } from "../../Utils/Constants/path";
 import { HIDEFROM } from "../../Utils/Constants/hideBars";
+import Drawer from "../Drawer";
 let backStack = []
 const SwipeTabs = (props) => {
     const [path, setPath] = useState(props.initialRoute)
@@ -74,9 +75,11 @@ const SwipeTabs = (props) => {
 
     }
     const renderScreen = ({ index }) => {
-        return React.cloneElement(<View style={{ width: width }}>{props.children[index]}</View>, {
+        return React.cloneElement(props.children[index], {
             path: path,
             navigate: navigate,
+            width: width,
+            openDrawer: openDrawer,
             key: props.children[index].type.name,
             goBack: backAction
         });
@@ -93,56 +96,87 @@ const SwipeTabs = (props) => {
         return () =>
             BackHandler.removeEventListener("hardwareBackPress", backAction);
     }, [path]);
+    const [translatey] = useState(new Animated.Value(0))
+    const [translatex] = useState(new Animated.Value(0))
+    const openDrawer = (action) => {
+        if (action)
+            Animated.parallel([
+                Animated.timing(translatey, {
+                    toValue: 50,
+                    duration: 300,
+                    useNativeDriver: true,
+                }),
+                Animated.timing(translatex, {
+                    toValue: width / 1.6,
+                    duration: 300,
+                    useNativeDriver: true,
+                })
 
+            ]).start()
+        else
+            Animated.parallel([
+                Animated.timing(translatey, {
+                    toValue: 0,
+                    duration: 300,
+                    useNativeDriver: true,
+                }),
+                Animated.timing(translatex, {
+                    toValue: 0,
+                    duration: 300,
+                    useNativeDriver: true,
+                })
+
+            ]).start()
+    }
     return (
-        <View style={style.container} >
-            {!HIDEFROM.includes(path) && <View style={{ zIndex: 1, height: "6.5%", width: "100%", backgroundColor: "#F5F5F5", alignItems: "center", justifyContent: "center" }}>
-                <Text style={{ color: "#30475E", fontSize: 25, fontWeight: "600" }}>Comminity</Text>
-            </View>}
-            <View style={{ height: "87%", width: width, paddingHorizontal: "5%", alignItems: "center" }}>
-                <FlatList
-                    ref={flatListRef}
-                    {...panResponder.panHandlers}
-                    horizontal
-                    showsVerticalScrollIndicator={false}
-                    showsHorizontalScrollIndicator={false}
-                    style={{ height: "100%", width: "300%" }}
-                    contentContainerStyle={{ height: "100%", paddingHorizontal: "31.5%" }}
-                    scrollEnabled={false}
-                    data={[{ id: 0 }, { id: 1 }, { id: 2 }]}
-                    renderItem={renderScreen}
-                    keyExtractor={tut => tut.id}
-                />
-            </View>
-            {!HIDEFROM.includes(path) &&
-                <View style={{ height: "6.5%", width: "100%", backgroundColor: "#F5F5F5", flexDirection: "row", justifyContent: "space-evenly" }}>
-                    <View style={{ borderRadius: 25, height: "100%", width: "20%", overflow: "hidden" }}>
-                        <Pressable android_ripple={{ color: "#b6bbbe" }} onPress={() => {
-                            pressToChangeScreen(0)
-                            navigate(PATH.SCREEN1)
-                        }} style={{ height: "100%", width: "100%", justifyContent: "center", alignItems: "center" }}>
-                            <Text style={{ color: path === PATH.SCREEN1 ? "red" : "#000000" }} >{PATH.SCREEN1}</Text>
-                        </Pressable>
-                    </View>
-                    <View style={{ borderRadius: 25, height: "100%", width: "20%", overflow: "hidden" }}>
-                        <Pressable android_ripple={{ color: "#b6bbbe" }} onPress={() => {
-                            pressToChangeScreen(1)
-                            navigate(PATH.SCREEN2)
-                        }} style={{ height: "100%", width: "100%", justifyContent: "center", alignItems: "center" }}>
-                            <Text style={{ color: path === PATH.SCREEN2 ? "red" : "#000000" }} >{PATH.SCREEN2}</Text>
-                        </Pressable>
-                    </View>
-                    <View style={{ borderRadius: 25, height: "100%", width: "20%", overflow: "hidden" }}>
-                        <Pressable android_ripple={{ color: "#b6bbbe" }} onPress={() => {
-                            pressToChangeScreen(2)
-                            navigate(PATH.SCREEN3)
-                        }} style={{ height: "100%", width: "100%", justifyContent: "center", alignItems: "center" }}>
-                            <Text style={{ color: path === PATH.SCREEN3 ? "red" : "#000000" }} >{PATH.SCREEN3}</Text>
-                        </Pressable>
-                    </View>
+        <>
+            <Drawer navigate={navigate} pressToChangeScreen={pressToChangeScreen} closeDrawer={openDrawer} />
+            <Animated.View style={[style.container, { transform: [{ translateX: translatex }, { translateY: translatey }], overflow: "hidden" }]} >
+                <View style={{ height: "93.5%", width: width, paddingHorizontal: "5%", alignItems: "center" }}>
+                    <FlatList
+                        ref={flatListRef}
+                        {...panResponder.panHandlers}
+                        horizontal
+                        showsVerticalScrollIndicator={false}
+                        showsHorizontalScrollIndicator={false}
+                        style={{ height: "100%", width: "300%" }}
+                        contentContainerStyle={{ height: "100%", paddingHorizontal: "31.5%" }}
+                        scrollEnabled={false}
+                        data={props.children}
+                        renderItem={renderScreen}
+                        keyExtractor={tut => tut.type.name}
+                    />
                 </View>
-            }
-        </View>
+                {!HIDEFROM.includes(path) &&
+                    <View style={{ height: "6.5%", width: "100%", backgroundColor: "#F5F5F5", flexDirection: "row", justifyContent: "space-evenly" }}>
+                        <View style={{ borderRadius: 25, height: "100%", width: "20%", overflow: "hidden" }}>
+                            <Pressable android_ripple={{ color: "#b6bbbe" }} onPress={() => {
+                                pressToChangeScreen(0)
+                                navigate(PATH.SCREEN1)
+                            }} style={{ height: "100%", width: "100%", justifyContent: "center", alignItems: "center" }}>
+                                <Text style={{ color: path === PATH.SCREEN1 ? "red" : "#000000" }} >{PATH.SCREEN1}</Text>
+                            </Pressable>
+                        </View>
+                        <View style={{ borderRadius: 25, height: "100%", width: "20%", overflow: "hidden" }}>
+                            <Pressable android_ripple={{ color: "#b6bbbe" }} onPress={() => {
+                                pressToChangeScreen(1)
+                                navigate(PATH.SCREEN2)
+                            }} style={{ height: "100%", width: "100%", justifyContent: "center", alignItems: "center" }}>
+                                <Text style={{ color: path === PATH.SCREEN2 ? "red" : "#000000" }} >{PATH.SCREEN2}</Text>
+                            </Pressable>
+                        </View>
+                        <View style={{ borderRadius: 25, height: "100%", width: "20%", overflow: "hidden" }}>
+                            <Pressable android_ripple={{ color: "#b6bbbe" }} onPress={() => {
+                                pressToChangeScreen(2)
+                                navigate(PATH.SCREEN3)
+                            }} style={{ height: "100%", width: "100%", justifyContent: "center", alignItems: "center" }}>
+                                <Text style={{ color: path === PATH.SCREEN3 ? "red" : "#000000" }} >{PATH.SCREEN3}</Text>
+                            </Pressable>
+                        </View>
+                    </View>
+                }
+            </Animated.View>
+        </>
     )
 }
 export default SwipeTabs;
