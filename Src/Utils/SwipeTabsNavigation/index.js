@@ -41,22 +41,25 @@ const SwipeTabs = (props) => {
                 return (dx > 2 || dx < -2 || dy > 2 || dy < -2)
             },
             onPanResponderRelease: (evt, gestureState) => {
-                if (gestureState.dx > 0) {
-                    if (currentIndex.current === 0) {
-                        flatListRef.current.scrollToIndex({ viewPosition: 0.5, index: 0 })
-                    } else {
-                        flatListRef.current.scrollToIndex({ viewPosition: 0.5, index: currentIndex.current - 1 })
-                        currentIndex.current = currentIndex.current - 1;
+                if (currentIndex.current !== 1) {
+
+                    if (gestureState.dx > 55) {
+                        if (currentIndex.current === 0) {
+                            flatListRef.current.scrollToIndex({ viewPosition: 0.5, index: 0 })
+                        } else {
+                            flatListRef.current.scrollToIndex({ viewPosition: 0.5, index: currentIndex.current - 1 })
+                            currentIndex.current = currentIndex.current - 1;
+                        }
+                    } else if (gestureState.dx < -55) {
+                        if (currentIndex.current === 2) {
+                            flatListRef.current.scrollToIndex({ viewPosition: 0.5, index: 2 })
+                        } else {
+                            flatListRef.current.scrollToIndex({ viewPosition: 0.5, index: currentIndex.current + 1 })
+                            currentIndex.current = currentIndex.current + 1;
+                        }
                     }
-                } else if (gestureState.dx < 0) {
-                    if (currentIndex.current === 2) {
-                        flatListRef.current.scrollToIndex({ viewPosition: 0.5, index: 2 })
-                    } else {
-                        flatListRef.current.scrollToIndex({ viewPosition: 0.5, index: currentIndex.current + 1 })
-                        currentIndex.current = currentIndex.current + 1;
-                    }
+                    changePath()
                 }
-                changePath()
             }
         })
     ).current;
