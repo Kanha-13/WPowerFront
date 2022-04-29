@@ -152,24 +152,24 @@ const SwipeTabs = (props) => {
                 </View>
                 {!HIDEFROM.includes(path) &&
                     <View style={{ height: "6.5%", width: "100%", backgroundColor: "#F5F5F5", flexDirection: "row", justifyContent: "space-evenly" }}>
-                        <View style={{ borderRadius: 25, height: "100%", width: "20%", overflow: "hidden" }}>
-                            <Pressable android_ripple={{ color: "#b6bbbe" }} onPress={() => {
+                        <View style={{ height: "100%", width: "33%", overflow: "hidden" }}>
+                            <Pressable android_ripple={{ color: "#b6bbbe", foreground: true, radius: 43 }} onPress={() => {
                                 pressToChangeScreen(0)
                                 navigate(PATH.SCREEN1)
                             }} style={{ height: "100%", width: "100%", justifyContent: "center", alignItems: "center" }}>
                                 <Text style={{ color: path === PATH.SCREEN1 ? "red" : "#000000" }} >{PATH.SCREEN1}</Text>
                             </Pressable>
                         </View>
-                        <View style={{ borderRadius: 25, height: "100%", width: "20%", overflow: "hidden" }}>
-                            <Pressable android_ripple={{ color: "#b6bbbe" }} onPress={() => {
+                        <View style={{ height: "100%", width: "33%", overflow: "hidden" }}>
+                            <Pressable android_ripple={{ color: "#b6bbbe", foreground: true, radius: 43 }} onPress={() => {
                                 pressToChangeScreen(1)
                                 navigate(PATH.SCREEN2)
                             }} style={{ height: "100%", width: "100%", justifyContent: "center", alignItems: "center" }}>
                                 <Text style={{ color: path === PATH.SCREEN2 ? "red" : "#000000" }} >{PATH.SCREEN2}</Text>
                             </Pressable>
                         </View>
-                        <View style={{ borderRadius: 25, height: "100%", width: "20%", overflow: "hidden" }}>
-                            <Pressable android_ripple={{ color: "#b6bbbe" }} onPress={() => {
+                        <View style={{ height: "100%", width: "33%", overflow: "hidden" }}>
+                            <Pressable android_ripple={{ color: "#b6bbbe", foreground: true, radius: 43 }} onPress={() => {
                                 pressToChangeScreen(2)
                                 navigate(PATH.SCREEN3)
                             }} style={{ height: "100%", width: "100%", justifyContent: "center", alignItems: "center" }}>
