@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Pressable, StyleSheet, Animated } from "react-native";
+import { View, Text, Pressable, Animated } from "react-native";
 import { help } from '../../../Apis';
+import Button from './Buttons';
+import { callAmbulance, callFamily, callNearBy, callPolice } from './api';
+import { style } from './style';
 const Home = ({ openDrawer, width }) => {
     const [ripple] = useState(new Animated.Value(0.9))
     const [ripple_color, setColor] = useState("#c8ebc8")
@@ -58,30 +61,10 @@ const Home = ({ openDrawer, width }) => {
                     height: "45%", width: "100%", alignItems: "center", flexDirection: "row",
                     justifyContent: "space-around", flexWrap: "wrap"
                 }}>
-                    <Pressable android_ripple={{ color: "gray", foreground: true }} onPress={() => console.log("help")} style={[style.centerAlign, {
-                        backgroundColor: 'purple', width: "45%",
-                        height: "45%", margin: 10, borderRadius: 30, overflow: "hidden", borderWidth: 10, borderColor: "gray"
-                    }]}>
-                        <Text style={{ color: "#ffffff", fontWeight: "bold", fontSize: 45 }}>Family</Text>
-                    </Pressable>
-                    <Pressable android_ripple={{ color: "gray", foreground: true }} onPress={() => console.log("help")} style={[style.centerAlign, {
-                        backgroundColor: 'purple', width: "45%",
-                        height: "45%", margin: 10, borderRadius: 30, overflow: "hidden", borderWidth: 10, borderColor: "gray"
-                    }]}>
-                        <Text style={{ color: "#ffffff", fontWeight: "bold", fontSize: 45 }}>NearBy</Text>
-                    </Pressable>
-                    <Pressable android_ripple={{ color: "gray", foreground: true }} onPress={() => console.log("help")} style={[style.centerAlign, {
-                        backgroundColor: 'purple', width: "45%",
-                        height: "45%", margin: 10, borderRadius: 30, overflow: "hidden", borderWidth: 10, borderColor: "gray"
-                    }]}>
-                        <Text style={{ color: "#ffffff", fontWeight: "bold", fontSize: 45 }}>Ambulance</Text>
-                    </Pressable>
-                    <Pressable android_ripple={{ color: "gray", foreground: true }} onPress={() => console.log("help")} style={[style.centerAlign, {
-                        backgroundColor: 'purple', width: "45%",
-                        height: "45%", margin: 10, borderRadius: 30, overflow: "hidden", borderWidth: 10, borderColor: "gray"
-                    }]}>
-                        <Text style={{ color: "#ffffff", fontWeight: "bold", fontSize: 45 }}>Police</Text>
-                    </Pressable>
+                    <Button title="Family" onClick={callFamily} />
+                    <Button title="Near By" onClick={callNearBy} />
+                    <Button title="Ambulance" onClick={callAmbulance} />
+                    <Button title="Police" onClick={callPolice} />
                 </View>
             </View>
 
@@ -89,10 +72,5 @@ const Home = ({ openDrawer, width }) => {
     );
 }
 
-const style = StyleSheet.create({
-    centerAlign: {
-        alignItems: "center",
-        justifyContent: "center"
-    }
-})
+
 export default Home;
