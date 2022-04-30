@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text, Image, Pressable } from 'react-native'
-import PATH from '../Constants/path'
-const Drawer = ({ navigate, pressToChangeScreen, closeDrawer }) => {
+// import PATH from '../Constants/path'
+const Drawer = ({ navigate, closeDrawer }) => {
   return (
     <View style={{ backgroundColor: "#000000", height: "100%", width: "100%", position: "absolute", zIndex: -1 }}>
       <View style={{ paddingLeft: 10, width: "60%", backgroundColor: "red", height: "100%" }}>
@@ -14,7 +14,6 @@ const Drawer = ({ navigate, pressToChangeScreen, closeDrawer }) => {
           <Pressable onPress={() => {
             navigate('Map')
             closeDrawer(0)
-            pressToChangeScreen(1)
           }}>
             <Text style={{ fontSize: 25, color: "black" }}>Map</Text>
           </Pressable>

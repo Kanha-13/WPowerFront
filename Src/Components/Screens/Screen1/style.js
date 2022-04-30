@@ -8,7 +8,7 @@ export const style = StyleSheet.create({
 
 export const buttonStyle = StyleSheet.create({
   button: {
-    backgroundColor: '#dedfe2', width: "35%",
-    height: "35%", margin: 10, borderRadius: 10, overflow: "hidden"
+    backgroundColor: '#ffffff', width: "28%",
+    height: "40%", margin: 10, borderRadius: 10, overflow: "hidden", elevation: 5
   }
 })

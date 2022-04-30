@@ -7,8 +7,22 @@ import Drawer from "../Drawer";
 let backStack = []
 const SwipeTabs = (props) => {
     const [path, setPath] = useState(props.initialRoute)
+    const { height, width } = Dimensions.get("window")
+    const flatListRef = useRef()
+    const currentIndex = useRef(0);
     const navigate = (path) => {
         setPath(path)
+        switch (path) {
+            case 'Map':
+                changeScreen(1);
+                break;
+            case 'Profile':
+                changeScreen(2);
+                break;
+            default:
+                changeScreen(0);
+                break;
+        }
     }
 
     const backAction = () => {
@@ -23,9 +37,7 @@ const SwipeTabs = (props) => {
         return true;
     }
 
-    const { height, width } = Dimensions.get("window")
-    const flatListRef = useRef()
-    const currentIndex = useRef(0);
+
 
     const panResponder = React.useRef(
         PanResponder.create({
@@ -58,7 +70,7 @@ const SwipeTabs = (props) => {
                             currentIndex.current = currentIndex.current + 1;
                         }
                     }
-                    changePath()
+                    changePath();//for changing tabs active color
                 }
             }
         })
@@ -72,7 +84,7 @@ const SwipeTabs = (props) => {
             setPath(PATH.SCREEN3)
         }
     }
-    const pressToChangeScreen = (index) => {
+    const changeScreen = (index) => {
         flatListRef.current.scrollToIndex({ viewPosition: 0.5, index: index })
         currentIndex.current = index;
 
@@ -133,7 +145,7 @@ const SwipeTabs = (props) => {
     }
     return (
         <>
-            <Drawer navigate={navigate} pressToChangeScreen={pressToChangeScreen} closeDrawer={openDrawer} />
+            <Drawer navigate={navigate} closeDrawer={openDrawer} />
             <Animated.View style={[style.container, { transform: [{ translateX: translatex }, { translateY: translatey }], overflow: "hidden" }]} >
                 <View style={{ height: "93.5%", width: width, paddingHorizontal: "5%", alignItems: "center" }}>
                     <FlatList
@@ -154,7 +166,6 @@ const SwipeTabs = (props) => {
                     <View style={{ height: "6.5%", width: "100%", backgroundColor: "#F5F5F5", flexDirection: "row", justifyContent: "space-evenly" }}>
                         <View style={{ height: "100%", width: "33%", overflow: "hidden" }}>
                             <Pressable android_ripple={{ color: "#b6bbbe", foreground: true, radius: 43 }} onPress={() => {
-                                pressToChangeScreen(0)
                                 navigate(PATH.SCREEN1)
                             }} style={{ height: "100%", width: "100%", justifyContent: "center", alignItems: "center" }}>
                                 <Text style={{ color: path === PATH.SCREEN1 ? "red" : "#000000" }} >{PATH.SCREEN1}</Text>
@@ -162,7 +173,6 @@ const SwipeTabs = (props) => {
                         </View>
                         <View style={{ height: "100%", width: "33%", overflow: "hidden" }}>
                             <Pressable android_ripple={{ color: "#b6bbbe", foreground: true, radius: 43 }} onPress={() => {
-                                pressToChangeScreen(1)
                                 navigate(PATH.SCREEN2)
                             }} style={{ height: "100%", width: "100%", justifyContent: "center", alignItems: "center" }}>
                                 <Text style={{ color: path === PATH.SCREEN2 ? "red" : "#000000" }} >{PATH.SCREEN2}</Text>
@@ -170,7 +180,6 @@ const SwipeTabs = (props) => {
                         </View>
                         <View style={{ height: "100%", width: "33%", overflow: "hidden" }}>
                             <Pressable android_ripple={{ color: "#b6bbbe", foreground: true, radius: 43 }} onPress={() => {
-                                pressToChangeScreen(2)
                                 navigate(PATH.SCREEN3)
                             }} style={{ height: "100%", width: "100%", justifyContent: "center", alignItems: "center" }}>
                                 <Text style={{ color: path === PATH.SCREEN3 ? "red" : "#000000" }} >{PATH.SCREEN3}</Text>

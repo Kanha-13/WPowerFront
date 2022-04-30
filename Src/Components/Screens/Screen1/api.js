@@ -1,5 +1,4 @@
-import RNImmediatePhoneCall from 'react-native-immediate-phone-call';
-
+import RNImmediatePhoneCall from "react-native-immediate-phone-call";
 export const callFamily = () => {
   console.log("Calling family for help")
   return 0;
@@ -11,12 +10,12 @@ export const callNearBy = () => {
 }
 
 export const callAmbulance = () => {
+  RNImmediatePhoneCall.immediatePhoneCall("0123456789")
   console.log("calling ambulance for help")
-  RNImmediatePhoneCall.immediatePhoneCall('0123456789');
   return 0;
 }
 export const callPolice = () => {
+  RNImmediatePhoneCall.immediatePhoneCall("8319115373")
   console.log("calling police for help")
-  RNImmediatePhoneCall.immediatePhoneCall('0123456789');
   return 0;
 }

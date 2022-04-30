@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { getCurrentLocation } from "../Location";
+import { permissionsManager } from "./permissionsManager";
 
 export const StateContext = React.createContext();
 const StateProvide = (props) => {
@@ -10,15 +11,16 @@ const StateProvide = (props) => {
   })
 
   useEffect(() => {
-    const interval = setInterval(async () => {
-      try {
-        const cords = await getCurrentLocation()
-        setMyCords(cords)
-      } catch (error) {
-        console.log(error)
-      }
-    }, 4000)
-    return () => clearInterval(interval)
+    permissionsManager();
+    // const interval = setInterval(async () => {
+    //   try {
+    //     const cords = await getCurrentLocation()
+    //     setMyCords(cords)
+    //   } catch (error) {
+    //     console.log(error)
+    //   }
+    // }, 4000)
+    // return () => clearInterval(interval)
   }, [])
   return (
     <StateContext.Provider

@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Pressable, Animated, Image, Dimensions } from "react-native";
+import { View, Text, Pressable, Animated, Image, Dimensions, ScrollView } from "react-native";
 import { help } from '../../../Apis';
 import Button from './Buttons';
 import { callAmbulance, callFamily, callNearBy, callPolice } from './api';
 import marker from '../../../assets/img/marker.png'
 import me from '../../../assets/img/me.jpeg'
+import home from '../../../assets/img/home.jpg'
+import police from '../../../assets/img/police.png'
+import nearby from '../../../assets/img/marker.png'
+import ambulance from '../../../assets/img/ambulance.png'
 import { style } from './style';
-const Home = ({ openDrawer, width }) => {
+import SituationCard from './SituationCard';
+const Home = ({ openDrawer, width, navigate }) => {
     const { height, width: windowWidth } = Dimensions.get("screen")
     const [ripple] = useState(new Animated.Value(0.9))
     const [ripple_color1, setColor1] = useState("#faebee")
@@ -68,12 +73,14 @@ const Home = ({ openDrawer, width }) => {
         openDrawer(!drawerState)
         setDrawerState(!drawerState)
     }
-    console.log("hell")
     return (
         <View style={{ height: "100%", width: width }}>
             <View style={{ flexDirection: "row", zIndex: 1, height: "6.5%", width: "100%", backgroundColor: "#F5F5F5", alignItems: "center", justifyContent: "center" }}>
                 {/* <View style={{ flexDirection: "row", zIndex: 1, height: "6.5%", width: "100%", backgroundColor: "blue", alignItems: "center", justifyContent: "center" }}> */}
-                <Pressable onPress={pullDrawer} style={{ paddingVertical: 10, justifyContent: "space-between", zIndex: 1, height: 40, marginLeft: 10, left: 0, position: "absolute", width: 30 }}>
+                <Pressable onPress={pullDrawer} style={{
+                    paddingVertical: 10, justifyContent: "space-between",
+                    zIndex: 1, height: 40, marginLeft: 10, left: 0, position: "absolute", width: 27
+                }}>
                     <View style={{ borderRadius: 5, width: "100%", borderColor: "#000000", borderTopWidth: 4 }}></View>
                     <View style={{ borderRadius: 5, width: "100%", borderColor: "#000000", borderTopWidth: 4 }}></View>
                     <View style={{ borderRadius: 5, width: "100%", borderColor: "#000000", borderTopWidth: 4 }}></View>
@@ -85,23 +92,27 @@ const Home = ({ openDrawer, width }) => {
                     <View style={{ flexDirection: "row", width: "50%" }}>
                         <Image source={me} style={{ borderRadius: 30, width: "25%", height: "100%", resizeMode: "contain" }} />
                         <View style={{ width: "75%" }}>
-                            <Text style={{ color: "#000000" }}>Hello Kanha!</Text>
-                            <Text style={{ color: "#000000", color: "red" }}>Complete profile</Text>
+                            <Text style={{ color: "#000000", fontWeight: "bold" }}>Hello Kanha!</Text>
+                            <Pressable onPress={() => navigate("Profile")}>
+                                <Text style={{ color: "#000000", color: "red" }}>Complete profile</Text>
+                            </Pressable>
                         </View>
                     </View>
                     <View style={{ flexDirection: "row", width: "50%", }}>
                         <View style={{ width: "80%", alignItems: "flex-end" }}>
-                            <Text style={{ color: "#000000" }}></Text>
-                            <Text style={{ color: "#000000", color: "red" }}>See your location</Text>
+                            <Text style={{ color: "#000000" }}>Samta colony,Ra...</Text>
+                            <Pressable onPress={() => navigate("Map")}>
+                                <Text style={{ color: "#000000", color: "red" }}>See your location</Text>
+                            </Pressable>
                         </View>
                         <Image source={marker} style={{ width: "20%", height: "60%", resizeMode: "contain" }} />
                     </View>
                 </View>
-                <View style={{ width: "100%", alignItems: "center", justifyContent: "center" }}>
+                <View style={{ width: "100%", alignItems: "center", justifyContent: "center", marginTop: 50 }}>
                     {/* <View style={[style.centerAlign, { height: "55%", width: "100%" }]}> */}
-                    <Animated.View style={{ transform: [{ scale: ripple }], backgroundColor: ripple_color1, height: height / 4.2, width: "50%", position: "absolute", borderRadius: 120 }}></Animated.View>
-                    <Animated.View style={{ transform: [{ scale: ripple }], backgroundColor: ripple_color2, height: height / 5.3, width: "40%", position: "absolute", borderRadius: 120 }}></Animated.View>
-                    <Animated.View style={{ transform: [{ scale: borderWidth }], backgroundColor: "#b9becd", height: height / 4.3, width: "49%", position: "absolute", borderRadius: 300 }}></Animated.View>
+                    <Animated.View style={{ zIndex: -1, transform: [{ scale: ripple }], backgroundColor: ripple_color1, height: height / 4.2, width: "50%", position: "absolute", borderRadius: 120 }}></Animated.View>
+                    <Animated.View style={{ zIndex: -1, transform: [{ scale: ripple }], backgroundColor: ripple_color2, height: height / 5.3, width: "40%", position: "absolute", borderRadius: 120 }}></Animated.View>
+                    <Animated.View style={{ elevation: 15, zIndex: -1, transform: [{ scale: borderWidth }], backgroundColor: "#b9becd", height: height / 4.3, width: "49%", position: "absolute", borderRadius: 300 }}></Animated.View>
                     < Pressable android_ripple={{ color: "gray", foreground: true, borderless: true }} onPress={() => callHelp()}
                         style={[style.centerAlign, {
                             backgroundColor: centerButtonColor, width: "45%", overflow: "hidden",
@@ -112,14 +123,24 @@ const Home = ({ openDrawer, width }) => {
                     </Pressable>
                 </View>
                 <View style={{
-                    width: "100%", alignItems: "center", flexDirection: "row",
-                    justifyContent: "space-around", flexWrap: "wrap"
+                    width: "100%", alignItems: "center", flexDirection: "row", height: height * 0.30, marginTop: 50
+                    , flexWrap: "wrap", paddingBottom: 0
                 }}>
-                    <Button title="Family" onClick={callFamily} />
-                    <Button title="Near By" onClick={callNearBy} />
-                    <Button title="Ambulance" onClick={callAmbulance} />
-                    <Button title="Police" onClick={callPolice} />
+                    <Button img={police} title="Police" onClick={callPolice} />
+                    <Button img={nearby} title="Near By" onClick={callNearBy} />
+                    <Button img={home} title="Family" onClick={callFamily} />
+                    <Button img={ambulance} title="Ambulance" onClick={callAmbulance} />
                 </View>
+                <Text style={{ color: "#000000", textAlign: "center", fontSize: 22, fontWeight: "bold" }}>Not sure what to do?</Text>
+                <Text style={{ color: "#000000", textAlign: "center", fontSize: 18 }}>Click the below card that suits your situation</Text>
+                <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}
+                    style={{ flexGrow: 1 }} contentContainerStyle={{
+                        justifyContent: "flex-start", flexGrow: 1
+                    }}>
+                    <SituationCard title="I had an accident" />
+                    <SituationCard title="I had an injury" />
+                    <SituationCard title="I require bloods" />
+                </ScrollView>
             </View>
 
         </View>
