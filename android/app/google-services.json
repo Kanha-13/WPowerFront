@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "460335149905",
+    "project_id": "ourpower-cd777",
+    "storage_bucket": "ourpower-cd777.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:460335149905:android:3010b7c18f8ea87486d970",
+        "android_client_info": {
+          "package_name": "com.ourpowercommunity"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "460335149905-irfe94qb3995s6v4hee8cmffu1bn7jol.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZ5z76Fue7zWM6lC9cKHU9fyPHevjnrf0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "460335149905-irfe94qb3995s6v4hee8cmffu1bn7jol.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

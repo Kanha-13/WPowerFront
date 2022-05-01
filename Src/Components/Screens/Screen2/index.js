@@ -31,7 +31,11 @@ const Map = ({ width }) => {
             altitude: 5
         }
         setTimeout(() => {
-            mapRef.current.animateCamera(newCamera, { duration: 500 });
+            try {
+                mapRef.current.animateCamera(newCamera, { duration: 500 });
+            } catch (error) {
+                console.log(error)
+            }
         }, 3000);
     }, [mapRef.current])
     return (

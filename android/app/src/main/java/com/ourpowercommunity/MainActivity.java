@@ -1,4 +1,4 @@
-package com.ourcommunity;
+package com.ourpowercommunity;
 
 import com.facebook.react.ReactActivity;
 import com.github.wumke.RNImmediatePhoneCall.RNImmediatePhoneCallPackage;

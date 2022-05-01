@@ -1,5 +1,6 @@
 import React from 'react'
 import { View, Text, Image, Pressable } from 'react-native'
+import { logOut } from '../LoginLogout';
 // import PATH from '../Constants/path'
 const Drawer = ({ navigate, closeDrawer }) => {
   return (
@@ -16,6 +17,11 @@ const Drawer = ({ navigate, closeDrawer }) => {
             closeDrawer(0)
           }}>
             <Text style={{ fontSize: 25, color: "black" }}>Map</Text>
+          </Pressable>
+        </View>
+        <View>
+          <Pressable onPress={logOut}>
+            <Text style={{ color: "#000000" }}>SignOut</Text>
           </Pressable>
         </View>
       </View>
