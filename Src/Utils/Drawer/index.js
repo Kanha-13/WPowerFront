@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, Text, Image, Pressable } from 'react-native'
-import { logOut } from '../LoginLogout';
+import { logOut } from '../../Components/Screens/LoginScreen/SessionManager';
 // import PATH from '../Constants/path'
 const Drawer = ({ navigate, closeDrawer }) => {
   return (

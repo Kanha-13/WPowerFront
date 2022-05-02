@@ -6,16 +6,19 @@ import Profile from './Src/Components/Screens/Screen3';
 import SwipeTabs from './Src/Utils/SwipeTabsNavigation';
 import StateProvide from './Src/Utils/StateProvider';
 import LoginScreen from './Src/Components/Screens/LoginScreen';
+import StackNavigation from './Src/Utils/StackNavigation';
+import SignIn from './Src/Components/Screens/LoginScreen/SignIn';
+import SignUp from './Src/Components/Screens/LoginScreen/SignUp';
 const App = () => {
-  const [valid, setValid] = useState(false)
+  const [validUser, setValid] = useState(false)
   const onVerify = () => {
     setValid(true)
   }
   const onLogout = () => {
     setValid(false)
   }
-  return (
-    valid === true ?
+  const AuthScreen = () => {
+    return (
       <StateProvide>
         <View style={{ height: "100%", width: "100%" }}>
           <SwipeTabs initialRoute="Home">
@@ -25,7 +28,15 @@ const App = () => {
           </SwipeTabs>
         </View >
       </StateProvide>
-      : <LoginScreen onVerify={onVerify} onLogout={onLogout} />
+    );
+  }
+  return (
+    <StackNavigation isUserLoggedIn={validUser}>
+      <LoginScreen onVerify={onVerify} onLogout={onLogout} />
+      <SignIn onVerify={onVerify} />
+      <SignUp onVerify={onVerify} />
+      <AuthScreen />
+    </StackNavigation>
   );
 }
 
