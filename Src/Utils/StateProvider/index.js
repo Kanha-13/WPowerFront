@@ -3,12 +3,17 @@ import { getCurrentLocation } from "../Location";
 import { permissionsManager } from "./permissionsManager";
 
 export const StateContext = React.createContext();
+
 const StateProvide = (props) => {
+  const [isUserSignedIn, setUserSignedIn] = useState(false)
+  const [myCords, setMyCords] = useState({})
   const mapRef = useRef()
-  const [myCords, setMyCords] = useState({
-    // latitudeDelta: 45.0254,
-    // longitudeDelta: 15.684,
-  })
+  const onLogout = () => {
+    setUserSignedIn(false)
+  }
+  const onVerify = () => {
+    setUserSignedIn(true)
+  }
 
   useEffect(() => {
     permissionsManager();
@@ -26,7 +31,10 @@ const StateProvide = (props) => {
     <StateContext.Provider
       value={{
         mapRef,
-        myCords
+        myCords,
+        onVerify,
+        isUserSignedIn,
+        onLogout
       }}
     >
       {props.children}

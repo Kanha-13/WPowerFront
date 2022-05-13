@@ -1,24 +1,28 @@
-import React, { useState, useEffect } from "react";
-import { View, Text, Pressable, Dimensions, TextInput, StyleSheet } from 'react-native'
+import React, { useEffect, useContext } from "react";
+import { View, Text, Pressable, Dimensions, StyleSheet } from 'react-native'
 import auth from '@react-native-firebase/auth'
-const LoginScreen = ({ onVerify, onLogout, navigate }) => {
+import { StateContext } from '../../../Utils/StateProvider';
+
+const LoginScreen = ({ navigate }) => {
   const { height, width } = Dimensions.get("screen")
+  const State = useContext(StateContext);
+  const { onVerify, onLogout } = State;
+
   const checkUser = () => {
     try {
       auth().onAuthStateChanged((user) => {
         if (user) {
-          console.log(user)
-          // checkUser(user.phoneNumber, navigate, LoginType)
-          onVerify();
+          if (user.phoneNumber !== null) {
+            console.log(user)
+            onVerify();
+          }
         }
         else {
-          // setLoginType(-1)
           onLogout()
         }
       });
     } catch (error) {
       console.log(error)
-      // setLoginType(-1)
     }
   }
 

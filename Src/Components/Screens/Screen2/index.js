@@ -3,6 +3,7 @@ import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import { View, Image } from 'react-native'
 import marker from '../../../assets/img/marker.png'
 import { StateContext } from '../../../Utils/StateProvider';
+import Slider from './Slider';
 const Map = ({ width }) => {
     const State = useContext(StateContext);
     const { mapRef, myCords } = State;
@@ -39,51 +40,54 @@ const Map = ({ width }) => {
         }, 3000);
     }, [mapRef.current])
     return (
-        <MapView
-            provider={PROVIDER_GOOGLE}
-            ref={(map) => mapRef.current = map}
-            style={{
-                width: width,
-                height: "100%",
-            }}
-            // mapType="standard"
-            mapTypeControlOptions={{
-                style: "",
-                position: "topCenter",
-            }}
-            showsUserLocation={true}
-            showsMyLocationButton={true}
-            initialRegion={{
-                latitude: 20.5937,
-                longitude: 78.9629,
-                latitudeDelta: 45.0254,
-                longitudeDelta: 15.684,
-            }}
-            // onLayout={() => {
-            //     mapRef.current.animateCamera({
-            //         center: {
-            //             latitude: myCords.latitude,
-            //             longitude: myCords.longitude,
-            //             latitudeDelta: 0.001663,
-            //             longitudeDelta: 0.002001,
-            //         },
-            //         heading: 0,
-            //         pitch: 90,
-            //     });
-            // }}
-            moveOnMarkerPress={true}
-            onMapReady={() => {
-                // mapRef.current.fitToCoordinates(helpCords.map((helpCord) => {
-                //     return { latitude: helpCord.latitude, longitude: helpCord.longitude }
-                // }))
-            }}
-        >
-            {/* <Marker
+        <>
+            <MapView
+                provider={PROVIDER_GOOGLE}
+                ref={(map) => mapRef.current = map}
+                style={{
+                    width: width,
+                    height: "100%",
+                }}
+                // mapType="standard"
+                mapTypeControlOptions={{
+                    style: "",
+                    position: "topCenter",
+                }}
+                showsUserLocation={true}
+                showsMyLocationButton={true}
+                initialRegion={{
+                    latitude: 20.5937,
+                    longitude: 78.9629,
+                    latitudeDelta: 45.0254,
+                    longitudeDelta: 15.684,
+                }}
+                // onLayout={() => {
+                //     mapRef.current.animateCamera({
+                //         center: {
+                //             latitude: myCords.latitude,
+                //             longitude: myCords.longitude,
+                //             latitudeDelta: 0.001663,
+                //             longitudeDelta: 0.002001,
+                //         },
+                //         heading: 0,
+                //         pitch: 90,
+                //     });
+                // }}
+                moveOnMarkerPress={true}
+                onMapReady={() => {
+                    // mapRef.current.fitToCoordinates(helpCords.map((helpCord) => {
+                    //     return { latitude: helpCord.latitude, longitude: helpCord.longitude }
+                    // }))
+                }}
+            >
+                {/* <Marker
                 coordinate={{ latitude: myCords.latitude, longitude: myCords.longitude }}
             >
             </Marker> */}
 
-        </MapView>
+            </MapView>
+            <Slider />
+        </>
     );
 }
 export default Map;

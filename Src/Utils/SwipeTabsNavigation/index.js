@@ -150,7 +150,7 @@ const SwipeTabs = (props) => {
                 <View style={{ height: "93.5%", width: width, paddingHorizontal: "5%", alignItems: "center" }}>
                     <FlatList
                         ref={flatListRef}
-                        {...panResponder.panHandlers}
+                        // {...panResponder.panHandlers}
                         horizontal
                         showsVerticalScrollIndicator={false}
                         showsHorizontalScrollIndicator={false}

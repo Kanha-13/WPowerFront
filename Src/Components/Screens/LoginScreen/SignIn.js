@@ -1,7 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { View, Pressable, Text, TextInput } from 'react-native'
 import { getOtp, verifyOtp } from './SessionManager'
-const SignIn = ({ onVerify, navigate }) => {
+import { StateContext } from '../../../Utils/StateProvider';
+
+const SignIn = ({ navigate }) => {
+  const State = useContext(StateContext);
+  const { onVerify } = State;
   const [mobileNumber, setMobileNumber] = useState("")
   const [otp, setOtp] = useState("")
   const [confirm, setConfirm] = useState(null)
@@ -18,6 +22,9 @@ const SignIn = ({ onVerify, navigate }) => {
 
   return (
     <View style={{ width: "100%", height: "100%", backgroundColor: "#ffffff" }}>
+      <Pressable onPress={() => navigate("LoginScreen")} style={{ alignSelf: "flex-start", margin: 20 }}>
+        <Text style={{ color: "#000000", fontSize: 26 }}>&lt;</Text>
+      </Pressable>
       <Text style={{ color: "#000000", marginTop: 60, fontSize: 20 }} >Phone Number</Text>
       <TextInput onChangeText={(text) => setMobileNumber(text)} style={{ borderWidth: 2, color: "#000000" }} placeholderTextColor="#000000" placeholder="Enter mobile number" />
       <Pressable style={{ backgroundColor: "pink", margin: 10, height: 40 }}

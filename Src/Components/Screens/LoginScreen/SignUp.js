@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { View, Pressable, Text } from 'react-native'
 import GoogleSignUp from './GoogleSignUp'
 import NativeSignUp from './NativeSignUp'
-
-const SignUp = ({ onVerify }) => {
-  const [confirm, setConfirm] = useState("")
+import { StateContext } from '../../../Utils/StateProvider';
+const SignUp = ({ navigate }) => {
+  const State = useContext(StateContext);
+  const { onVerify } = State;
   const [signUpVia, setSignUpVia] = useState(-1) //0 for google 1 for native
   const onBack = () => {
     setSignUpVia(-1)
@@ -13,9 +14,12 @@ const SignUp = ({ onVerify }) => {
     <View style={{
       width: "100%", height: "100%", backgroundColor: "#ffffff", alignItems: "center"
     }}>
+      <Pressable onPress={() => navigate("LoginScreen")} style={{ alignSelf: "flex-start", margin: 20 }}>
+        <Text style={{ color: "#000000", fontSize: 26 }}>&lt;</Text>
+      </Pressable>
       {
         signUpVia === -1 ? <>
-          <Text style={{ flex: 1, color: "#000000", marginTop: 60 }}>Sign Up</Text>
+          <Text style={{ flex: 1, color: "#000000", marginTop: 60, fontSize: 20, fontWeight: "bold" }}>Sign Up</Text>
           <View style={{ height: "65%", width: "100%", alignItems: "center" }}>
             <Pressable
               onPress={() => setSignUpVia(0)}
