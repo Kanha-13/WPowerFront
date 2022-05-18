@@ -1,6 +1,5 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useContext } from 'react';
 import { View, Text, Pressable, Animated, Image, Dimensions, ScrollView } from "react-native";
-import { help } from '../../../Apis';
 import Button from './Buttons';
 import { callAmbulance, callFamily, callNearBy, callPolice, reverseGeoCoding } from './api';
 import marker from '../../../assets/img/marker.png'
@@ -11,11 +10,14 @@ import nearby from '../../../assets/img/marker.png'
 import ambulance from '../../../assets/img/ambulance.png'
 import { style } from './style';
 import SituationCard from './SituationCard';
-import { MakeConnection } from '../../../Utils/Sockets';
 import { getCurrentLocation } from '../../../Utils/Location';
+import auth from '@react-native-firebase/auth';
+import { StateContext } from '../../../Utils/StateProvider';
 
 const Home = ({ openDrawer, width, navigate }) => {
-    const { height, width: windowWidth } = Dimensions.get("screen")
+    const State = useContext(StateContext);
+    const { establishConnection, mySocket } = State;
+    const { height } = Dimensions.get("screen")
     const [ripple] = useState(new Animated.Value(0.9))
     const [ripple_color1, setColor1] = useState("#ebfaed")
     const [ripple_color2, setColor2] = useState("#d1f7d4")
@@ -23,8 +25,8 @@ const Home = ({ openDrawer, width, navigate }) => {
     const [centerButtonColor, setCenterButtonColor] = useState("#f53736")
     const [helpCalled, setHelpCalled] = useState(0)
     const [borderWidth] = useState(new Animated.Value(1))
-    const [mySocket, setMySocket] = useState(null)
     const stopCalling = useRef(true)
+    const [userData, setUserData] = useState({})
     const startAnimate = () => {
         Animated.timing(borderWidth, {
             toValue: 1.3,
@@ -38,14 +40,14 @@ const Home = ({ openDrawer, width, navigate }) => {
             if (stopCalling.current) {
                 clearInterval(interval)
             } else {
-                mySocket.emit("helpMe", { cords: await getCurrentLocation(), address: address })
+                mySocket.emit("helpMe", { cords: await getCurrentLocation(), address: address, userData: userData })
             }
         }, 2000);
         return () => clearInterval(interval)
     }
     const stopCallForHelp = async () => {
         console.log("emmiting stop call")
-        mySocket.emit("iAmSafe", await getCurrentLocation())
+        mySocket.emit("iAmSafe", { cords: await getCurrentLocation(), phoneNumber: userData.phoneNumber })
     }
     const callHelp = async () => {
         if (helpCalled) {
@@ -95,21 +97,13 @@ const Home = ({ openDrawer, width, navigate }) => {
         const cords = await getCurrentLocation();
         console.log(cords)
     }
-    const callback = (ws) => {
-        setMySocket(ws)
-        console.log(ws)
-    }
 
-    const establishConnection = async () => {
-        try {
-            MakeConnection(callback)
-        } catch (error) {
-            alert("Server is offline")
-        }
-    }
     useEffect(() => {
-        getUserLocation()
         establishConnection()
+        setUserData(auth().currentUser)
+        getUserLocation()
+    }, [])
+    useEffect(() => {
         const interval = setInterval(rippleEffect, 2100);
         return () => clearInterval(interval);
     }, [])

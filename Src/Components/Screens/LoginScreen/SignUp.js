@@ -14,11 +14,11 @@ const SignUp = ({ navigate }) => {
     <View style={{
       width: "100%", height: "100%", backgroundColor: "#ffffff", alignItems: "center"
     }}>
-      <Pressable onPress={() => navigate("LoginScreen")} style={{ alignSelf: "flex-start", margin: 20 }}>
-        <Text style={{ color: "#000000", fontSize: 26 }}>&lt;</Text>
-      </Pressable>
       {
         signUpVia === -1 ? <>
+          <Pressable onPress={() => navigate("LoginScreen")} style={{ alignSelf: "flex-start", margin: 20 }}>
+            <Text style={{ color: "#000000", fontSize: 26 }}>&lt;</Text>
+          </Pressable>
           <Text style={{ flex: 1, color: "#000000", marginTop: 60, fontSize: 20, fontWeight: "bold" }}>Sign Up</Text>
           <View style={{ height: "65%", width: "100%", alignItems: "center" }}>
             <Pressable

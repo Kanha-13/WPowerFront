@@ -1,12 +1,14 @@
-import React, { useEffect, useContext } from 'react'
+import React, { useEffect, useContext, useRef } from 'react'
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
-import { View, Image } from 'react-native'
+import { View, Image, Text, FlatList } from 'react-native'
 import marker from '../../../assets/img/marker.png'
 import { StateContext } from '../../../Utils/StateProvider';
 import Slider from './Slider';
+import RequestCard from './RequestCard';
 const Map = ({ width }) => {
     const State = useContext(StateContext);
-    const { mapRef, myCords } = State;
+    const { mapRef, myCords, allHelpRequests } = State;
+    const markersRef = useRef([])
     const CustomMarker = () => (
         <View
             style={{
@@ -23,6 +25,12 @@ const Map = ({ width }) => {
             </View>
         </View>
     );
+
+    useEffect(() => {
+        // console.log("In screen 2", allHelpRequests)
+    }, [allHelpRequests])
+
+
     useEffect(() => {
         const newCamera = {
             center: { latitude: myCords.latitude, longitude: myCords.longitude },
@@ -39,6 +47,18 @@ const Map = ({ width }) => {
             }
         }, 3000);
     }, [mapRef.current])
+    const onRequestCardClick = (index) => {
+        markerPressed(markersRef.current[index].props.coordinate)
+    }
+    const markerPressed = (cords) => {
+        mapRef?.current?.getCamera().then(camera => {
+            camera.zoom += 10
+            camera.center = cords
+            mapRef?.current?.animateCamera(camera)
+        })
+    }
+    const renderItem = ({ item, index }) => <RequestCard index={index} data={allHelpRequests[item]} onClick={onRequestCardClick} />
+
     return (
         <>
             <MapView
@@ -54,6 +74,8 @@ const Map = ({ width }) => {
                     position: "topCenter",
                 }}
                 showsUserLocation={true}
+                showsTraffic={true}
+                showsCompass={true}
                 showsMyLocationButton={true}
                 initialRegion={{
                     latitude: 20.5937,
@@ -61,32 +83,27 @@ const Map = ({ width }) => {
                     latitudeDelta: 45.0254,
                     longitudeDelta: 15.684,
                 }}
-                // onLayout={() => {
-                //     mapRef.current.animateCamera({
-                //         center: {
-                //             latitude: myCords.latitude,
-                //             longitude: myCords.longitude,
-                //             latitudeDelta: 0.001663,
-                //             longitudeDelta: 0.002001,
-                //         },
-                //         heading: 0,
-                //         pitch: 90,
-                //     });
-                // }}
                 moveOnMarkerPress={true}
-                onMapReady={() => {
-                    // mapRef.current.fitToCoordinates(helpCords.map((helpCord) => {
-                    //     return { latitude: helpCord.latitude, longitude: helpCord.longitude }
-                    // }))
-                }}
+                onMapReady={() => { }}
             >
-                {/* <Marker
-                coordinate={{ latitude: myCords.latitude, longitude: myCords.longitude }}
-            >
-            </Marker> */}
-
+                {
+                    Object.keys(allHelpRequests).map((key, index) => <Marker key={index} title='Help me!' description='I am in big trubble please help me' onPress={() => {
+                        markerPressed(markersRef.current[index].props.coordinate)
+                    }} ref={(marker) => markersRef.current[index] = marker}
+                        coordinate={{ latitude: allHelpRequests[key].cords.latitude, longitude: allHelpRequests[key].cords.longitude }}
+                    >
+                    </Marker>)
+                }
             </MapView>
-            <Slider />
+            <Slider >
+                <Text style={{ color: "#000000", marginBottom: 10, fontSize: 20, fontWeight: "bold" }} >List of people need your help</Text>
+                <FlatList
+                    data={Object.keys(allHelpRequests)}
+                    keyExtractor={data => data.phoneNumber}
+                    renderItem={renderItem}
+                    showsVerticalScrollIndicator={false}
+                />
+            </Slider>
         </>
     );
 }

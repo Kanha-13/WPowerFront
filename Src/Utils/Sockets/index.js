@@ -1,4 +1,4 @@
-export const MakeConnection = (callback) => {
+export const MakeConnection = (callback, onRecieveHelpReq, onRecieveSafeRequest) => {
   try {
     const ws = new WebSocket('ws://192.168.29.59:1310/');
     WebSocket.prototype.emit = function (eventName, payload) {
@@ -11,9 +11,13 @@ export const MakeConnection = (callback) => {
 
     ws.onmessage = (e) => {//for receiveing any message from server anytime
       // a message was received
-      // console.log(e.data);
-      console.log("List of all help requests", e)
-      console.log("List of all help requests", e.data)
+      const message = JSON.parse(e.data)
+      if (message.needYourHelp) {//message contains all help requests
+        onRecieveHelpReq(message.needYourHelp)
+      }
+      else if (message.thisPersonIsSafeNow) {//some other message
+        onRecieveSafeRequest(message.thisPersonIsSafeNow)
+      }
 
     };
 

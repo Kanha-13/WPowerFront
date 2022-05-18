@@ -15,7 +15,7 @@ const NativeSignUp = ({ onBackPress, onVerify }) => {
     console.log(response)
   }
   const validateEmailOtp = async () => {
-    const response = await verifyEmailOtp(userDetails.email, userDetails.emailOpt)
+    const response = await verifyEmailOtp(userDetails.email, userDetails.emailOpt, userDetails)
     console.log(response)
   }
   const requestMobileOtp = async () => {
@@ -40,7 +40,6 @@ const NativeSignUp = ({ onBackPress, onVerify }) => {
       await validateMobileOtp()
     }
     setStep(prev => prev + 1)
-    console.log(userDetails)
   }
   const onBack = () => {
     if (step === 0)

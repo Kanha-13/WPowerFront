@@ -15,7 +15,6 @@ const Slider = (props) => {
   //=========================================================================
 
   const onPanResponderMove = (_, _a) => {
-    console.log("moving");
     var moveY = _a.moveY;
     var val = movementValue(moveY);
     animateMove(y, val);
@@ -55,6 +54,8 @@ const Slider = (props) => {
           position: "absolute",
           zIndex: 30,
           transform: [{ translateY: y }],
+          paddingBottom: 130,
+          paddingHorizontal: 15
         },
       ]}
       {...panResponder.panHandlers}>
