@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useRef, useContext } from 'react';
 import { View, Text, Pressable, Animated, Image, Dimensions, ScrollView } from "react-native";
 import Button from './Buttons';
-import { callAmbulance, callFamily, callNearBy, callPolice, reverseGeoCoding } from './api';
+import { callAmbulance, callFamily, callNearBy, callPolice } from './api';
+import { reverseGeoCoding } from '../../../Utils/Location/address'
 import marker from '../../../assets/img/marker.png'
 import me from '../../../assets/img/me.jpeg'
 import home from '../../../assets/img/home.jpg'
@@ -16,7 +17,7 @@ import { StateContext } from '../../../Utils/StateProvider';
 
 const Home = ({ openDrawer, width, navigate }) => {
     const State = useContext(StateContext);
-    const { establishConnection, mySocket } = State;
+    const { establishConnection, mySocket, myCords, myAddress, mapRef } = State;
     const { height } = Dimensions.get("screen")
     const [ripple] = useState(new Animated.Value(0.9))
     const [ripple_color1, setColor1] = useState("#ebfaed")
@@ -63,6 +64,7 @@ const Home = ({ openDrawer, width, navigate }) => {
         } else {
             try {
                 await reverseGeoCoding(await getCurrentLocation()).then((res) => {
+                    console.log(res)
                     continuouslyCallForHelp(res);
                 })
             } catch (error) {
@@ -93,15 +95,9 @@ const Home = ({ openDrawer, width, navigate }) => {
 
         ]).start()
     }
-    const getUserLocation = async () => {
-        const cords = await getCurrentLocation();
-        console.log(cords)
-    }
-
     useEffect(() => {
         establishConnection()
         setUserData(auth().currentUser)
-        getUserLocation()
     }, [])
     useEffect(() => {
         const interval = setInterval(rippleEffect, 2100);
@@ -139,7 +135,7 @@ const Home = ({ openDrawer, width, navigate }) => {
                     </View>
                     <View style={{ flexDirection: "row", width: "50%", }}>
                         <View style={{ width: "80%", alignItems: "flex-end" }}>
-                            <Text style={{ color: "#000000" }}>Samta colony,Ra...</Text>
+                            <Text style={{ color: "#000000" }} numberOfLines={1} ellipsizeMode="tail">{myAddress.district} , {myAddress.city}</Text>
                             <Pressable onPress={() => navigate("Map")}>
                                 <Text style={{ color: "#000000", color: "red" }}>See your location</Text>
                             </Pressable>

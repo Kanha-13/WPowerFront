@@ -2,10 +2,11 @@ import React, { useEffect, useRef, useState } from "react";
 import { getCurrentLocation } from "../Location";
 import { permissionsManager } from "./permissionsManager";
 import { MakeConnection } from '../../Utils/Sockets';
-
+import { reverseGeoCoding } from '../../Utils/Location/address'
 const StateProvide = (props) => {
   const [isUserSignedIn, setUserSignedIn] = useState(false)
   const [myCords, setMyCords] = useState({})
+  const [myAddress, setMyAddress] = useState({})
   const [mySocket, setMySocket] = useState(null)
   const [allHelpRequests, setAllHelpReq] = useState({})
   const mapRef = useRef()
@@ -20,7 +21,12 @@ const StateProvide = (props) => {
   const callback = (ws) => {
     setMySocket(ws)
   }
-
+  const getMyAddress = async () => {
+    const cords = await getCurrentLocation()
+    setMyCords(cords)
+    const address = await reverseGeoCoding(cords)
+    setMyAddress(address)
+  }
   const onRecieveHelpReq = (requests) => {
     setAllHelpReq(requests)
   }
@@ -38,6 +44,7 @@ const StateProvide = (props) => {
 
 
   useEffect(() => {
+    getMyAddress()
     permissionsManager();
     // const interval = setInterval(async () => {
     //   try {
@@ -59,7 +66,8 @@ const StateProvide = (props) => {
         onLogout,
         establishConnection,
         mySocket,
-        allHelpRequests
+        allHelpRequests,
+        myAddress
       }}
     >
       {props.children}

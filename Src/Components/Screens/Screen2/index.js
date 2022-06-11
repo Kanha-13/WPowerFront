@@ -30,27 +30,29 @@ const Map = ({ width }) => {
         // console.log("In screen 2", allHelpRequests)
     }, [allHelpRequests])
 
-
-    useEffect(() => {
-        const newCamera = {
-            center: { latitude: myCords.latitude, longitude: myCords.longitude },
-            zoom: 15,
-            heading: 0,
-            pitch: 0,
-            altitude: 5
-        }
+    const zoomMapToMyLocation = () => {
         setTimeout(() => {
-            try {
-                mapRef.current.animateCamera(newCamera, { duration: 500 });
-            } catch (error) {
-                console.log(error)
-            }
+            console.log("called")
+            markerPressed(myCords)
         }, 3000);
-    }, [mapRef.current])
+        // try {
+        //     mapRef?.current?.getCamera().then(camera => {
+        //         camera.zoom += 10
+        //         camera.center = myCords
+        //         mapRef?.current?.animateCamera(camera)
+        //     })
+        // } catch (error) {
+        //     console.log("error in zooming")
+        // }
+    }
+    useEffect(() => {
+        zoomMapToMyLocation()
+    }, [myCords])
     const onRequestCardClick = (index) => {
         markerPressed(markersRef.current[index].props.coordinate)
     }
     const markerPressed = (cords) => {
+        console.log(cords)
         mapRef?.current?.getCamera().then(camera => {
             camera.zoom += 10
             camera.center = cords
