@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react'
 import { View, Pressable, Text } from 'react-native'
 import GoogleSignUp from './GoogleSignUp'
 import NativeSignUp from './NativeSignUp'
-import { StateContext } from '../../../Utils/StateProvider';
+import { StateContext } from '../../../../Utils/StateProvider'
 const SignUp = ({ navigate }) => {
   const State = useContext(StateContext);
   const { onVerify } = State;

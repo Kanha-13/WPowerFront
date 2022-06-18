@@ -177,7 +177,6 @@ const Home = ({ openDrawer, width, navigate }) => {
                     <SituationCard title="I require bloods" />
                 </ScrollView>
             </View>
-
         </View>
     );
 }

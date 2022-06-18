@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { View, Pressable, Text } from 'react-native'
-import Email from './Email'
-import EmailOtp from './EmailOtp'
-import MobileOtp from './MobileOtp'
-import MobileNumber from './MobileNumber'
-import Name from './Name'
-import { getEmailOtp, verifyEmailOtp, getOtp, verifyOtp } from './SessionManager'
+import Email from '../Utils/Email'
+import EmailOtp from '../Utils/EmailOtp'
+import MobileOtp from '../Utils/MobileOtp'
+import MobileNumber from '../Utils/MobileNumber'
+import Name from '../Utils/Name'
+import { getEmailOtp, verifyEmailOtp, getOtp, verifyOtp } from '../SessionManager'
 const NativeSignUp = ({ onBackPress, onVerify }) => {
   const [confirm, setConfirm] = useState("")
   const [step, setStep] = useState(0)

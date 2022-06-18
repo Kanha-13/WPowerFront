@@ -4,12 +4,13 @@ import { permissionsManager } from "./permissionsManager";
 import { MakeConnection } from '../../Utils/Sockets';
 import { reverseGeoCoding } from '../../Utils/Location/address'
 const StateProvide = (props) => {
-  const [isUserSignedIn, setUserSignedIn] = useState(false)
-  const [myCords, setMyCords] = useState({})
-  const [myAddress, setMyAddress] = useState({})
-  const [mySocket, setMySocket] = useState(null)
-  const [allHelpRequests, setAllHelpReq] = useState({})
-  const mapRef = useRef()
+  const [isUserSignedIn, setUserSignedIn] = useState(false);
+  const [userData,setUserData]=useState({});
+  const [myCords, setMyCords] = useState({});
+  const [myAddress, setMyAddress] = useState({});
+  const [mySocket, setMySocket] = useState(null);
+  const [allHelpRequests, setAllHelpReq] = useState({});
+  const mapRef = useRef();
   const onLogout = () => {
     setUserSignedIn(false)
   }
@@ -41,20 +42,18 @@ const StateProvide = (props) => {
       alert("Server is offline")
     }
   }
+  const getUserData=async()=>{
+    // const usedata= await user
+    setUserData()
+  }
 
+  useEffect(()=>{
+    getUserData()
+  },[isUserSignedIn])
 
   useEffect(() => {
     getMyAddress()
     permissionsManager();
-    // const interval = setInterval(async () => {
-    //   try {
-    //     const cords = await getCurrentLocation()
-    //     setMyCords(cords)
-    //   } catch (error) {
-    //     console.log(error)
-    //   }
-    // }, 4000)
-    // return () => clearInterval(interval)
   }, [])
   return (
     <StateContext.Provider
@@ -63,6 +62,7 @@ const StateProvide = (props) => {
         myCords,
         onVerify,
         isUserSignedIn,
+        userData,
         onLogout,
         establishConnection,
         mySocket,

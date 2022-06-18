@@ -60,7 +60,6 @@ const Map = ({ width }) => {
         })
     }
     const renderItem = ({ item, index }) => <RequestCard index={index} data={allHelpRequests[item]} onClick={onRequestCardClick} />
-
     return (
         <>
             <MapView
@@ -98,13 +97,21 @@ const Map = ({ width }) => {
                 }
             </MapView>
             <Slider >
-                <Text style={{ color: "#000000", marginBottom: 10, fontSize: 20, fontWeight: "bold" }} >List of people need your help</Text>
-                <FlatList
-                    data={Object.keys(allHelpRequests)}
-                    keyExtractor={data => data.phoneNumber}
-                    renderItem={renderItem}
-                    showsVerticalScrollIndicator={false}
-                />
+                <View style={{ height: 50, backgroundColor: "#ffffff", alignItems: 'center', marginBottom: 10, borderRadius: 5, justifyContent: 'center' }}>
+                    <Text style={{ textAlign: 'center', color: "#000000", fontSize: 20, fontWeight: "500" }} >List of people need your help</Text>
+                </View>
+                {
+                    Object.keys(allHelpRequests).length < 1 ?
+                        <View style={{ height: 160, justifyContent: 'center', alignItems: 'center', backgroundColor: "#ffffff", borderRadius: 5 }}>
+                            <Text style={{ color: "#000000", paddingHorizontal: 10, fontSize: 25, textAlign: "center", }}>Everone is safe 🥳 😃 🥳 </Text>
+                        </View> :
+                        <FlatList
+                            data={Object.keys(allHelpRequests)}
+                            keyExtractor={data => data.phoneNumber}
+                            renderItem={renderItem}
+                            showsVerticalScrollIndicator={false}
+                        />
+                }
             </Slider>
         </>
     );

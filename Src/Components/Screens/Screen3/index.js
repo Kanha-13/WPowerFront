@@ -1,11 +1,12 @@
 import React from "react";
 import { Pressable, Text, View, StatusBar, Image, ScrollView, TextInput } from "react-native";
-// import userImage from '../../../assets/img/user.png'
+import userImage from '../../../assets/img/user.png'
 import backIcon from '../../../assets/img/back.png'
-import userImage from '../../../assets/img/me.jpeg'
+// import userImage from '../../../assets/img/me.jpeg'
 
 const Profile = ({ navigate, goBack, userData = {}, width }) => {
     const renderImage = userData?.photoURL ? { uri: userData?.photoURL || " " } : userImage
+    console.log(userData)
     return (
         <View style={{
             height: "100%", width: width, backgroundColor: "#FFFFFF",

@@ -3,9 +3,9 @@ import { View, Pressable, Text } from 'react-native'
 import auth from '@react-native-firebase/auth';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 
-import MobileNumber from './MobileNumber';
-import MobileOpt from './MobileOtp';
-import { getOtp, verifyOtp } from './SessionManager';
+import MobileNumber from '../Utils/MobileNumber';
+import MobileOpt from '../Utils/MobileOtp';
+import { getOtp, verifyOtp } from '../SessionManager';
 
 const GoogleSignUp = ({ onBackPress, onVerify }) => {
   // auth().user  

@@ -5,7 +5,7 @@ import { logOut } from '../../Components/Screens/LoginScreen/SessionManager';
 const Drawer = ({ navigate, closeDrawer }) => {
   return (
     <View style={{ backgroundColor: "#000000", height: "100%", width: "100%", position: "absolute", zIndex: -1 }}>
-      <View style={{ paddingLeft: 10, width: "60%", backgroundColor: "red", height: "100%" }}>
+      <View style={{ paddingLeft: 10, width: "60%", backgroundColor: "#D9EEF0", height: "100%" }}>
         {/* image block */}
         <View>
           <Text style={{ color: "#000000", fontSize: 25, fontWeight: "bold" }}>Kanha Agrawal</Text>

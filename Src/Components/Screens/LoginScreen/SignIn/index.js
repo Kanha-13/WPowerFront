@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react'
 import { View, Pressable, Text, TextInput } from 'react-native'
-import { getOtp, verifyOtp } from './SessionManager'
-import { StateContext } from '../../../Utils/StateProvider';
+import { getOtp, verifyOtp } from '../SessionManager'
+import { StateContext } from '../../../../Utils/StateProvider';
 
 const SignIn = ({ navigate }) => {
   const State = useContext(StateContext);
@@ -39,4 +39,5 @@ const SignIn = ({ navigate }) => {
     </View>
   );
 }
+
 export default SignIn;
