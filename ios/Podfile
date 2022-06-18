@@ -3,7 +3,7 @@ require_relative '../node_modules/@react-native-community/cli-platform-ios/nativ
 
 platform :ios, '11.0'
 
-target 'AwesomeProject' do
+target 'OurCommunity' do
   config = use_native_modules!
 
   use_react_native!(
@@ -12,9 +12,7 @@ target 'AwesomeProject' do
     :hermes_enabled => false
   )
 
-  pod 'RNDeviceInfo', :path => '../node_modules/react-native-device-info'
-
-  target 'AwesomeProjectTests' do
+  target 'OurCommunityTests' do
     inherit! :complete
     # Pods for testing
   end
@@ -27,5 +25,6 @@ target 'AwesomeProject' do
 
   post_install do |installer|
     react_native_post_install(installer)
+    __apply_Xcode_12_5_M1_post_install_workaround(installer)
   end
 end

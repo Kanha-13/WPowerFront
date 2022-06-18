@@ -1,32 +1,37 @@
-import React, { useState } from 'react'
-import { StatusBar } from 'react-native';
-import { NativeRouter, Route } from "react-router-native";
-//screens
-import Drawer from './Drawer';
-import Home from './src/Screens/Home';
-import NearBySOS from './src/Screens/NearBySOS';
-import Profile from './src/Screens/Profile';
-import MyAccount from './src/Screens/MyAccount';
-import MyGuardian from './src/Screens/MyGuardian';
-import Settings from './src/Screens/Settings';
-import StateProvide from './Utility/StateProvider';
+import React from 'react';
+import { View } from 'react-native';
+import Home from './Src/Components/Screens/Screen1';
+import Map from './Src/Components/Screens/Screen2';
+import Profile from './Src/Components/Screens/Screen3';
+import SwipeTabs from './Src/Utils/SwipeTabsNavigation';
+import StateProvide from './Src/Utils/StateProvider';
+import LoginScreen from './Src/Components/Screens/LoginScreen';
+import StackNavigation from './Src/Utils/StackNavigation';
+import SignIn from './Src/Components/Screens/LoginScreen/SignIn';
+import SignUp from './Src/Components/Screens/LoginScreen/SignUp';
 const App = () => {
-  const [currentNavigation, setCurrentNavigation] = useState('Home')
-  const [currentTab, setCurrentTab] = useState('Home')
+  const AuthScreen = () => {
+    return (
+      <View style={{ height: "100%", width: "100%" }}>
+        <SwipeTabs initialRoute="Home">
+          <Home />
+          <Map />
+          <Profile />
+        </SwipeTabs>
+      </View >
+    );
+  }
   return (
     <StateProvide>
-      <NativeRouter>
-        <StatusBar />
-        <Drawer currentTab={currentTab} setCurrentTab={setCurrentTab} setCurrentNavigation={setCurrentNavigation} currentNavigation={currentNavigation}>
-          <Route exact path={`/`} component={() => <Home />} />
-          <Route exact path={`/Profile`} component={Profile} />
-          <Route exact path={`/MyAccount`} component={() => <MyAccount setCurrentTab={setCurrentTab} />} />
-          <Route exact path={`/MyGuardian`} component={MyGuardian} />
-          <Route exact path={`/Settings`} component={Settings} />
-          <Route exact path={`/NearBySOS`} component={() => <NearBySOS />} />
-        </Drawer>
-      </NativeRouter>
+      <StackNavigation >
+        <LoginScreen />
+        <SignIn />
+        <SignUp />
+        <AuthScreen />
+      </StackNavigation>
     </StateProvide>
   );
 }
+
+
 export default App;
