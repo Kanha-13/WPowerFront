@@ -10,6 +10,10 @@ const SignUp = ({ navigate }) => {
   const onBack = () => {
     setSignUpVia(-1)
   }
+  const sendToSignIn=()=>{
+    alert("User already exist sending to signin menu")
+    navigate("SignIn")
+  }
   return (
     <View style={{
       width: "100%", height: "100%", backgroundColor: "#ffffff", alignItems: "center"
@@ -19,8 +23,9 @@ const SignUp = ({ navigate }) => {
           <Pressable onPress={() => navigate("LoginScreen")} style={{ alignSelf: "flex-start", margin: 20 }}>
             <Text style={{ color: "#000000", fontSize: 26 }}>&lt;</Text>
           </Pressable>
-          <Text style={{ flex: 1, color: "#000000", marginTop: 60, fontSize: 20, fontWeight: "bold" }}>Sign Up</Text>
+          <Text style={{ flex: 1, color: "#000000", marginTop: 60, fontSize: 30, fontWeight: "bold" }}>Sign Up</Text>
           <View style={{ height: "65%", width: "100%", alignItems: "center" }}>
+            <Text style={{fontSize:18,color:"#000000"}}>Create a free account by</Text>
             <Pressable
               onPress={() => setSignUpVia(0)}
               style={{
@@ -30,6 +35,7 @@ const SignUp = ({ navigate }) => {
               }}>
               <Text style={{ fontWeight: "bold", color: "#ffffff", fontSize: 20 }}>Google Signup</Text>
             </Pressable>
+            <Text style={{fontSize:20,color:"#000000"}}>or</Text>
             <Pressable
               onPress={() => setSignUpVia(1)}
               style={{
@@ -42,7 +48,7 @@ const SignUp = ({ navigate }) => {
           </View>
         </> :
           signUpVia === 0 ? <GoogleSignUp onBackPress={onBack} onVerify={onVerify} /> :
-            signUpVia === 1 ? <NativeSignUp onBackPress={onBack} onVerify={onVerify} /> : <></>
+            signUpVia === 1 ? <NativeSignUp onBackPress={onBack} onVerify={onVerify} alreadyExist={sendToSignIn} /> : <></>
       }
     </View>
   );

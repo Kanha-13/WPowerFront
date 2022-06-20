@@ -9,7 +9,7 @@ const MobileNumber = ({ onChange }) => {
     }}>
       <View>
         <Text style={{ color: "#000000", marginTop: 20 }}>Mobile Number</Text>
-        <TextInput autoFocus={true} focusable={true} onChangeText={(text) => onChange("mobileNumber", text)} style={{ borderRadius: 5, borderWidth: 1, color: "#000000" }} placeholderTextColor="#000000" placeholder='Enter your mobile number' />
+        <TextInput keyboardType='phone-pad' autoFocus={true} focusable={true} onChangeText={(text) => onChange("mobileNumber", text)} style={{ borderRadius: 5, borderWidth: 1, color: "#000000" }} placeholderTextColor="#000000" placeholder='Enter your mobile number' />
       </View>
     </View>
   );

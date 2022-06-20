@@ -1,23 +1,44 @@
 import React, { useState, useContext } from 'react'
-import { View, Pressable, Text, TextInput } from 'react-native'
+import { View, Pressable, Text, TextInput, Dimensions } from 'react-native'
 import { getOtp, verifyOtp } from '../SessionManager'
 import { StateContext } from '../../../../Utils/StateProvider';
+import MobileNumber from './Utils/MobileNumber';
+import Otp from './Utils/Otp';
+import { checkUser } from '../api';
 
 const SignIn = ({ navigate }) => {
+  const { height, width } = Dimensions.get("window");
   const State = useContext(StateContext);
   const { onVerify } = State;
   const [mobileNumber, setMobileNumber] = useState("")
-  const [otp, setOtp] = useState("")
   const [confirm, setConfirm] = useState(null)
+  const [otp, setOtp] = useState("")
+  const [step, setStep] = useState(0);
+  const [loading, setLoading] = useState(false)
+  const [loadingMsg, setLoadingMsg] = useState("")
 
   const requestOtp = async () => {
-    const confirmCode = await getOtp(mobileNumber)
-    setConfirm(confirmCode)
+    // setLoading(true)
+    // setLoadingMsg("Sending otp...")
+    console.log("sending...")
+    const checkuser= await checkUser(mobileNumber);
+    console.log(checkuser)
+    // const confirmCode = await getOtp(mobileNumber);
+    // if (confirmCode) {
+    //   setLoading(false)
+    // }
+    // setConfirm(confirmCode)
+    // setStep(1)
   }
+
   const checkOtp = async () => {
-    const response = await verifyOtp(confirm, otp)
-    if (response)
+    setLoading(true);
+    setLoadingMsg("Hold on verifying otp...");
+    const response = await verifyOtp(confirm, otp);
+    if (response) {
+      setLoading(false)
       onVerify()
+    }
   }
 
   return (
@@ -25,17 +46,19 @@ const SignIn = ({ navigate }) => {
       <Pressable onPress={() => navigate("LoginScreen")} style={{ alignSelf: "flex-start", margin: 20 }}>
         <Text style={{ color: "#000000", fontSize: 26 }}>&lt;</Text>
       </Pressable>
-      <Text style={{ color: "#000000", marginTop: 60, fontSize: 20 }} >Phone Number</Text>
-      <TextInput onChangeText={(text) => setMobileNumber(text)} style={{ borderWidth: 2, color: "#000000" }} placeholderTextColor="#000000" placeholder="Enter mobile number" />
-      <Pressable style={{ backgroundColor: "pink", margin: 10, height: 40 }}
-        android_ripple={{ color: "gray" }} onPress={requestOtp}>
-        <Text style={{ color: "#000000" }}>Submit Number</Text>
-      </Pressable>
-      <TextInput onChangeText={(text) => setOtp(text)} style={{ borderWidth: 2, color: "#000000" }} placeholderTextColor="#000000" placeholder="Enter otp" />
-      <Pressable style={{ backgroundColor: "pink", margin: 10, height: 40 }}
-        android_ripple={{ color: "gray" }} onPress={checkOtp}>
-        <Text style={{ color: "#000000" }}>Submit Otp</Text>
-      </Pressable>
+      {
+        step === 0 ? <MobileNumber mobileNumber={mobileNumber} onChange={(text) => setMobileNumber(text)} requestOtp={requestOtp} /> :
+          <Otp otp={otp} onChange={(text) => setOtp(text)} checkOtp={checkOtp} />
+      }
+      <View style={{
+        display: loading ? "flex" : "none",
+        justifyContent: "center", alignItems: "center",
+        position: "absolute", height: height,
+        backgroundColor: "gray", opacity: 0.4,
+        width: width
+      }}>
+        <Text style={{ color: "#000000", fontSize: 25 }}>{loadingMsg}</Text>
+      </View>
     </View>
   );
 }

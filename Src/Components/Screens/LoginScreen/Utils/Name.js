@@ -8,7 +8,7 @@ const Name = ({ onChange }) => {
       flex: 1
     }}>
       <View>
-        <Text style={{ color: "#000000", marginTop: 20 }}>Name</Text>
+        <Text style={{ color: "#000000", marginTop: 20,marginLeft:10,fontSize:22 }}>Name</Text>
         <TextInput autoFocus={true} focusable={true} onChangeText={(text) => onChange("name", text)} style={{ borderRadius: 5, borderWidth: 1, color: "#000000" }} placeholderTextColor="#000000" placeholder='Enter your name' />
       </View>
     </View>

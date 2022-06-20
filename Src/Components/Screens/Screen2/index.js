@@ -97,8 +97,8 @@ const Map = ({ width }) => {
                 }
             </MapView>
             <Slider >
-                <View style={{ height: 50, backgroundColor: "#ffffff", alignItems: 'center', marginBottom: 10, borderRadius: 5, justifyContent: 'center' }}>
-                    <Text style={{ textAlign: 'center', color: "#000000", fontSize: 20, fontWeight: "500" }} >List of people need your help</Text>
+                <View style={{ height: 50, backgroundColor: "#ffffff",backgroundColor:"purple", alignItems: 'center', marginBottom: 10, borderRadius: 5, justifyContent: 'center' }}>
+                    <Text style={{ textAlign: 'center', color: "#ffffff", fontSize: 20, fontWeight: "500" }} >List of people need your help</Text>
                 </View>
                 {
                     Object.keys(allHelpRequests).length < 1 ?

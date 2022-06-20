@@ -8,8 +8,8 @@ const Email = ({ onChange }) => {
       flex: 1
     }}>
       <View>
-        <Text style={{ color: "#000000", marginTop: 20 }}>Email</Text>
-        <TextInput autoFocus={true} focusable={true} onChangeText={(text) => onChange("email", text)} style={{ borderRadius: 5, borderWidth: 1, color: "#000000" }} placeholderTextColor="#000000" placeholder='Enter your Email' />
+        <Text style={{ color: "#000000", marginTop: 20,fontSize:22,marginLeft:10 }}>Email</Text>
+        <TextInput keyboardType='email-address' autoFocus={true} focusable={true} onChangeText={(text) => onChange("email", text)} style={{ borderRadius: 5, borderWidth: 1, color: "#000000" }} placeholderTextColor="#000000" placeholder='Enter your Email' />
       </View>
     </View>
   );
