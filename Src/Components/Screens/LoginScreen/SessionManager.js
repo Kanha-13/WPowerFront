@@ -39,7 +39,6 @@ export const getEmailOtp = async (email) => {
     return error.response
   }
 }
-
 export const verifyEmailOtp = async (email, otp, userDetails) => {
   try {
     console.log(email)

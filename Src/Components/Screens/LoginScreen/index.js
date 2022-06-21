@@ -1,6 +1,7 @@
 import React, { useEffect, useContext } from "react";
 import { View, Text, Pressable, Dimensions, StyleSheet, Image } from 'react-native'
 import auth from '@react-native-firebase/auth'
+import { updateUserCredential } from "./api";
 import { StateContext } from '../../../Utils/StateProvider';
 import community from '../../../assets/img/community.jpg'
 const LoginScreen = ({ navigate }) => {
@@ -8,13 +9,14 @@ const LoginScreen = ({ navigate }) => {
   const State = useContext(StateContext);
   const { onVerify, onLogout } = State;
 
-  const checkUser = () => {
+  const checkUserAuthState = () => {
     try {
-      auth().onAuthStateChanged((user) => {
+      auth().onAuthStateChanged(async(user) => {
         if (user) {
           if (user.phoneNumber !== null) {
-            console.log(user)
-            onVerify();
+            await updateUserCredential({mobileNumber:user.phoneNumber}).then(()=>{
+              onVerify();
+            })
           }
         }
         else {
@@ -27,7 +29,7 @@ const LoginScreen = ({ navigate }) => {
   }
 
   useEffect(() => {
-    checkUser()
+    checkUserAuthState()
   }, [])
   return (
     <View style={{

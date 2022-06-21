@@ -14,6 +14,7 @@ import SituationCard from './SituationCard';
 import { getCurrentLocation } from '../../../Utils/Location';
 import auth from '@react-native-firebase/auth';
 import { StateContext } from '../../../Utils/StateProvider';
+import { updateUserCredential } from '../LoginScreen/api';
 
 const Home = ({ openDrawer, width, navigate }) => {
     const State = useContext(StateContext);
@@ -51,34 +52,35 @@ const Home = ({ openDrawer, width, navigate }) => {
         mySocket.emit("iAmSafe", { cords: await getCurrentLocation(), phoneNumber: userData.phoneNumber })
     }
     const callHelp = async () => {
-        if (helpCalled) {
-            //send message that I am safe now
-            stopCalling.current = true
-            stopCallForHelp();
-            Animated.timing(borderWidth, { toValue: 1, duration: 100, useNativeDriver: true }).start()
-            setHelpCalled(0)
-            setCenterButtonColor("#f53736")
-            setButtonText("Help")
-            setColor1("#ebfaed")
-            setColor2("#d1f7d4")
-        } else {
-            try {
-                await reverseGeoCoding(await getCurrentLocation()).then((res) => {
-                    console.log(res)
-                    continuouslyCallForHelp(res);
-                })
-            } catch (error) {
-                alert("Not able to send your help request! Server is not rechable")
-            }
-            setHelpCalled(1)
-            setCenterButtonColor("#36f576")
-            setButtonText("I am safe")
-            setTimeout(() => {
-                setColor1("#faebee")
-                setColor2("#f7d1d2")
-            }, 2000);
-            startAnimate()
-        }
+        updateUserCredential({mobileNumber:"8319115373",email:"kanha.agr11@gmail.com"})
+        // if (helpCalled) {
+        //     //send message that I am safe now
+        //     stopCalling.current = true
+        //     stopCallForHelp();
+        //     Animated.timing(borderWidth, { toValue: 1, duration: 100, useNativeDriver: true }).start()
+        //     setHelpCalled(0)
+        //     setCenterButtonColor("#f53736")
+        //     setButtonText("Help")
+        //     setColor1("#ebfaed")
+        //     setColor2("#d1f7d4")
+        // } else {
+        //     try {
+        //         await reverseGeoCoding(await getCurrentLocation()).then((res) => {
+        //             console.log(res)
+        //             continuouslyCallForHelp(res);
+        //         })
+        //     } catch (error) {
+        //         alert("Not able to send your help request! Server is not rechable")
+        //     }
+        //     setHelpCalled(1)
+        //     setCenterButtonColor("#36f576")
+        //     setButtonText("I am safe")
+        //     setTimeout(() => {
+        //         setColor1("#faebee")
+        //         setColor2("#f7d1d2")
+        //     }, 2000);
+        //     startAnimate()
+        // }
     }
     const rippleEffect = () => {
         Animated.sequence([
