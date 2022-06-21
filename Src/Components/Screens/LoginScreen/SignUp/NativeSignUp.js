@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,useContext } from 'react'
 import { View, Pressable, Text, Dimensions } from 'react-native'
 import Email from '../Utils/Email'
 import EmailOtp from '../Utils/EmailOtp'
@@ -6,8 +6,12 @@ import MobileOtp from '../Utils/MobileOtp'
 import MobileNumber from '../Utils/MobileNumber'
 import Name from '../Utils/Name'
 import { getEmailOtp, verifyEmailOtp, getOtp, verifyOtp } from '../SessionManager'
+import { StateContext } from '../../../../Utils/StateProvider';
+import { updateUserCredential } from '../api'
 const NativeSignUp = ({ onBackPress, onVerify,alreadyExist }) => {
   const { height, width } = Dimensions.get("window")
+  const State = useContext(StateContext);
+  const {updateuserdata}=State;
   const [loading, setLoading] = useState(false)
   const [loadingMsg, setLoadingMsg] = useState("")
   const [confirm, setConfirm] = useState("")
@@ -47,6 +51,7 @@ const NativeSignUp = ({ onBackPress, onVerify,alreadyExist }) => {
       alert("wrong otp")
     } else if (response.status===200) {
       setStep(prev => prev + 1)
+      updateuserdata("email",userDetails.email)
     }else if (response.status===500) {
       alert("Server error")
     }
@@ -54,6 +59,7 @@ const NativeSignUp = ({ onBackPress, onVerify,alreadyExist }) => {
   }
   const requestMobileOtp = async () => {
     const confirmCode = await getOtp(userDetails.mobileNumber)
+    await updateUserCredential(userDetails)
     if (confirmCode) {
       setLoading(false)
       setStep(prev => prev + 1)
@@ -61,10 +67,12 @@ const NativeSignUp = ({ onBackPress, onVerify,alreadyExist }) => {
     setConfirm(confirmCode)
   }
   const validateMobileOtp = async () => {
-    const response = await verifyOtp(confirm, otp)
-    if (response.status) {
-      onVerify()
-      setStep(prev => prev + 1)
+    console.log("in mobile otp verify")
+    const response = await verifyOtp(confirm, userDetails.mobileOpt)
+    if (response.user?.uid) {
+      updateUserCredential(userDetails).then(()=>{
+        onVerify()
+      })
     }
     setLoading(false)
   }
@@ -83,7 +91,7 @@ const NativeSignUp = ({ onBackPress, onVerify,alreadyExist }) => {
       setLoading(true)
       setLoadingMsg("Sending OTP...")
       await requestMobileOtp();
-    } else if (step === 3) {
+    } else if (step === 4) {
       setLoading(true)
       setLoadingMsg("Hold on validating OTP...")
       await validateMobileOtp()

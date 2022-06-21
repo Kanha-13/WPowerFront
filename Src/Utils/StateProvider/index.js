@@ -18,6 +18,9 @@ const StateProvide = (props) => {
     setUserSignedIn(true)
   }
 
+  const updateuserdata=(label,value)=>{
+    setUserData({...userData,[label]:value})
+  }
 
   const callback = (ws) => {
     setMySocket(ws)
@@ -63,6 +66,7 @@ const StateProvide = (props) => {
         onVerify,
         isUserSignedIn,
         userData,
+        updateuserdata,
         onLogout,
         establishConnection,
         mySocket,
